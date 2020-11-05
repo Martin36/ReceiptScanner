@@ -12,6 +12,7 @@ distlib==0.3.1
 filelock==3.0.12
 google-auth==1.23.0
 googleapis-common-protos==1.52.0
+google-cloud-vision==2.0.0
 idna==2.10
 isort==5.6.4
 joblib==0.17.0
