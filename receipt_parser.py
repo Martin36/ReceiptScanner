@@ -178,8 +178,12 @@ class GcloudParser:
               continue
             # Checking if the words are on different rows
             # if they are the second word should not be added
-            if p_ymax < ymin or p_ymin > ymax or ( y_current > 0 and p_ymin > y_current):
+            if p_ymax < ymin or p_ymin > ymax:
               continue
+
+            # if ( y_current > 0 and p_ymin > y_current):
+            #   continue
+
             used_idx.append(j)
             parsed_y = max(parsed_y, (p_ymax + p_ymin) / 2)
             if self.debug:

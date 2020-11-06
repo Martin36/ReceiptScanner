@@ -42,21 +42,21 @@ class TestParser(unittest.TestCase):
     self.assertFalse(result, "Should be false if input is not a price")
   
   def test_check_discount(self):
-    discount = "-5.89"
+    discount = "-5,89"
     is_discount = parser.check_discount(discount)
     self.assertTrue(is_discount, "Should be discount if negative number")
 
-    discount = "5.89"
+    discount = "5,89"
     is_discount = parser.check_discount(discount)
     self.assertFalse(is_discount, "Should not be discount if positive number")
 
-    discount = "-54.89"
+    discount = "-54,89"
     is_discount = parser.check_discount(discount)
     self.assertTrue(is_discount, "Should be discount if double digit negative number")
 
     discount = "blabla"
     is_discount = parser.check_discount(discount)
-    self.assertTrue(is_discount, "Should not be discount if arbitrary string")
+    self.assertFalse(is_discount, "Should not be discount if arbitrary string")
 
 if __name__ == '__main__':
   unittest.main()
