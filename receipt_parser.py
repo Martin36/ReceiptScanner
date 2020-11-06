@@ -11,6 +11,7 @@ MARKETS = ['ica', 'coop', 'hemköp']
 SKIPWORDS = ['SEK', 'www.coop.se', 'Tel.nr:', 'Kvitto:', 'Datum:', 'Kassör:', 'Org Nr:']
 STOPWORDS = []
 BLACKLIST_WORDS = []
+TOTAL_WORDS = ['ATT BETALA']
 
 class GcloudParser:
   def __init__(self, debug=False, min_length=5, max_height=1):
@@ -19,6 +20,7 @@ class GcloudParser:
     self.max_height = max_height
     self.client = vision_v1.ImageAnnotatorClient()
     self.allowed_labels = ['article', 'price', 'market', 'address', 'date', 'misc']
+    self.total_amount = 0
 
   def parse_pdf(self, path):
     pages = convert_from_path(path, 500)
@@ -35,7 +37,7 @@ class GcloudParser:
       dates += _dat
       markets += _mar
       discounts += _dis
-    return articles, dates, markets, discounts
+    return articles, dates, markets, discounts, self.total_amount
 
   # Detects text in the file.
   def detect_text(self, path):
@@ -124,10 +126,11 @@ class GcloudParser:
           p_xmax = np.max([v.x for v in p_ann.bounding_poly.vertices])
           p_ymin = np.min([v.y for v in p_ann.bounding_poly.vertices])
           p_ymax = np.max([v.y for v in p_ann.bounding_poly.vertices])
+
           if p_ymax < ymin or p_ymin > ymax:
             continue
           line_overlap = np.min([p_ymax-ymin, ymax-p_ymin]) / np.max([p_ymax-p_ymin, ymax-ymin])
-          if line_overlap < 0.5:
+          if line_overlap < 0.45:
             continue
           if is_hanging:
             p_description += p_ann.description
@@ -141,6 +144,10 @@ class GcloudParser:
             continue
   
           if p_type == 'number':
+            # Keep track of the largest read number, which is the total amount
+            parsed_number = float(p_description.replace(",", ".")) 
+            if parsed_number > self.total_amount:
+              self.total_amount = parsed_number
             # Checking if the number ends on the left side of the middle of the document
             if p_xmax < g_xmax / 2:
               continue
@@ -247,8 +254,10 @@ class GcloudParser:
 
   # Function for checking if a string is an article on the receipt
   # The article name begins with an all-caps word
+  # The article name can also contain a number due to special characters, 
+  # such as the clove on coop receipts
   def check_article_name(self, article_name):
-    rex = regex.compile(r'[[:upper:]]+')
+    rex = regex.compile(r'[0-9]?[[:upper:]]+')
     words = article_name.split(' ')
     if regex.fullmatch(rex, words[0]):
       return True

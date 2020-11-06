@@ -1,0 +1,426 @@
+[
+  {
+    "markets": [
+      "coop"
+    ],
+    "dates": [
+      "2020-10-20"
+    ],
+    "articles": [
+      {
+        "name": "BLANDFARS 20% 50/50",
+        "price": "75,85"
+      },
+      {
+        "name": "BLOMKAL GR\u00d6N",
+        "price": "21,18"
+      },
+      {
+        "name": "BLOMKAL ST",
+        "price": "21,95"
+      },
+      {
+        "name": "BRYSSEL NAT 50OG",
+        "price": "17,95"
+      },
+      {
+        "name": "CITRON LIME",
+        "price": "17,95"
+      },
+      {
+        "name": "PANT 1KR BURK 1X1KR",
+        "price": "1,00"
+      },
+      {
+        "name": "CREME FRAICHE 34%",
+        "price": "49,00"
+      },
+      {
+        "name": "DARK TEMPTATION",
+        "price": "41,95"
+      },
+      {
+        "name": "DRYCK VATTENM/PARON",
+        "price": "13,95"
+      },
+      {
+        "name": "GURKA STYCK",
+        "price": "25,90"
+      },
+      {
+        "name": "HALLON ACAI",
+        "price": "17,95"
+      },
+      {
+        "name": "PANT 1KR BURK 1X1KR",
+        "price": "1,00"
+      },
+      {
+        "name": "INTENZO XLT",
+        "price": "41,95"
+      },
+      {
+        "name": "KYCKLING FARS Medlem",
+        "price": "99,80"
+      },
+      {
+        "name": "KYCKLINGFILE",
+        "price": "169,90"
+      },
+      {
+        "name": "MULTIVITAMINDRINK",
+        "price": "13,50"
+      },
+      {
+        "name": "ORIGINAL KRAMIG HAL",
+        "price": "19,50"
+      },
+      {
+        "name": "PHILADELP ORIGINAL",
+        "price": "39,90"
+      },
+      {
+        "name": "SATSUMAS",
+        "price": "11,81"
+      },
+      {
+        "name": "SK\u00c1NER\u00d6ST",
+        "price": "41,95"
+      },
+      {
+        "name": "SM\u00d6R OSALTAT",
+        "price": "39,95"
+      },
+      {
+        "name": "SQUEEZY JORDGSYLT",
+        "price": "27,95"
+      },
+      {
+        "name": "VISPGRADDE 36%",
+        "price": "39,95"
+      },
+      {
+        "name": "WHITE PEACH",
+        "price": "17,95"
+      },
+      {
+        "name": "PANT 1KR BURK 1X1KR",
+        "price": "1,00"
+      },
+      {
+        "name": "SUMMERING RABATTER DETTA K\u00d6P",
+        "price": "211,35"
+      },
+      {
+        "name": "ATT BETALA ( ARTIKLAR )",
+        "price": "766,69"
+      }
+    ],
+    "discounts": [
+      {
+        "name": "Celsius f\u00f6r 32kr",
+        "price": "-3,90"
+      },
+      {
+        "name": "Kaffe 59kr",
+        "price": "-66,85"
+      },
+      {
+        "name": "Blandf\u00e4rs 49,90/kg",
+        "price": "-50,50"
+      },
+      {
+        "name": "Philadelphia 10kr",
+        "price": "-9,95"
+      },
+      {
+        "name": "Philadelphia 10kr",
+        "price": "-9,95"
+      },
+      {
+        "name": "Kyckling",
+        "price": "-25,05"
+      },
+      {
+        "name": "Kyckling",
+        "price": "-25,05"
+      }
+    ]
+  },
+  {
+    "markets": [
+      "coop"
+    ],
+    "dates": [
+      "2020-10-27"
+    ],
+    "articles": [
+      {
+        "name": "CREME FRAICHE 34%",
+        "price": "49,00"
+      },
+      {
+        "name": "FR\u00dcKOSTFLINGOR SPEC",
+        "price": "21,50"
+      },
+      {
+        "name": "GETOST ST MAURE Kampanj",
+        "price": "25,00"
+      },
+      {
+        "name": "GODIS L\u00d6SVIKT",
+        "price": "104,09"
+      },
+      {
+        "name": "GUACAMOLE DIP MIX",
+        "price": "21,90"
+      },
+      {
+        "name": "GURKA STYCK",
+        "price": "33,90"
+      },
+      {
+        "name": "LAXFILE HELSIDA B\u1ec6N Kampanj",
+        "price": "159,19"
+      },
+      {
+        "name": "L\u00d6K VIT G",
+        "price": "22,95"
+      },
+      {
+        "name": "\u00d6LIVER HALKIDIKI UR",
+        "price": "26,50"
+      },
+      {
+        "name": "PUMPA HALLOWEN",
+        "price": "26,91"
+      },
+      {
+        "name": "SKALKNIV CM",
+        "price": "79,00"
+      },
+      {
+        "name": "SM\u00d6R OSALTAT",
+        "price": "39,95"
+      },
+      {
+        "name": "TOMAT PLOM-BABY",
+        "price": "30,00"
+      },
+      {
+        "name": "TORTILLA CHIPS CHEE",
+        "price": "13,95"
+      },
+      {
+        "name": "TORTILLA ORIGINAL L",
+        "price": "20,95"
+      },
+      {
+        "name": "VISPGRADDE 36%",
+        "price": "40,95"
+      },
+      {
+        "name": "YOGGI ORIG JDG/SMU",
+        "price": "19,50"
+      },
+      {
+        "name": "AGG 24-PACK 1428GR",
+        "price": "79,90"
+      },
+      {
+        "name": "\u00d6LKORV VITL\u00d6K",
+        "price": "42,50"
+      },
+      {
+        "name": "SUMMERING RABATTER DETTA K\u00d6P",
+        "price": "63,05"
+      },
+      {
+        "name": "ATT BETALA ( ARTIKLAR )",
+        "price": "794,59"
+      }
+    ],
+    "discounts": [
+      {
+        "name": "L\u00f6svitktsgodis 39,90kr/k",
+        "price": "-52,15"
+      },
+      {
+        "name": "gurka",
+        "price": "-10,90"
+      }
+    ]
+  },
+  {
+    "markets": [
+      "coop"
+    ],
+    "dates": [
+      "2020-10-29"
+    ],
+    "articles": [
+      {
+        "name": "AVOCADO",
+        "price": "44,95"
+      },
+      {
+        "name": "GODIS",
+        "price": "59,16"
+      },
+      {
+        "name": "KEXCHOKLAD MINI",
+        "price": "17,95"
+      },
+      {
+        "name": "MAX SPEARMINT",
+        "price": "29,00"
+      },
+      {
+        "name": "OB PROCOMFORT SUPER",
+        "price": "25,95"
+      },
+      {
+        "name": "ORIGINALROST",
+        "price": "26,95"
+      },
+      {
+        "name": "PAPRIKA GUL STYCK",
+        "price": "23,85"
+      },
+      {
+        "name": "PLOPP MINI PASE",
+        "price": "17,95"
+      },
+      {
+        "name": "PROCOMFORT SUPER",
+        "price": "99,90"
+      },
+      {
+        "name": "ULTRA LONG + VP Kampanj",
+        "price": "34,90"
+      },
+      {
+        "name": "ULTRA NIGHT VP Kampanj",
+        "price": "34,90"
+      },
+      {
+        "name": "WERTHERS ORIGINAL",
+        "price": "14,50"
+      },
+      {
+        "name": "SUMMERING RABATTER DETTA K\u00d6P",
+        "price": "34,54"
+      },
+      {
+        "name": "ATT BETALA ( ARTIKLAR )",
+        "price": "395,42"
+      }
+    ],
+    "discounts": [
+      {
+        "name": "L\u00f6svitktsgodis 39,90kr/k",
+        "price": "-29,64"
+      },
+      {
+        "name": "MINI BITAR CHOKLAD F\u00d6R 35K",
+        "price": "-0,90"
+      }
+    ]
+  },
+  {
+    "markets": [
+      "coop"
+    ],
+    "dates": [
+      "2020-11-05"
+    ],
+    "articles": [
+      {
+        "name": "CHILIPULVER",
+        "price": "22,50"
+      },
+      {
+        "name": "CITY PULSE",
+        "price": "17,95"
+      },
+      {
+        "name": "PANT 1KR BURK 1X1KR",
+        "price": "1,00"
+      },
+      {
+        "name": "DEO CITRUS ESSENS",
+        "price": "19,95"
+      },
+      {
+        "name": "FILTER OBLEKT 1X4",
+        "price": "12,95"
+      },
+      {
+        "name": "FLANKSTEK I BIT",
+        "price": "174,21"
+      },
+      {
+        "name": "GURKA STYCK SE",
+        "price": "29,90"
+      },
+      {
+        "name": "OL\u012aVOLJA FRUKT\u012aG",
+        "price": "79,95"
+      },
+      {
+        "name": "ORIGINAL",
+        "price": "21,50"
+      },
+      {
+        "name": "PAPRIKA ORANGE_STYC",
+        "price": "32,85"
+      },
+      {
+        "name": "PA\u0160TA GIRAND\u00d3LE",
+        "price": "12,50"
+      },
+      {
+        "name": "PESTO GENOVESE",
+        "price": "29,95"
+      },
+      {
+        "name": "TOMAT PLOM-BABY",
+        "price": "30,00"
+      },
+      {
+        "name": "WHITE PEACH",
+        "price": "17,95"
+      },
+      {
+        "name": "PANT 1KR BURK 1X1KR",
+        "price": "1,00"
+      },
+      {
+        "name": "YOGGI ORIG SKOGSBAR",
+        "price": "19,50"
+      },
+      {
+        "name": "\u00c4GG 24-PACK 1428GR",
+        "price": "79,90"
+      },
+      {
+        "name": "SUMMERING RABATTER DETTA K\u00d6P",
+        "price": "18,80"
+      },
+      {
+        "name": "ATT BETALA ( ARTIKLAR )",
+        "price": "606,71"
+      }
+    ],
+    "discounts": [
+      {
+        "name": "Celsius f\u00f6r 32kr",
+        "price": "-3,90"
+      },
+      {
+        "name": "gurka 15kr",
+        "price": "-14,90"
+      }
+    ]
+  }
+]
