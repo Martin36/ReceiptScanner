@@ -27,7 +27,36 @@ class TestParser(unittest.TestCase):
     market = "Coop"
     is_market = parser.check_market(market)
     self.assertTrue(is_market, "Should work with mixed letters")
+  
+  def test_check_price(self):
+    price = "34,99"
+    result = parser.check_price(price)
+    self.assertEqual(price, result, "Should return the price if the format is correct")
 
+    price = "-34,99"
+    result = parser.check_price(price)
+    self.assertEqual(price, result, "Should be able to handle negative prices")
+
+    price = "blabla"
+    result = parser.check_price(price)
+    self.assertFalse(result, "Should be false if input is not a price")
+  
+  def test_check_discount(self):
+    discount = "-5.89"
+    is_discount = parser.check_discount(discount)
+    self.assertTrue(is_discount, "Should be discount if negative number")
+
+    discount = "5.89"
+    is_discount = parser.check_discount(discount)
+    self.assertFalse(is_discount, "Should not be discount if positive number")
+
+    discount = "-54.89"
+    is_discount = parser.check_discount(discount)
+    self.assertTrue(is_discount, "Should be discount if double digit negative number")
+
+    discount = "blabla"
+    is_discount = parser.check_discount(discount)
+    self.assertTrue(is_discount, "Should not be discount if arbitrary string")
 
 if __name__ == '__main__':
   unittest.main()

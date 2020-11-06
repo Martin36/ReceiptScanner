@@ -25,18 +25,17 @@ class GcloudParser:
     articles = []
     dates = []
     markets = []
+    discounts = []
     for page in pages:
       page.save('tmp.jpg')
       gcloud_response = self.detect_text('tmp.jpg')
-      os.system('rm tmp.jpg')
-      _art, _dat, _mar = self.parse_response(gcloud_response)
+      os.system('del tmp.jpg')
+      _art, _dat, _mar, _dis = self.parse_response(gcloud_response)
       articles += _art
       dates += _dat
       markets += _mar
-    # print(articles)
-    # print(markets)
-    # print(dates)
-    return articles, dates, markets
+      discounts += _dis
+    return articles, dates, markets, discounts
 
   # Detects text in the file.
   def detect_text(self, path):
@@ -55,6 +54,7 @@ class GcloudParser:
     articles = []
     dates = []
     markets = []
+    discounts = []
     seen_indexes = []
     seen_prices = []
     parsed_y = 0
@@ -81,7 +81,6 @@ class GcloudParser:
         continue
 
       if i in seen_indexes:
-        # print('Skipping ' + annotation.description)
         continue
 
       t_type = self.check_annotation_type(annotation.description)
@@ -98,9 +97,7 @@ class GcloudParser:
         xmax = np.max([v.x for v in annotation.bounding_poly.vertices])
         ymin = np.min([v.y for v in annotation.bounding_poly.vertices])
         ymax = np.max([v.y for v in annotation.bounding_poly.vertices])
-        # If the word crosses the middle, skip it?
-        # if xmax > g_xmax/2:
-        #   continue
+
         if (ymax + ymin)/2 < parsed_y:
           if self.debug:
             print('Skipping ' + annotation.description + ' ' + str(ymax) + ' ' + str(parsed_y))
@@ -149,7 +146,10 @@ class GcloudParser:
               continue
             if j in seen_prices:
               continue
-            # code.interact(banner='', local=locals())
+            # Checking if the price text start before the middle of the page
+            # the price should always be to the right of the middle of the page
+            if p_xmin < g_xmax * 0.7:
+              continue
             if p_ymax < ymin or p_ymin > ymax or p_xmax < xmax or p_xmin < price_x_current:
               if current_price or p_ymin > ymin + 2*line_height:
                 continue
@@ -185,11 +185,20 @@ class GcloudParser:
           seen_prices += used_pr
           seen_indexes += used_idx
           skip_this = False
-          # for checkword in BLACKLIST_WORDS + SKIPWORDS + STOPWORDS:
-          #     if checkword in current_name.lower():
-          #         skip_this = True
           if self.debug:
             print(current_name.lower())
+
+          # Check if the current item is a discount
+          if self.check_discount(current_price):
+            if self.debug:
+              print('Adding discount: ' + current_name + ' ' + str(current_price))
+            discounts.append({
+              'name': current_name,
+              'price': current_price
+            })
+            current_name = ''
+            current_price = None
+          
           if not self.check_article_name(current_name):
             skip_this = True
           if not skip_this:
@@ -215,7 +224,7 @@ class GcloudParser:
       elif t_type == 'market':
         if self.check_market(annotation.description):
           markets.append(self.check_market(annotation.description))
-    return articles, dates, markets
+    return articles, dates, markets, discounts
 
   def check_annotation_type(self, text_body):
     if text_body[-1] == ',':
@@ -247,10 +256,19 @@ class GcloudParser:
   
   # Function for detecting a price string
   # A price string has the format (X)XX,XX
+  # Returns false if the string does not represent a price
   def check_price(self, string):
-    rex = r'\d+,\d\d'
+    rex = r'-?\d+,\d\d'
     if regex.fullmatch(rex, string):
       return string
+    return False
+
+  # Function for checking if the current item is a discount
+  # Discounts have a negative price
+  def check_discount(self, string):
+    rex = r'-\d+,\d\d'
+    if regex.fullmatch(rex, string):
+      return True
     return False
 
   def is_integer(self, text_body):
