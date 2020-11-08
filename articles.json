@@ -9,10 +9,14 @@
     "articles": [
       {
         "name": "BLANDFARS 20% 50/50",
+        "price": "75,25"
+      },
+      {
+        "name": "BLANDFARS 20% 50/50",
         "price": "75,85"
       },
       {
-        "name": "BLOMKAL GR\u00d6N",
+        "name": "BLOMKAL GRÖN",
         "price": "21,18"
       },
       {
@@ -60,7 +64,7 @@
         "price": "41,95"
       },
       {
-        "name": "KYCKLING FARS Medlem",
+        "name": "KYCKLING FARS Medlem M",
         "price": "99,80"
       },
       {
@@ -84,16 +88,20 @@
         "price": "11,81"
       },
       {
-        "name": "SK\u00c1NER\u00d6ST",
+        "name": "SKÁNERÖST",
         "price": "41,95"
       },
       {
-        "name": "SM\u00d6R OSALTAT",
+        "name": "SMÖR OSALTAT",
         "price": "39,95"
       },
       {
         "name": "SQUEEZY JORDGSYLT",
         "price": "27,95"
+      },
+      {
+        "name": "4TOMATER KROSSADE",
+        "price": "11,95"
       },
       {
         "name": "VISPGRADDE 36%",
@@ -108,7 +116,7 @@
         "price": "1,00"
       },
       {
-        "name": "SUMMERING RABATTER DETTA K\u00d6P",
+        "name": "SUMMERING RABATTER DETTA KÖP",
         "price": "211,35"
       },
       {
@@ -118,7 +126,7 @@
     ],
     "discounts": [
       {
-        "name": "Celsius f\u00f6r 32kr",
+        "name": "Celsius för 32kr",
         "price": "-3,90"
       },
       {
@@ -126,7 +134,7 @@
         "price": "-66,85"
       },
       {
-        "name": "Blandf\u00e4rs 49,90/kg",
+        "name": "Blandfärs 49,90/kg",
         "price": "-50,50"
       },
       {
@@ -145,7 +153,8 @@
         "name": "Kyckling",
         "price": "-25,05"
       }
-    ]
+    ],
+    "total": 766.69
   },
   {
     "markets": [
@@ -160,7 +169,7 @@
         "price": "49,00"
       },
       {
-        "name": "FR\u00dcKOSTFLINGOR SPEC",
+        "name": "FRÜKOSTFLINGOR SPEC",
         "price": "21,50"
       },
       {
@@ -168,7 +177,7 @@
         "price": "25,00"
       },
       {
-        "name": "GODIS L\u00d6SVIKT",
+        "name": "GODIS LÖSVIKT",
         "price": "104,09"
       },
       {
@@ -180,15 +189,15 @@
         "price": "33,90"
       },
       {
-        "name": "LAXFILE HELSIDA B\u1ec6N Kampanj",
+        "name": "LAXFILE HELSIDA BỆN Kampanj",
         "price": "159,19"
       },
       {
-        "name": "L\u00d6K VIT G",
+        "name": "LÖK VIT G",
         "price": "22,95"
       },
       {
-        "name": "\u00d6LIVER HALKIDIKI UR",
+        "name": "ÖLIVER HALKIDIKI UR",
         "price": "26,50"
       },
       {
@@ -200,7 +209,7 @@
         "price": "79,00"
       },
       {
-        "name": "SM\u00d6R OSALTAT",
+        "name": "SMÖR OSALTAT",
         "price": "39,95"
       },
       {
@@ -228,11 +237,11 @@
         "price": "79,90"
       },
       {
-        "name": "\u00d6LKORV VITL\u00d6K",
+        "name": "ÖLKORV VITLÖK",
         "price": "42,50"
       },
       {
-        "name": "SUMMERING RABATTER DETTA K\u00d6P",
+        "name": "SUMMERING RABATTER DETTA KÖP",
         "price": "63,05"
       },
       {
@@ -242,14 +251,15 @@
     ],
     "discounts": [
       {
-        "name": "L\u00f6svitktsgodis 39,90kr/k",
+        "name": "Lösvitktsgodis 39,90kr/k",
         "price": "-52,15"
       },
       {
         "name": "gurka",
         "price": "-10,90"
       }
-    ]
+    ],
+    "total": 794.59
   },
   {
     "markets": [
@@ -260,11 +270,11 @@
     ],
     "articles": [
       {
-        "name": "AVOCADO",
+        "name": "AVOCADO 3-PACK",
         "price": "44,95"
       },
       {
-        "name": "GODIS",
+        "name": "GODIS LÖSVIKT",
         "price": "59,16"
       },
       {
@@ -308,7 +318,7 @@
         "price": "14,50"
       },
       {
-        "name": "SUMMERING RABATTER DETTA K\u00d6P",
+        "name": "SUMMERING RABATTER DETTA KÖP",
         "price": "34,54"
       },
       {
@@ -318,14 +328,15 @@
     ],
     "discounts": [
       {
-        "name": "L\u00f6svitktsgodis 39,90kr/k",
+        "name": "Lösvitktsgodis 39,90kr/k",
         "price": "-29,64"
       },
       {
-        "name": "MINI BITAR CHOKLAD F\u00d6R 35K",
+        "name": "MINI BITAR CHOKLAD FÖR 35K",
         "price": "-0,90"
       }
-    ]
+    ],
+    "total": 794.59
   },
   {
     "markets": [
@@ -364,7 +375,7 @@
         "price": "29,90"
       },
       {
-        "name": "OL\u012aVOLJA FRUKT\u012aG",
+        "name": "OLĪVOLJA FRUKTĪG",
         "price": "79,95"
       },
       {
@@ -376,7 +387,7 @@
         "price": "32,85"
       },
       {
-        "name": "PA\u0160TA GIRAND\u00d3LE",
+        "name": "PAŠTA GIRANDÓLE",
         "price": "12,50"
       },
       {
@@ -400,11 +411,11 @@
         "price": "19,50"
       },
       {
-        "name": "\u00c4GG 24-PACK 1428GR",
+        "name": "ÄGG 24-PACK 1428GR",
         "price": "79,90"
       },
       {
-        "name": "SUMMERING RABATTER DETTA K\u00d6P",
+        "name": "SUMMERING RABATTER DETTA KÖP",
         "price": "18,80"
       },
       {
@@ -414,13 +425,14 @@
     ],
     "discounts": [
       {
-        "name": "Celsius f\u00f6r 32kr",
+        "name": "Celsius för 32kr",
         "price": "-3,90"
       },
       {
         "name": "gurka 15kr",
         "price": "-14,90"
       }
-    ]
+    ],
+    "total": 794.59
   }
 ]
