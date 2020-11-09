@@ -58,6 +58,94 @@ class TestParser(unittest.TestCase):
     is_discount = parser.check_discount(discount)
     self.assertFalse(is_discount, "Should not be discount if arbitrary string")
 
+  def test_is_amount_line(self):
+    string = "2 st x 12,95"
+    is_amount_line = parser.is_amount_line(string)
+    self.assertTrue(is_amount_line, "Should return true when correct input (Coop st pris)")
+
+    string = "2stx12,95"
+    is_amount_line = parser.is_amount_line(string)
+    self.assertTrue(is_amount_line, "Should return true when correct input (Hemköp st pris)")
+
+    string = "2st*12,95"
+    is_amount_line = parser.is_amount_line(string)
+    self.assertTrue(is_amount_line, "Should return true when correct input (Hemköp st pris)")
+
+    string = "1,004 kg x 74,95 SEK/kg"
+    is_amount_line = parser.is_amount_line(string)
+    self.assertTrue(is_amount_line, "Should return true when correct input (Coop kg pris)")
+
+    string = "1,131kg*79,00kr/kg"
+    is_amount_line = parser.is_amount_line(string)
+    self.assertTrue(is_amount_line, "Should return true when correct input (Hemköp kg pris)")
+
+    string = " 1,131kg*79,00kr/kg "
+    is_amount_line = parser.is_amount_line(string)
+    self.assertTrue(is_amount_line, "Should be able to handle leading and trailing spaces")
+
+    string = "blablalba"
+    is_amount_line = parser.is_amount_line(string)
+    self.assertFalse(is_amount_line, "Should return false when incorrect input")
+
+  def test_get_amount(self):
+    string = "2 st x 12,95"
+    amount = parser.get_amount(string)
+    self.assertEqual(amount, "2 st")
+
+    string = "2stx12,95"
+    amount = parser.get_amount(string)
+    self.assertEqual(amount, "2st")
+
+    string = "2st*12,95"
+    amount = parser.get_amount(string)
+    self.assertEqual(amount, "2st")
+
+    string = "1,004 kg x 74,95 SEK/kg"
+    amount = parser.get_amount(string)
+    self.assertEqual(amount, "1,004 kg")
+
+    string = "1,131kg*79,00kr/kg"
+    amount = parser.get_amount(string)
+    self.assertEqual(amount, "1,131kg")
+
+    string = " 1,131kg*79,00kr/kg "
+    amount = parser.get_amount(string)
+    self.assertEqual(amount, "1,131kg", "Should be able to handle leading and trailing spaces")
+
+    string = "blablalba"
+    amount = parser.get_amount(string)
+    self.assertFalse(amount, "Should return false if an invalid quantity string")
+
+  def test_get_st_price(self):
+    string = "2 st x 12,95"
+    amount = parser.get_st_price(string)
+    self.assertEqual(amount, "12,95")
+
+    string = "2stx12,95"
+    amount = parser.get_st_price(string)
+    self.assertEqual(amount, "12,95")
+
+    string = "2st*12,95"
+    amount = parser.get_st_price(string)
+    self.assertEqual(amount, "12,95")
+
+    string = "1,004 kg x 74,95 SEK/kg"
+    amount = parser.get_st_price(string)
+    self.assertEqual(amount, "74,95 SEK/kg")
+
+    string = "1,131kg*79,00kr/kg"
+    amount = parser.get_st_price(string)
+    self.assertEqual(amount, "79,00kr/kg")
+
+    string = " 1,131kg*79,00kr/kg "
+    amount = parser.get_st_price(string)
+    self.assertEqual(amount, "79,00kr/kg", "Should be able to handle leading and trailing spaces")
+
+    string = "blablalba"
+    amount = parser.get_st_price(string)
+    self.assertFalse(amount, "Should return false if an invalid quantity string")
+
+
 if __name__ == '__main__':
   unittest.main()
 

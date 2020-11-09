@@ -99,19 +99,33 @@ class GcloudParser:
         xmax = np.max([v.x for v in annotation.bounding_poly.vertices])
         ymin = np.min([v.y for v in annotation.bounding_poly.vertices])
         ymax = np.max([v.y for v in annotation.bounding_poly.vertices])
+        ymid = ymax - (ymax - ymin)/2
 
         if (ymax + ymin)/2 < parsed_y:
           if self.debug:
             print('Skipping ' + annotation.description + ' ' + str(ymax) + ' ' + str(parsed_y))
           continue
         line_height = ymax - ymin
-        # look for a price that is in the same line on the far right
         current_price = None
+        current_name = ''
         current_name += annotation.description
+        # If the item has additional information e.g. how many of the item was bought
+        # then this will have a value
+        current_amount = None 
+        # This represents how much each item costs, which is only present for some items
+        current_st_price = None
+        # This string holds the information about the quantity and the price for each item
+        current_quantity_string = ''
+        # TODO: What is this?
         y_current = 0
         price_x_current = 0
         is_hanging = False
         p_description = ''
+        # This is for keeping track of the start of the next item
+        # when we are looking for the quantity row
+        # If the quantity row is underneath this, then we know it doesn't 
+        # belong to the current article
+        y_min_next_article = g_ymax
 
         for j, p_ann in enumerate(sorted_annotations):
           if i == j:
@@ -127,8 +141,27 @@ class GcloudParser:
           p_ymin = np.min([v.y for v in p_ann.bounding_poly.vertices])
           p_ymax = np.max([v.y for v in p_ann.bounding_poly.vertices])
 
-          if p_ymax < ymin or p_ymin > ymax:
+          if annotation.description == "BLANDFARS":
+            test = 0
+          # This means that the first word is underneath the next word
+          # Therefore we can skip this, since we never want to add a word
+          # above the first       
+          if p_ymax < ymin:
             continue
+
+          # Check if the next word is underneath the first
+          if p_ymin > ymid and p_ymin < y_min_next_article:
+            # If this is the case, it could be a row that contains information
+            # about the quantity bought
+            # Lets check if this words belongs to an article
+            if self.check_article_name(p_ann.description):
+              y_min_next_article = p_ymin
+              continue
+            # If it is not an article then we add it to the quantity string
+            # but only if 
+            current_quantity_string += ' ' + p_ann.description
+            used_idx.append(j)
+
           line_overlap = np.min([p_ymax-ymin, ymax-p_ymin]) / np.max([p_ymax-p_ymin, ymax-ymin])
           if line_overlap < 0.45:
             continue
@@ -155,8 +188,12 @@ class GcloudParser:
               continue
             # Checking if the price text start before the middle of the page
             # the price should always be to the right of the middle of the page
+            # If the number does not start on the right side, then it might be
+            # the price per kg e.g. SEK/kg
             if p_xmin < g_xmax * 0.7:
+              current_name += ' ' + p_description
               continue
+            
             if p_ymax < ymin or p_ymin > ymax or p_xmax < xmax or p_xmin < price_x_current:
               if current_price or p_ymin > ymin + 2*line_height:
                 continue
@@ -190,6 +227,7 @@ class GcloudParser:
               print('Appending ' + current_name + ' ' + p_description)
             current_name += ' ' + p_ann.description
             
+        y_min_next_article = g_ymax
         if self.debug:
           print(current_name + ' ' + str(current_price))
         if current_price:
@@ -215,19 +253,18 @@ class GcloudParser:
           if not skip_this:
             if self.debug:
               print('Adding ' + current_name + ' ' + str(current_price))
+            
+            # Check if the article has a correct quantity string
+            if self.is_amount_line(current_quantity_string):
+              current_amount = self.get_amount(current_quantity_string)
+              current_st_price = self.get_st_price(current_quantity_string)
+
             articles.append({
               'name': current_name,
-              'price': current_price
+              'sum': current_price,
+              'amount': current_amount if current_amount else '1 st',
+              'price': current_st_price if current_st_price else current_price
             })
-            current_name = ''
-            current_price = None
-          else:
-            current_name = ''
-            current_price = None
-        else:
-          # If there is no current price at this stage, we assume that the read line was not an article
-          current_name = ''
-          current_price = None
 
       elif t_type == 'date':
         dates.append(self.parse_date(annotation.description))
@@ -281,6 +318,55 @@ class GcloudParser:
   def check_discount(self, string):
     rex = r'-\d+,\d\d'
     if regex.fullmatch(rex, string):
+      return True
+    return False
+
+  # Gets the amount of a product from a string
+  # For the string "0,538 kg x 21,95 SEK/kg" it would return "0,538 kg"
+  def get_amount(self, string):
+    string = string.strip()
+    re_kg = r'(\d+,\d+\s*kg)\s*[x|\*]\s*\d\d,\d\d\s*.*/kg'
+    re_st = r'(\d+\s*st)\s*[x|\*]\s*\d\d,\d\d'
+    
+    kg_search = regex.search(re_kg, string)
+    if kg_search:
+      return kg_search.group(1)
+    
+    st_search = regex.search(re_st, string)
+    if st_search:
+      return st_search.group(1)
+
+    else:
+      return False
+
+  # Gets the price for each of a product from a string
+  # For the string "0,538 kg x 21,95 SEK/kg" it would return "21,95 SEK/kg"
+  def get_st_price(self, string):
+    string = string.strip()
+    re_kg = r'\d+,\d+\s*kg\s*[x|\*]\s*(\d\d,\d\d\s*.*/kg)'
+    re_st = r'\d+\s*st\s*[x|\*]\s*(\d\d,\d\d)'
+    
+    kg_search = regex.search(re_kg, string)
+    if kg_search:
+      return kg_search.group(1)
+    
+    st_search = regex.search(re_st, string)
+    if st_search:
+      return st_search.group(1)
+
+    else:
+      return False
+
+  # Checks if the string is an amount of a product e.g. number of items bought
+  # It could be on the form: X,XXX kr x XX,XX SEK/kg (where X is an int)
+  # Or it could be on the form: X st x XX,XX
+  def is_amount_line(self, string):
+    string = string.strip()
+    re_kg = r'\d+,\d+\s*kg\s*[x|\*]\s*\d\d,\d\d\s*.*/kg'
+    re_st = r'\d+\s*st\s*[x|\*]\s*\d\d,\d\d'
+    if regex.match(re_kg, string):
+      return True
+    elif regex.match(re_st, string):
       return True
     return False
 

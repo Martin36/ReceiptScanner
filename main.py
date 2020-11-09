@@ -4,7 +4,7 @@ import csv
 from pprint import pprint
 from receipt_parser import GcloudParser
 
-PATH = 'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-24.pdf'
+PATH = 'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-20.pdf'
 receipt_paths = [
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-20.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-27.pdf',
@@ -45,33 +45,5 @@ def parse_all_pdfs():
   f.write(json.dumps(j, indent=2, ensure_ascii=False))
   f.close()
 
-def write_to_csv():
-  with open('articles.csv', newline='') as csvfile:
-    csv_writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-    
-    f = open('articles.json')
-    json_data = json.load(f)
-
-    for receipt in json_data:
-      # Add the header
-      csv_writer.writerow(['Market', 'Date', 'Receipt total', 'Article name', 'Sum'])
-      
-      market = receipt['markets'][0]
-      date = receipt['dates'][0]
-      total = receipt['total']
-
-      for article in receipt['articles']:
-        name = article['name']
-        price_sum = article['price']
-        csv_writer.writerow([market, date, total, name, price_sum])
-
-  # j = json.dumps({
-  #   "markets": markets, 
-  #   "dates": dates, 
-  #   "articles": articles, 
-  #   "discounts": discounts
-  # }, indent=2)
-
 # parse_all_pdfs()
-# parse_one_pdf()
-write_to_csv()
+parse_one_pdf()
