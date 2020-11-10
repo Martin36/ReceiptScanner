@@ -12,6 +12,14 @@ SKIPWORDS = ['SEK', 'www.coop.se', 'Tel.nr:', 'Kvitto:', 'Datum:', 'Kassör:', '
 STOPWORDS = []
 BLACKLIST_WORDS = []
 TOTAL_WORDS = ['ATT BETALA']
+# This represents the offset on the x-axis that the additional information
+# has from the start of the article name. It needs to be tweaked so that it
+# works correctly
+X_OFFSET = 50
+# This represents the distance from the edge of the receipt that the 
+# price should end AFTER. It is not an optimal solution since the 
+# required distance may differ between receipts
+PRICE_OFFSET = 200
 
 class GcloudParser:
   def __init__(self, debug=False, min_length=5, max_height=1):
@@ -100,6 +108,17 @@ class GcloudParser:
         ymin = np.min([v.y for v in annotation.bounding_poly.vertices])
         ymax = np.max([v.y for v in annotation.bounding_poly.vertices])
         ymid = ymax - (ymax - ymin)/2
+        # This represents the bounding box of the current item
+        # It includes the additional information that is underneath the name
+        # of the article
+        # Initially this is just the bounding box for the first word
+        # but it grows as new words are added
+        bounding_box = {
+          'xmin': xmin,
+          'xmax': xmax,
+          'ymin': ymin,
+          'ymax': ymax
+        }
 
         if (ymax + ymin)/2 < parsed_y:
           if self.debug:
@@ -141,26 +160,54 @@ class GcloudParser:
           p_ymin = np.min([v.y for v in p_ann.bounding_poly.vertices])
           p_ymax = np.max([v.y for v in p_ann.bounding_poly.vertices])
 
-          if annotation.description == "BLANDFARS":
-            test = 0
           # This means that the first word is underneath the next word
           # Therefore we can skip this, since we never want to add a word
           # above the first       
           if p_ymax < ymin:
             continue
 
+          p_type = self.check_annotation_type(p_ann.description)
+
           # Check if the next word is underneath the first
           if p_ymin > ymid and p_ymin < y_min_next_article:
             # If this is the case, it could be a row that contains information
             # about the quantity bought
-            # Lets check if this words belongs to an article
-            if self.check_article_name(p_ann.description):
+            # Check if the next word is offset on the x-axis
+            if p_xmin-X_OFFSET > xmin:
+              # TODO: Need to handle rows with "Pant" here
+              # If the next word is not a number, we know that it is 
+              # part of the additional information
+              if p_type != 'number':
+                current_quantity_string += ' ' + p_ann.description
+                used_idx.append(j)
+                # Extend the bounding box to contain the new word
+                if p_xmax > bounding_box['xmax']:
+                  bounding_box['xmax'] = p_xmax
+                if p_ymax > bounding_box['ymax']:
+                  bounding_box['ymax'] = p_ymax 
+                continue               
+
+              # If it is a number it becomes trickier, since it could
+              # both be part of the additional information or it could
+              # be the price of the article
+              else:
+                # Assume that it is the price of the article
+                # if it is ends close to the edge of the receipt
+                if g_xmax-PRICE_OFFSET < p_xmax:
+                  used_pr.append(j)
+                  current_price = self.check_price(p_ann.description) 
+                # If the price is not on the far right, we assume that 
+                # it is part of the quantity string
+                else:
+                  current_quantity_string += ' ' + p_ann.description
+                  used_idx.append(j)
+                continue
+            else:
+              # If we get here it means that the next word is aligned with
+              # the current article, therefore it must be a new article
+              # and we should stop expanding the bounding box on the y-axis
               y_min_next_article = p_ymin
               continue
-            # If it is not an article then we add it to the quantity string
-            # but only if 
-            current_quantity_string += ' ' + p_ann.description
-            used_idx.append(j)
 
           line_overlap = np.min([p_ymax-ymin, ymax-p_ymin]) / np.max([p_ymax-p_ymin, ymax-ymin])
           if line_overlap < 0.45:
@@ -170,7 +217,6 @@ class GcloudParser:
             is_hanging = False
           else:
             p_description = p_ann.description
-          p_type = self.check_annotation_type(p_description)
   
           if p_type == 'hanging':
             is_hanging = True
