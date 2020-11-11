@@ -6,6 +6,27 @@ parser = GcloudParser()
 
 class TestParser(unittest.TestCase):
   
+  def test_check_annotation_type(self):
+    text_body = "34,55"
+    result = parser.check_annotation_type(text_body)
+    self.assertEqual(result, 'number', "Should return number if input is correct price")
+
+    text_body = "20-05-12"
+    result = parser.check_annotation_type(text_body)
+    self.assertEqual(result, 'date', "Should return date if input is correct date")
+
+    text_body = "23"
+    result = parser.check_annotation_type(text_body)
+    self.assertEqual(result, 'int', "Should return int if input is correct int")
+
+    text_body = "coop"
+    result = parser.check_annotation_type(text_body)
+    self.assertEqual(result, 'market', "Should return market if input is correct market")
+
+    text_body = "blablabla"
+    result = parser.check_annotation_type(text_body)
+    self.assertEqual(result, 'text', "Should return text for all other inputs")
+
   def test_check_article_name(self):
     article_name = "QWEÄÖPLÄÖÜÊÉ"
     is_article = parser.check_article_name(article_name)
@@ -57,6 +78,15 @@ class TestParser(unittest.TestCase):
     discount = "blabla"
     is_discount = parser.check_discount(discount)
     self.assertFalse(is_discount, "Should not be discount if arbitrary string")
+
+  def test_check_if_pant(self):
+    string = "gfdspokPANT eqåpwoeads"
+    is_pant = parser.check_if_pant(string)
+    self.assertTrue(is_pant, "Should return true when input includes 'pant'")
+    
+    string = "gfdspokPNT eqåpwoeads"
+    is_pant = parser.check_if_pant(string)
+    self.assertFalse(is_pant, "Should return false when input doesnt include 'pant'")
 
   def test_is_amount_line(self):
     string = "2 st x 12,95"

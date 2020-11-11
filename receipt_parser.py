@@ -169,12 +169,18 @@ class GcloudParser:
           p_type = self.check_annotation_type(p_ann.description)
 
           # Check if the next word is underneath the first
-          if p_ymin > ymid and p_ymin < y_min_next_article:
+          # and if the quantity string is finished, then we can skip this part
+          if p_ymin > ymid and \
+             p_ymin < y_min_next_article and \
+             not self.is_amount_line(current_quantity_string):
             # If this is the case, it could be a row that contains information
             # about the quantity bought
             # Check if the next word is offset on the x-axis
             if p_xmin-X_OFFSET > xmin:
-              # TODO: Need to handle rows with "Pant" here
+              # Treat a row with pant as a new article
+              if self.check_if_pant(p_ann.description):
+                y_min_next_article = p_ymin
+                continue
               # If the next word is not a number, we know that it is 
               # part of the additional information
               if p_type != 'number':
@@ -321,6 +327,7 @@ class GcloudParser:
     return articles, dates, markets, discounts
 
   def check_annotation_type(self, text_body):
+    # TODO: What is 'hanging'?
     if text_body[-1] == ',':
       return 'hanging'
     if self.check_price(text_body):
@@ -366,6 +373,16 @@ class GcloudParser:
     if regex.fullmatch(rex, string):
       return True
     return False
+
+  # Checking if the string is pant, which should be 
+  # handled differently
+  def check_if_pant(self, string):
+    rex = r'pant'
+    string = string.lower()
+    if regex.search(rex, string):
+      return True
+    else:
+      return False
 
   # Gets the amount of a product from a string
   # For the string "0,538 kg x 21,95 SEK/kg" it would return "0,538 kg"
