@@ -142,6 +142,25 @@ class TestParser(unittest.TestCase):
     is_amount_line = parser.is_amount_line(string)
     self.assertFalse(is_amount_line, "Should return false when incorrect input")
 
+    string = "BLANDFARS 1,131kg*79,00kr/kg"
+    is_amount_line = parser.is_amount_line(string)
+    self.assertTrue(is_amount_line, "Should return true when the quantity string happens to be on the same line as the article")
+
+  def test_extract_amount_line(self):
+    string = "BLANDFARS 1,131kg*79,00kr/kg"
+    amount_line = "1,131kg*79,00kr/kg"
+    result = parser.extract_amount_line(string)
+    self.assertEqual(result, amount_line, "Should return the correct amount line")
+
+    string = "BLANDFARS 1,004 kg x 74,95 SEK/kg"
+    amount_line = "1,004 kg x 74,95 SEK/kg"
+    result = parser.extract_amount_line(string)
+    self.assertEqual(result, amount_line, "Should return the correct amount line")
+
+    string = "blablalba"
+    result = parser.extract_amount_line(string)
+    self.assertEqual(result, None, "Should return None if string does not contain a correct amount line")
+
   def test_get_amount(self):
     string = "2 st x 12,95"
     amount = parser.get_amount(string)

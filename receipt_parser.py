@@ -73,9 +73,8 @@ class GcloudParser:
     g_ymax = np.max([v.y for v in base_ann.bounding_poly.vertices])
     break_this = False
     sorted_annotations = gcloud_response.text_annotations[1:]
-    # sorted_annotations = sorted(gcloud_response.text_annotations[1:],
-    #                             key=lambda x: x.bounding_poly.vertices[0].y)
     current_name = ''    
+    
     for i, annotation in enumerate(sorted_annotations):
       skip_this = False
 
@@ -133,8 +132,6 @@ class GcloudParser:
         current_st_price = None
         # This string holds the information about the quantity and the price for each item
         current_quantity_string = ''
-        # TODO: What is this?
-        y_current = 0
         price_x_current = 0
         is_hanging = False
         p_description = ''
@@ -249,7 +246,6 @@ class GcloudParser:
                 continue
             if self.debug:
               print('Checking ' + p_description)
-            y_current = p_ymin
             used_pr.append(j)
             current_price = self.check_price(p_description)
             price_x_current = p_xmin
@@ -267,9 +263,6 @@ class GcloudParser:
             # if they are the second word should not be added
             if p_ymax < ymin or p_ymin > ymax:
               continue
-
-            # if ( y_current > 0 and p_ymin > y_current):
-            #   continue
 
             used_idx.append(j)
             parsed_y = max(parsed_y, (p_ymax + p_ymin) / 2)
@@ -303,6 +296,13 @@ class GcloudParser:
           if not skip_this:
             if self.debug:
               print('Adding ' + current_name + ' ' + str(current_price))
+
+            # Sometimes the quantity string is on the same line as the article
+            # In this case we need to move it from the article string to the 
+            # quantity string
+            if self.is_amount_line(current_name):
+              current_quantity_string = self.extract_amount_line(current_name)
+              current_name = current_name.replace(current_quantity_string, '')
             
             # Check if the article has a correct quantity string
             if self.is_amount_line(current_quantity_string):
@@ -445,11 +445,27 @@ class GcloudParser:
     string = string.strip()
     re_kg = r'\d+,\d+\s*kg\s*[x|\*]\s*\d\d,\d\d\s*.*/kg'
     re_st = r'\d+\s*st\s*[x|\*]\s*\d\d,\d\d'
-    if regex.match(re_kg, string):
+    if regex.search(re_kg, string):
       return True
-    elif regex.match(re_st, string):
+    elif regex.search(re_st, string):
       return True
     return False
+
+  # Gets the amount line from a string if it has any
+  def extract_amount_line(self, string):
+    string = string.strip()
+    re_kg = r'(\d+,\d+\s*kg\s*[x|\*]\s*\d\d,\d\d\s*.*/kg)'
+    result = regex.search(re_kg, string)
+    if result:
+      return result.group(1)
+
+    re_st = r'(\d+\s*st\s*[x|\*]\s*\d\d,\d\d)'
+    result = regex.search(re_st, string)
+    if result:
+      return result.group(1)
+    
+    return None
+
 
   def is_integer(self, text_body):
     try:
