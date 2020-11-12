@@ -4,7 +4,7 @@ import csv
 from pprint import pprint
 from receipt_parser import GcloudParser
 
-PATH = 'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-20.pdf'
+PATH = 'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-24.pdf'
 receipt_paths = [
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-20.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-27.pdf',
@@ -21,7 +21,7 @@ def parse_one_pdf():
   #print(len(articles))
   print(dates)
   print(markets)
-  print(discounts)
+  pprint(discounts)
   print(total)
 
 

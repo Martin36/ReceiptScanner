@@ -30,25 +30,50 @@ class TestParser(unittest.TestCase):
   def test_check_article_name(self):
     article_name = "QWEÄÖPLÄÖÜÊÉ"
     is_article = parser.check_article_name(article_name)
-    self.assertEqual(is_article, True, "Should be able to handle special characters")
+    self.assertTrue(is_article, "Should be able to handle special characters")
 
     article_name = "TEST TeST"
     is_article = parser.check_article_name(article_name)
-    self.assertEqual(is_article, True, "Should be article if multiple words (only first word needs to have all caps)")
+    self.assertTrue(is_article, "Should be article if multiple words (only first word needs to have all caps)")
 
     article_name = "test TEST"
     is_article = parser.check_article_name(article_name)
-    self.assertEqual(is_article, False, "Should not be article if first word is not all caps")
+    self.assertFalse(is_article, "Should not be article if first word is not all caps")
+
+    article_name = "Blomkål blabla"
+    is_article = parser.check_article_name(article_name)
+    self.assertTrue(is_article, "Should return true for names where first letter is capital")
+
+    article_name = "* PAPPKASSE BRUN 30L"
+    is_article = parser.check_article_name(article_name)
+    self.assertTrue(is_article, "Should return true for names that begins with *")
+
+    article_name = "Blomkål blabla"
+    parser.market = "coop"
+    is_article = parser.check_article_name(article_name)
+    self.assertFalse(is_article, "Should return false for names where only first letter is capital when market is coop or hemköp")
 
   def test_check_market(self):
     market = "ICA"
-    is_market = parser.check_market(market)
-    self.assertTrue(is_market, "Should work with capital letters")
+    result = parser.check_market(market)
+    self.assertEqual(result, "ica", "Should work with capital letters")
 
     market = "Coop"
-    is_market = parser.check_market(market)
-    self.assertTrue(is_market, "Should work with mixed letters")
-  
+    result = parser.check_market(market)
+    self.assertEqual(result, "coop", "Should work with first letter capital")
+
+    market = "Hemköp"
+    result = parser.check_market(market)
+    self.assertEqual(result, "hemköp", "Should work for hemköp")
+
+    market = "Hemk@p"
+    result = parser.check_market(market)
+    self.assertEqual(result, "hemköp", "Should work for hemköp, even if Ö is incorrect")
+
+    market = "blablabla"
+    result = parser.check_market(market)
+    self.assertEqual(result, None, "Should return none if input is not a market recognized by the algorithm")
+
   def test_check_price(self):
     price = "34,99"
     result = parser.check_price(price)

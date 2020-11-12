@@ -29,12 +29,12 @@ class GcloudParser:
     self.client = vision_v1.ImageAnnotatorClient()
     self.allowed_labels = ['article', 'price', 'market', 'address', 'date', 'misc']
     self.total_amount = 0
+    self.market = None
 
   def parse_pdf(self, path):
     pages = convert_from_path(path, 500)
     articles = []
     dates = []
-    markets = []
     discounts = []
     for page in pages:
       page.save('tmp.jpg')
@@ -43,9 +43,8 @@ class GcloudParser:
       _art, _dat, _mar, _dis = self.parse_response(gcloud_response)
       articles += _art
       dates += _dat
-      markets += _mar
       discounts += _dis
-    return articles, dates, markets, discounts, self.total_amount
+    return articles, dates, self.market, discounts, self.total_amount
 
   # Detects text in the file.
   def detect_text(self, path):
@@ -63,7 +62,6 @@ class GcloudParser:
   def parse_response(self, gcloud_response):
     articles = []
     dates = []
-    markets = []
     discounts = []
     seen_indexes = []
     seen_prices = []
@@ -323,8 +321,8 @@ class GcloudParser:
 
       elif t_type == 'market':
         if self.check_market(annotation.description):
-          markets.append(self.check_market(annotation.description))
-    return articles, dates, markets, discounts
+          market = self.check_market(annotation.description)
+    return articles, dates, market, discounts
 
   def check_annotation_type(self, text_body):
     # TODO: What is 'hanging'?
@@ -344,17 +342,37 @@ class GcloudParser:
     for market in MARKETS:
       if market.lower() in text_body.lower().split(' '):
         return market
+    
+    # Hemköp will probably not be handled correctly since 
+    # they can't handle ÅÄÖ, therefore it needs to be handled separately
+    re_hemkop = regex.compile(r'HEMK.P')
+    for text in text_body.upper().split(' '):
+      if regex.fullmatch(re_hemkop, text):
+        return 'hemköp'
+
     return None
 
   # Function for checking if a string is an article on the receipt
-  # The article name begins with an all-caps word
+  # The article name begins with an all-caps word (Coop and Hemköp)
   # The article name can also contain a number due to special characters, 
+  # The article name on an ICA receipt starts with a capital letter and 
+  # the rest are small letters
   # such as the clove on coop receipts
   def check_article_name(self, article_name):
-    rex = regex.compile(r'[0-9]?[[:upper:]]+')
+    rex = regex.compile(r'[0-9\*]*[[:upper:]]+')
     words = article_name.split(' ')
+    if(words[0] == "*"):
+      return True
     if regex.fullmatch(rex, words[0]):
       return True
+
+    # Coop and Hemköp receipts have all articles in only capital letters
+    # so if the market is any of them we skip this regex match
+    if self.market not in ['coop', 'hemköp']:
+      re_ica = regex.compile(r'[[:upper:]][[:lower:]]*')
+      if regex.fullmatch(re_ica, words[0]):
+        return True
+
     return False
   
   # Function for detecting a price string
@@ -443,7 +461,7 @@ class GcloudParser:
     return False
 
   def parse_date(self, date_str):
-    for fmt in ['%d.%m.%y', '%Y-%m-%d', '%d.%m.%y %H:%M', '%d.%m.%Y']:
+    for fmt in ['%d.%m.%y', '%Y-%m-%d', '%d.%m.%y %H:%M', '%d.%m.%Y', '%y-%m-%d']:
       for substr in date_str.split(' '):
         try:
           new_purch_date = datetime.datetime.strptime(substr, fmt).strftime('%Y-%m-%d')
