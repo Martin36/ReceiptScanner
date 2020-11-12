@@ -117,10 +117,10 @@ class GcloudParser:
           'ymax': ymax
         }
 
-        if (ymax + ymin)/2 < parsed_y:
-          if self.debug:
-            print('Skipping ' + annotation.description + ' ' + str(ymax) + ' ' + str(parsed_y))
-          continue
+        # if (ymax + ymin)/2 < parsed_y:
+        #   if self.debug:
+        #     print('Skipping ' + annotation.description + ' ' + str(ymax) + ' ' + str(parsed_y))
+        #   continue
         line_height = ymax - ymin
         current_price = None
         current_name = ''
@@ -207,7 +207,8 @@ class GcloudParser:
               # If we get here it means that the next word is aligned with
               # the current article, therefore it must be a new article
               # and we should stop expanding the bounding box on the y-axis
-              y_min_next_article = p_ymin
+              if self.check_article_name(p_ann.description):
+                y_min_next_article = p_ymin
               continue
 
           line_overlap = np.min([p_ymax-ymin, ymax-p_ymin]) / np.max([p_ymax-p_ymin, ymax-ymin])
@@ -274,8 +275,6 @@ class GcloudParser:
         if self.debug:
           print(current_name + ' ' + str(current_price))
         if current_price:
-          seen_prices += used_pr
-          seen_indexes += used_idx
           skip_this = False
           if self.debug:
             print(current_name.lower())
@@ -290,7 +289,10 @@ class GcloudParser:
             })
             current_name = ''
             current_price = None
-          
+            seen_prices += used_pr
+            seen_indexes += used_idx
+            continue
+
           if not self.check_article_name(current_name):
             skip_this = True
           if not skip_this:
@@ -310,11 +312,14 @@ class GcloudParser:
               current_st_price = self.get_st_price(current_quantity_string)
 
             articles.append({
-              'name': current_name,
+              'name': current_name.strip(),
               'sum': current_price,
               'amount': current_amount if current_amount else '1 st',
               'price': current_st_price if current_st_price else current_price
             })
+            seen_prices += used_pr
+            seen_indexes += used_idx
+          
 
       elif t_type == 'date':
         dates.append(self.parse_date(annotation.description))
@@ -355,15 +360,16 @@ class GcloudParser:
   # Function for checking if a string is an article on the receipt
   # The article name begins with an all-caps word (Coop and Hemköp)
   # The article name can also contain a number due to special characters, 
+  # such as the clove on coop receipts
   # The article name on an ICA receipt starts with a capital letter and 
   # the rest are small letters
-  # such as the clove on coop receipts
+  # Due to Hemköps inability to handle ÅÄÖ, random characters will appear
+  # in the article names. Because of this the regex will need to match non-alpha chars
   def check_article_name(self, article_name):
-    rex = regex.compile(r'[0-9\*]*[[:upper:]]+')
     words = article_name.split(' ')
-    if(words[0] == "*"):
+    if words[0] == "*":
       return True
-    if regex.fullmatch(rex, words[0]):
+    if words[0] == words[0].upper():
       return True
 
     # Coop and Hemköp receipts have all articles in only capital letters

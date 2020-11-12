@@ -48,6 +48,15 @@ class TestParser(unittest.TestCase):
     is_article = parser.check_article_name(article_name)
     self.assertTrue(is_article, "Should return true for names that begins with *")
 
+    article_name = 'NOTF@RS 12%'
+    is_article = parser.check_article_name(article_name)
+    self.assertTrue(is_article, "Should return true for names that contain non-alphabetic characters")
+
+    article_name = 'Brejk'
+    parser.market = "hemköp"
+    is_article = parser.check_article_name(article_name)
+    self.assertFalse(is_article, "Should return false for names where only first letter is capital when market is coop or hemköp")
+
     article_name = "Blomkål blabla"
     parser.market = "coop"
     is_article = parser.check_article_name(article_name)
