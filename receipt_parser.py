@@ -165,8 +165,10 @@ class GcloudParser:
 
           # Check if the next word is underneath the first
           # and if the quantity string is finished, then we can skip this part
+          # line_height/2 is added to the condition because sometimes p_ymin 
+          # can be smaller for the next word on the line
           if p_ymin > ymid and \
-             p_ymin < y_min_next_article and \
+             p_ymin+line_height/2 < y_min_next_article and \
              not self.is_amount_line(current_quantity_string):
             # If this is the case, it could be a row that contains information
             # about the quantity bought
@@ -194,9 +196,15 @@ class GcloudParser:
               else:
                 # Assume that it is the price of the article
                 # if it is ends close to the edge of the receipt
+                # Do not update price if the article already has a price
+                # Here the assumption is made that the prices will always come
+                # in correct order
                 if g_xmax-PRICE_OFFSET < p_xmax:
-                  used_pr.append(j)
-                  current_price = self.check_price(p_ann.description) 
+                  if current_price == None:
+                    used_pr.append(j)
+                    current_price = self.check_price(p_ann.description) 
+                  else:
+                    continue
                 # If the price is not on the far right, we assume that 
                 # it is part of the quantity string
                 else:
@@ -242,9 +250,9 @@ class GcloudParser:
               current_name += ' ' + p_description
               continue
             
-            if p_ymax < ymin or p_ymin > ymax or p_xmax < xmax or p_xmin < price_x_current:
-              if current_price or p_ymin > ymin + 2*line_height:
-                continue
+            # if p_ymax < ymin or p_ymin > ymax or p_xmax < xmax or p_xmin < price_x_current:
+            #   if current_price or p_ymin > ymin + 2*line_height:
+            #     continue
             if self.debug:
               print('Checking ' + p_description)
             used_pr.append(j)
@@ -326,8 +334,8 @@ class GcloudParser:
 
       elif t_type == 'market':
         if self.check_market(annotation.description):
-          market = self.check_market(annotation.description)
-    return articles, dates, market, discounts
+          self.market = self.check_market(annotation.description)
+    return articles, dates, self.market, discounts
 
   def check_annotation_type(self, text_body):
     # TODO: What is 'hanging'?
