@@ -132,7 +132,6 @@ class GcloudParser:
         current_st_price = None
         # This string holds the information about the quantity and the price for each item
         current_quantity_string = ''
-        price_x_current = 0
         is_hanging = False
         p_description = ''
         # This is for keeping track of the start of the next item
@@ -169,7 +168,8 @@ class GcloudParser:
           # can be smaller for the next word on the line
           if p_ymin > ymid and \
              p_ymin+line_height/2 < y_min_next_article and \
-             not self.is_amount_line(current_quantity_string):
+             (not self.is_amount_line(current_quantity_string) or \
+              current_price == None):
             # If this is the case, it could be a row that contains information
             # about the quantity bought
             # Check if the next word is offset on the x-axis
@@ -237,9 +237,6 @@ class GcloudParser:
             parsed_number = float(p_description.replace(",", ".")) 
             if parsed_number > self.total_amount:
               self.total_amount = parsed_number
-            # Checking if the number ends on the left side of the middle of the document
-            if p_xmax < g_xmax / 2:
-              continue
             if j in seen_prices:
               continue
             # Checking if the price text start before the middle of the page
@@ -250,14 +247,10 @@ class GcloudParser:
               current_name += ' ' + p_description
               continue
             
-            # if p_ymax < ymin or p_ymin > ymax or p_xmax < xmax or p_xmin < price_x_current:
-            #   if current_price or p_ymin > ymin + 2*line_height:
-            #     continue
             if self.debug:
               print('Checking ' + p_description)
             used_pr.append(j)
             current_price = self.check_price(p_description)
-            price_x_current = p_xmin
             if self.debug:
               print('New price ' + str(current_price))
             parsed_y = max(parsed_y, (p_ymax + p_ymin) / 2)
