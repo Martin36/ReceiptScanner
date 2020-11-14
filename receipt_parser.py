@@ -11,7 +11,7 @@ MARKETS = ['ica', 'coop', 'hemköp']
 SKIPWORDS = ['SEK', 'www.coop.se', 'Tel.nr:', 'Kvitto:', 'Datum:', 'Kassör:', 'Org Nr:']
 STOPWORDS = []
 BLACKLIST_WORDS = []
-TOTAL_WORDS = ['ATT BETALA']
+TOTAL_WORDS = ['betala', 'totalt']
 # This represents the offset on the x-axis that the additional information
 # has from the start of the article name. It needs to be tweaked so that it
 # works correctly
@@ -28,8 +28,9 @@ class GcloudParser:
     self.max_height = max_height
     self.client = vision_v1.ImageAnnotatorClient()
     self.allowed_labels = ['article', 'price', 'market', 'address', 'date', 'misc']
-    self.total_amount = 0
+    self.totals = None
     self.market = None
+    self.largets_number = 0
 
   def parse_pdf(self, path):
     pages = convert_from_path(path, 500)
@@ -44,7 +45,7 @@ class GcloudParser:
       articles += _art
       dates += _dat
       discounts += _dis
-    return articles, dates, self.market, discounts, self.total_amount
+    return articles, dates, self.market, discounts, self.totals
 
   # Detects text in the file.
   def detect_text(self, path):
@@ -71,7 +72,6 @@ class GcloudParser:
     g_xmax = np.max([v.x for v in base_ann.bounding_poly.vertices])
     g_ymin = np.min([v.y for v in base_ann.bounding_poly.vertices])
     g_ymax = np.max([v.y for v in base_ann.bounding_poly.vertices])
-    break_this = False
     sorted_annotations = gcloud_response.text_annotations[1:]
     current_name = ''    
     
@@ -95,9 +95,69 @@ class GcloudParser:
       if self.debug:
         print(annotation.description + ' ' + t_type)
 
+      if t_type == 'total':
+        used_idx = []
+        used_pr = []
+        xmin = np.min([v.x for v in annotation.bounding_poly.vertices])
+        xmax = np.max([v.x for v in annotation.bounding_poly.vertices])
+        ymin = np.min([v.y for v in annotation.bounding_poly.vertices])
+        ymax = np.max([v.y for v in annotation.bounding_poly.vertices])
+        ymid = ymax - (ymax - ymin)/2
+        line_height = ymax - ymin
+        total_price = None
+        nr_of_articles = None
+        current_name = 'Totalt'
+
+        for j, p_ann in enumerate(sorted_annotations):
+          if i == j:
+            continue
+          skip_this = False
+          for skipword in SKIPWORDS+BLACKLIST_WORDS+STOPWORDS:
+            if skipword in p_ann.description.lower().split(' '):
+              skip_this = True
+          if skip_this:
+            continue
+          p_xmin = np.min([v.x for v in p_ann.bounding_poly.vertices])
+          p_xmax = np.max([v.x for v in p_ann.bounding_poly.vertices])
+          p_ymin = np.min([v.y for v in p_ann.bounding_poly.vertices])
+          p_ymax = np.max([v.y for v in p_ann.bounding_poly.vertices])
+
+          # This means that the first word is underneath the next word
+          # Therefore we can skip this, since we never want to add a word
+          # above the first       
+          if p_ymax < ymin:
+            continue
+
+          p_type = self.check_annotation_type(p_ann.description)
+
+          # If next word is an int, it means that it is the number of articles
+          # on the receipt
+          if p_type == 'int' and nr_of_articles == None:
+            nr_of_articles = p_ann.description
+            used_idx.append(j)
+          
+          # If the next word is a number, it is the total amount paid
+          if p_type == 'number' and total_price == None:
+            total_price = p_ann.description  
+            used_pr.append(j)
+
+          if p_type == 'text':
+            used_idx.append(j)
+
+          # If both nr of articles and total price are found, we save this obj
+          if nr_of_articles != None and total_price != None:
+            self.totals = {
+              'name': 'totals',
+              'sum': total_price,
+              'amount': nr_of_articles
+            }
+            break
+        
+        seen_indexes += used_idx
+        seen_prices += used_pr
+
+
       if t_type == 'text':
-        if break_this:
-          continue
         used_idx = []
         used_pr = []
         xmin = np.min([v.x for v in annotation.bounding_poly.vertices])
@@ -132,6 +192,9 @@ class GcloudParser:
         current_st_price = None
         # This string holds the information about the quantity and the price for each item
         current_quantity_string = ''
+        # This is for storing the price of a discount if there is a discount line 
+        # beneath the article line
+        current_discount_price = None
         is_hanging = False
         p_description = ''
         # This is for keeping track of the start of the next item
@@ -175,9 +238,12 @@ class GcloudParser:
             # Check if the next word is offset on the x-axis
             if p_xmin-X_OFFSET > xmin:
               # Treat a row with pant as a new article
-              if self.check_if_pant(p_ann.description):
+              # Also treat a row containing the total as the next article
+              if self.check_if_pant(p_ann.description) or \
+                 p_type == 'total':
                 y_min_next_article = p_ymin
                 continue
+              
               # If the next word is not a number, we know that it is 
               # part of the additional information
               if p_type != 'number':
@@ -194,12 +260,18 @@ class GcloudParser:
               # both be part of the additional information or it could
               # be the price of the article
               else:
-                # Assume that it is the price of the article
+                # This could either be a price or a discount
                 # if it is ends close to the edge of the receipt
                 # Do not update price if the article already has a price
                 # Here the assumption is made that the prices will always come
                 # in correct order
+                # 
                 if g_xmax-PRICE_OFFSET < p_xmax:
+                  # First check if this is a discount price
+                  if current_discount_price == None and \
+                     self.check_discount(p_ann.description):
+                     used_pr.append(j)
+                     current_discount_price = p_ann.description
                   if current_price == None:
                     used_pr.append(j)
                     current_price = self.check_price(p_ann.description) 
@@ -235,8 +307,8 @@ class GcloudParser:
           if p_type == 'number':
             # Keep track of the largest read number, which is the total amount
             parsed_number = float(p_description.replace(",", ".")) 
-            if parsed_number > self.total_amount:
-              self.total_amount = parsed_number
+            if parsed_number > self.largets_number:
+              self.largets_number = parsed_number
             if j in seen_prices:
               continue
             # Checking if the price text start before the middle of the page
@@ -296,9 +368,18 @@ class GcloudParser:
 
           if not self.check_article_name(current_name):
             skip_this = True
+         
           if not skip_this:
             if self.debug:
               print('Adding ' + current_name + ' ' + str(current_price))
+
+            # Check if the current discount price has a value
+            # then this item has an discount associated with it
+            if current_discount_price != None:
+              discounts.append({
+                'name': current_quantity_string,
+                'price': current_discount_price
+              })
 
             # Sometimes the quantity string is on the same line as the article
             # In this case we need to move it from the article string to the 
@@ -316,7 +397,8 @@ class GcloudParser:
               'name': current_name.strip(),
               'sum': current_price,
               'amount': current_amount if current_amount else '1 st',
-              'price': current_st_price if current_st_price else current_price
+              'price': current_st_price if current_st_price else current_price,
+              'bounding_box': bounding_box
             })
             seen_prices += used_pr
             seen_indexes += used_idx
@@ -342,7 +424,16 @@ class GcloudParser:
       return 'int'
     if self.check_market(text_body):
       return 'market'
+    if self.check_if_total(text_body):
+      return 'total'
     return 'text'
+
+  # Checking if a word is the start of the totals row
+  def check_if_total(self, text_body):
+    for total in TOTAL_WORDS:
+      if total.lower() == text_body.lower():
+        return True
+    return False
 
   def check_market(self, text_body):
     for market in MARKETS:

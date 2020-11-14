@@ -23,6 +23,10 @@ class TestParser(unittest.TestCase):
     result = parser.check_annotation_type(text_body)
     self.assertEqual(result, 'market', "Should return market if input is correct market")
 
+    text_body = "Totalt"
+    result = parser.check_annotation_type(text_body)
+    self.assertEqual(result, 'total', "Should return total if input is a total word")
+
     text_body = "blablabla"
     result = parser.check_annotation_type(text_body)
     self.assertEqual(result, 'text', "Should return text for all other inputs")
@@ -61,6 +65,15 @@ class TestParser(unittest.TestCase):
     parser.market = "coop"
     is_article = parser.check_article_name(article_name)
     self.assertFalse(is_article, "Should return false for names where only first letter is capital when market is coop or hemköp")
+
+  def test_check_if_total(self):
+    text = "Totalt"
+    result = parser.check_if_total(text)
+    self.assertTrue(result, "Should return true if correct total input")
+
+    text = "blabla"
+    result = parser.check_if_total(text)
+    self.assertFalse(result, "Should return false if incorrect input")
 
   def test_check_market(self):
     market = "ICA"
