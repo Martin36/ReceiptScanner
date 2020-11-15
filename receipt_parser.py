@@ -28,9 +28,10 @@ class GcloudParser:
     self.max_height = max_height
     self.client = vision_v1.ImageAnnotatorClient()
     self.allowed_labels = ['article', 'price', 'market', 'address', 'date', 'misc']
-    self.totals = None
+    self.totals = []
     self.market = None
     self.largets_number = 0
+    self.bounding_box = None
 
   def parse_pdf(self, path):
     pages = convert_from_path(path, 500)
@@ -45,7 +46,7 @@ class GcloudParser:
       articles += _art
       dates += _dat
       discounts += _dis
-    return articles, dates, self.market, discounts, self.totals
+    return articles, dates, self.market, discounts, self.totals, self.bounding_box
 
   # Detects text in the file.
   def detect_text(self, path):
@@ -72,6 +73,12 @@ class GcloudParser:
     g_xmax = np.max([v.x for v in base_ann.bounding_poly.vertices])
     g_ymin = np.min([v.y for v in base_ann.bounding_poly.vertices])
     g_ymax = np.max([v.y for v in base_ann.bounding_poly.vertices])
+    self.bounding_box = {
+      'xmin': g_xmin,
+      'xmax': g_xmax,
+      'ymin': g_ymin,
+      'ymax': g_ymax
+    }
     sorted_annotations = gcloud_response.text_annotations[1:]
     current_name = ''    
     
@@ -128,6 +135,10 @@ class GcloudParser:
           if p_ymax < ymin:
             continue
 
+          # If the current word is too far underneath the first, we skip it
+          if p_ymin-2*line_height > ymax:
+            continue
+
           p_type = self.check_annotation_type(p_ann.description)
 
           # If next word is an int, it means that it is the number of articles
@@ -146,13 +157,23 @@ class GcloudParser:
 
           # If both nr of articles and total price are found, we save this obj
           if nr_of_articles != None and total_price != None:
-            self.totals = {
+            self.totals.append({
               'name': 'totals',
               'sum': total_price,
               'amount': nr_of_articles
-            }
+            })
+            total_price = None
+            nr_of_articles = None
             break
-        
+              
+        # Sometimes the totals line does not have the number of articles
+        # In this case it should be added anyways
+        if total_price != None:
+          self.totals.append({
+            'name': 'totals',
+            'sum': total_price
+          })
+
         seen_indexes += used_idx
         seen_prices += used_pr
 

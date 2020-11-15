@@ -16,13 +16,14 @@ parser = GcloudParser()
 
 
 def parse_one_pdf():
-  articles, dates, markets, discounts, total = parser.parse_pdf(PATH)
+  articles, dates, markets, discounts, total, bounding_box = parser.parse_pdf(PATH)
   pprint(articles)
   #print(len(articles))
   print(dates)
   print(markets)
   pprint(discounts)
   print(total)
+  pprint(bounding_box)
 
 
 def parse_all_pdfs():
