@@ -56,6 +56,10 @@ class TestParser(unittest.TestCase):
     is_article = parser.check_article_name(article_name)
     self.assertTrue(is_article, "Should return true for names that contain non-alphabetic characters")
 
+    article_name = '*Celsius Citr/Lime'
+    is_article = parser.check_article_name(article_name)
+    self.assertTrue(is_article, "Should return true for names that start with * then 1 capital letter and the rest lower case")
+
     article_name = 'Brejk'
     parser.market = "hemköp"
     is_article = parser.check_article_name(article_name)
@@ -101,6 +105,10 @@ class TestParser(unittest.TestCase):
     result = parser.check_price(price)
     self.assertEqual(price, result, "Should return the price if the format is correct")
 
+    price = "34.99"
+    result = parser.check_price(price)
+    self.assertEqual(price, result, "Should work with dots")
+
     price = "-34,99"
     result = parser.check_price(price)
     self.assertEqual(price, result, "Should be able to handle negative prices")
@@ -109,6 +117,17 @@ class TestParser(unittest.TestCase):
     result = parser.check_price(price)
     self.assertFalse(result, "Should be false if input is not a price")
   
+  def test_convert_price(self):
+    price = "34.99"
+    correct = "34,99"
+    result = parser.convert_price(price)
+    self.assertEqual(correct, result, "Should change dot to comma")
+
+    price = "34,99"
+    result = parser.convert_price(price)
+    self.assertEqual(price, result, "Should keep price with comma the same")
+
+
   def test_check_discount(self):
     discount = "-5,89"
     is_discount = parser.check_discount(discount)

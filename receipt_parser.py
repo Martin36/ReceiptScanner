@@ -11,7 +11,7 @@ MARKETS = ['ica', 'coop', 'hemköp']
 SKIPWORDS = ['SEK', 'www.coop.se', 'Tel.nr:', 'Kvitto:', 'Datum:', 'Kassör:', 'Org Nr:']
 STOPWORDS = []
 BLACKLIST_WORDS = []
-TOTAL_WORDS = ['betala', 'totalt']
+TOTAL_WORDS = ['betala', 'totalt', 'total']
 # This represents the offset on the x-axis that the additional information
 # has from the start of the article name. It needs to be tweaked so that it
 # works correctly
@@ -73,12 +73,13 @@ class GcloudParser:
     g_xmax = np.max([v.x for v in base_ann.bounding_poly.vertices])
     g_ymin = np.min([v.y for v in base_ann.bounding_poly.vertices])
     g_ymax = np.max([v.y for v in base_ann.bounding_poly.vertices])
-    self.bounding_box = {
-      'xmin': g_xmin,
-      'xmax': g_xmax,
-      'ymin': g_ymin,
-      'ymax': g_ymax
-    }
+    if self.bounding_box == None:
+      self.bounding_box = {
+        'xmin': g_xmin,
+        'xmax': g_xmax,
+        'ymin': g_ymin,
+        'ymax': g_ymax
+      }
     sorted_annotations = gcloud_response.text_annotations[1:]
     current_name = ''    
     
@@ -343,7 +344,7 @@ class GcloudParser:
             if self.debug:
               print('Checking ' + p_description)
             used_pr.append(j)
-            current_price = self.check_price(p_description)
+            current_price = self.convert_price(p_description)
             if self.debug:
               print('New price ' + str(current_price))
             parsed_y = max(parsed_y, (p_ymax + p_ymin) / 2)
@@ -488,7 +489,7 @@ class GcloudParser:
     # Coop and Hemköp receipts have all articles in only capital letters
     # so if the market is any of them we skip this regex match
     if self.market not in ['coop', 'hemköp']:
-      re_ica = regex.compile(r'[[:upper:]][[:lower:]]*')
+      re_ica = regex.compile(r'\*?[[:upper:]][[:lower:]]*')
       if regex.fullmatch(re_ica, words[0]):
         return True
 
@@ -498,10 +499,13 @@ class GcloudParser:
   # A price string has the format (X)XX,XX
   # Returns false if the string does not represent a price
   def check_price(self, string):
-    rex = r'-?\d+,\d\d'
+    rex = r'-?\d+[,|.]\d\d'
     if regex.fullmatch(rex, string):
       return string
     return False
+
+  def convert_price(self, string):
+    return string.replace('.', ',')
 
   # Function for checking if the current item is a discount
   # Discounts have a negative price
