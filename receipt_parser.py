@@ -3,6 +3,7 @@ import os
 import datetime
 import numpy as np
 import regex
+import utils
 
 from google.cloud import vision_v1
 from pdf2image import convert_from_path
@@ -75,10 +76,10 @@ class GcloudParser:
     g_ymax = np.max([v.y for v in base_ann.bounding_poly.vertices])
     if self.bounding_box == None:
       self.bounding_box = {
-        'xmin': g_xmin,
-        'xmax': g_xmax,
-        'ymin': g_ymin,
-        'ymax': g_ymax
+        'xmin': g_xmin.item(),  # Converts from numpy type to regular
+        'xmax': g_xmax.item(),
+        'ymin': g_ymin.item(),
+        'ymax': g_ymax.item()
       }
     sorted_annotations = gcloud_response.text_annotations[1:]
     current_name = ''    
@@ -193,16 +194,12 @@ class GcloudParser:
         # Initially this is just the bounding box for the first word
         # but it grows as new words are added
         bounding_box = {
-          'xmin': xmin,
-          'xmax': xmax,
-          'ymin': ymin,
-          'ymax': ymax
+          'xmin': xmin.item(),
+          'xmax': xmax.item(),
+          'ymin': ymin.item(),
+          'ymax': ymax.item()
         }
 
-        # if (ymax + ymin)/2 < parsed_y:
-        #   if self.debug:
-        #     print('Skipping ' + annotation.description + ' ' + str(ymax) + ' ' + str(parsed_y))
-        #   continue
         line_height = ymax - ymin
         current_price = None
         current_name = ''
@@ -268,14 +265,18 @@ class GcloudParser:
               
               # If the next word is not a number, we know that it is 
               # part of the additional information
+              # TODO: This may cause a bug in the case where the quantity string 
+              # TODO: is the quantity string of the next item IF the quantity string
+              # TODO: would be read before the actual name of the item and before
+              # TODO: the price of the next item
               if p_type != 'number':
                 current_quantity_string += ' ' + p_ann.description
                 used_idx.append(j)
                 # Extend the bounding box to contain the new word
                 if p_xmax > bounding_box['xmax']:
-                  bounding_box['xmax'] = p_xmax
+                  bounding_box['xmax'] = p_xmax.item()
                 if p_ymax > bounding_box['ymax']:
-                  bounding_box['ymax'] = p_ymax 
+                  bounding_box['ymax'] = p_ymax.item()
                 continue               
 
               # If it is a number it becomes trickier, since it could
@@ -287,7 +288,6 @@ class GcloudParser:
                 # Do not update price if the article already has a price
                 # Here the assumption is made that the prices will always come
                 # in correct order
-                # 
                 if g_xmax-PRICE_OFFSET < p_xmax:
                   # First check if this is a discount price
                   if current_discount_price == None and \
@@ -298,6 +298,11 @@ class GcloudParser:
                     used_pr.append(j)
                     current_price = self.check_price(p_ann.description) 
                   else:
+                    # This means that we have already found a price for this article
+                    # and the read item is a price, therefore this must be the price
+                    # for the next article (assuming that the prices comes in order)
+                    if not self.check_discount(p_ann.description):
+                      y_min_next_article = p_ymin
                     continue
                 # If the price is not on the far right, we assume that 
                 # it is part of the quantity string
@@ -353,7 +358,7 @@ class GcloudParser:
             # Checking if left side of bounding box for next word is before the right side of the first word
             # in that case it means that the next word comes BEFORE the word that is already added, 
             # and should not be added
-            if p_xmin < xmax:
+            if p_xmax < xmax:
               continue
             # Checking if the words are on different rows
             # if they are the second word should not be added
@@ -408,12 +413,20 @@ class GcloudParser:
             # quantity string
             if self.is_amount_line(current_name):
               current_quantity_string = self.extract_amount_line(current_name)
-              current_name = current_name.replace(current_quantity_string, '')
-            
+              current_name = current_name.replace(current_quantity_string, '')  
+
             # Check if the article has a correct quantity string
             if self.is_amount_line(current_quantity_string):
               current_amount = self.get_amount(current_quantity_string)
               current_st_price = self.get_st_price(current_quantity_string)
+
+            # This is done because some items may appear to be one item
+            # but are actually multiple items
+            if self.is_group_price(current_name):
+              amount, st_price = self.extract_group_price(current_name)
+              new_amount = utils.get_number_from_string(current_amount)*amount
+              current_amount = str(int(new_amount)) + ' st'
+              current_st_price = utils.convert_to_price_string(st_price)
 
             articles.append({
               'name': current_name.strip(),
@@ -530,7 +543,7 @@ class GcloudParser:
   def get_amount(self, string):
     string = string.strip()
     re_kg = r'(\d+,\d+\s*kg)\s*[x|\*]\s*\d\d,\d\d\s*.*/kg'
-    re_st = r'(\d+\s*st)\s*[x|\*]\s*\d\d,\d\d'
+    re_st = r'(\d+\s*(st)?)\s*[x|\*]\s*\d\d,\d\d'
     
     kg_search = regex.search(re_kg, string)
     if kg_search:
@@ -548,7 +561,7 @@ class GcloudParser:
   def get_st_price(self, string):
     string = string.strip()
     re_kg = r'\d+,\d+\s*kg\s*[x|\*]\s*(\d\d,\d\d\s*.*/kg)'
-    re_st = r'\d+\s*st\s*[x|\*]\s*(\d\d,\d\d)'
+    re_st = r'\d+\s*(st)?\s*[x|\*]\s*(\d\d,\d\d)'
     
     kg_search = regex.search(re_kg, string)
     if kg_search:
@@ -556,7 +569,7 @@ class GcloudParser:
     
     st_search = regex.search(re_st, string)
     if st_search:
-      return st_search.group(1)
+      return st_search.group(2)
 
     else:
       return False
@@ -564,10 +577,11 @@ class GcloudParser:
   # Checks if the string is an amount of a product e.g. number of items bought
   # It could be on the form: X,XXX kr x XX,XX SEK/kg (where X is an int)
   # Or it could be on the form: X st x XX,XX
+  # Or the form X * XX,XX
   def is_amount_line(self, string):
     string = string.strip()
     re_kg = r'\d+,\d+\s*kg\s*[x|\*]\s*\d\d,\d\d\s*.*/kg'
-    re_st = r'\d+\s*st\s*[x|\*]\s*\d\d,\d\d'
+    re_st = r'\d+\s*(st)?\s*[x|\*]\s*\d\d,\d\d'
     if regex.search(re_kg, string):
       return True
     elif regex.search(re_st, string):
@@ -582,13 +596,36 @@ class GcloudParser:
     if result:
       return result.group(1)
 
-    re_st = r'(\d+\s*st\s*[x|\*]\s*\d\d,\d\d)'
+    re_st = r'(\d+\s*(st)?\s*[x|\*]\s*\d\d,\d\d)'
     result = regex.search(re_st, string)
     if result:
       return result.group(1)
     
     return None
 
+  # Checking if the name of the article contains a group discount string
+  # For example on Hemköp receipts it would be 
+  def is_group_price(self, string):
+    string = string.strip()
+    rex = r'\dF\d\d?\d?'
+    if regex.search(rex, string):
+      return True
+    return False
+
+  # Extracts the price for each individual item for an article that has a
+  # group price
+  # For example the line "MOZZARELLA 2F20 V3 2*20,00 40,00" inplies that
+  # each item on this row is 2 pakets of mozzarella
+  def extract_group_price(self, string):
+    string = string.strip()
+    rex = r'(\d)F(\d\d?\d?)'
+    match = regex.search(rex, string)
+    if not match:
+      return None
+    amount = int(match.group(1))
+    price = int(match.group(2))
+    st_price = price/amount
+    return amount, st_price
 
   def is_integer(self, text_body):
     try:

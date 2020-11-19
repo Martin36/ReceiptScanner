@@ -127,7 +127,6 @@ class TestParser(unittest.TestCase):
     result = parser.convert_price(price)
     self.assertEqual(price, result, "Should keep price with comma the same")
 
-
   def test_check_discount(self):
     discount = "-5,89"
     is_discount = parser.check_discount(discount)
@@ -187,6 +186,10 @@ class TestParser(unittest.TestCase):
     is_amount_line = parser.is_amount_line(string)
     self.assertTrue(is_amount_line, "Should return true when the quantity string happens to be on the same line as the article")
 
+    string = "MOZZARELLA 2F20 V3 2*20,00"
+    is_amount_line = parser.is_amount_line(string)
+    self.assertTrue(is_amount_line, "Should return true when there is no 'st' in the string")
+
   def test_extract_amount_line(self):
     string = "BLANDFARS 1,131kg*79,00kr/kg"
     amount_line = "1,131kg*79,00kr/kg"
@@ -202,6 +205,31 @@ class TestParser(unittest.TestCase):
     result = parser.extract_amount_line(string)
     self.assertEqual(result, None, "Should return None if string does not contain a correct amount line")
 
+    string = "MOZZARELLA 2F20 V3 2*20,00"
+    amount_line = "2*20,00"
+    result = parser.extract_amount_line(string)
+    self.assertEqual(result, amount_line, "Should return true when there is no 'st' in the string")
+
+  def test_is_group_price(self):
+    string = "MOZZARELLA 2F20 V3 2*20,00"
+    result = parser.is_group_price(string)
+    self.assertTrue(result, "Should be true if string contains correct group price")
+
+    string = "MOZZARELLA V3 2*20,00"
+    result = parser.is_group_price(string)
+    self.assertFalse(result, "Should be false if string does not contain correct group price")
+
+  def test_extract_group_price(self):
+    string = "MOZZARELLA 2F20 V3 2*20,00"
+    amount, price = parser.extract_group_price(string)
+    self.assertEqual(amount, "2", "Should extract amount correctly")
+    self.assertEqual(price, "20", "Should extract amount correctly")
+
+    string = "MOZZARELLA V3 2*20,00"
+    amount, price = parser.extract_group_price(string)
+    self.assertEqual(amount, None, "Should return None for amount if no group price found")
+    self.assertEqual(price, None, "Should return None for price if no group price found")
+
   def test_get_amount(self):
     string = "2 st x 12,95"
     amount = parser.get_amount(string)
@@ -214,6 +242,10 @@ class TestParser(unittest.TestCase):
     string = "2st*12,95"
     amount = parser.get_amount(string)
     self.assertEqual(amount, "2st")
+
+    string = "2*12,95"
+    amount = parser.get_amount(string)
+    self.assertEqual(amount, "2")
 
     string = "1,004 kg x 74,95 SEK/kg"
     amount = parser.get_amount(string)
