@@ -65,6 +65,11 @@ class TestParser(unittest.TestCase):
     is_article = parser.check_article_name(article_name)
     self.assertFalse(is_article, "Should return false for names where only first letter is capital when market is coop or hemköp")
 
+    article_name = 'Bonusgrundande belopp:'
+    parser.market = "hemköp"
+    is_article = parser.check_article_name(article_name)
+    self.assertFalse(is_article, "Should return false for names where only first letter is capital when market is coop or hemköp")
+
     article_name = "Blomkål blabla"
     parser.market = "coop"
     is_article = parser.check_article_name(article_name)
@@ -93,6 +98,10 @@ class TestParser(unittest.TestCase):
     self.assertEqual(result, "hemköp", "Should work for hemköp")
 
     market = "Hemk@p"
+    result = parser.check_market(market)
+    self.assertEqual(result, "hemköp", "Should work for hemköp, even if Ö is incorrect")
+
+    market = "HEMKOP"
     result = parser.check_market(market)
     self.assertEqual(result, "hemköp", "Should work for hemköp, even if Ö is incorrect")
 
@@ -222,13 +231,26 @@ class TestParser(unittest.TestCase):
   def test_extract_group_price(self):
     string = "MOZZARELLA 2F20 V3 2*20,00"
     amount, price = parser.extract_group_price(string)
-    self.assertEqual(amount, "2", "Should extract amount correctly")
-    self.assertEqual(price, "20", "Should extract amount correctly")
+    self.assertEqual(amount, 2, "Should extract amount correctly")
+    self.assertEqual(price, 10.0, "Should extract amount correctly")
 
     string = "MOZZARELLA V3 2*20,00"
     amount, price = parser.extract_group_price(string)
     self.assertEqual(amount, None, "Should return None for amount if no group price found")
     self.assertEqual(price, None, "Should return None for price if no group price found")
+
+  def test_check_if_skip_word(self):
+    string = "SEK"
+    result = parser.check_if_skip_word(string)
+    self.assertTrue(result, "Should return true if string is a skip word")
+
+    string = "SEK blabla"
+    result = parser.check_if_skip_word(string)
+    self.assertTrue(result, "Should return true if string contains a skip word")
+
+    string = "blabla"
+    result = parser.check_if_skip_word(string)
+    self.assertFalse(result, "Should return false if string does not contain a skip word")
 
   def test_get_amount(self):
     string = "2 st x 12,95"

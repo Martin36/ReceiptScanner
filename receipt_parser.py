@@ -54,7 +54,10 @@ class GcloudParser:
     with io.open(path, 'rb') as image_file:
       content = image_file.read()
     image = vision_v1.types.Image(content=content)
-    response = self.client.text_detection(image=image)
+    response = self.client.text_detection(
+      image=image,
+      image_context={"language_hints": ["sv", "en"]}
+    )
     if response.error.message:
       raise Exception(
         '{}\nFor more info on error messages, check: '
@@ -85,14 +88,8 @@ class GcloudParser:
     current_name = ''    
     
     for i, annotation in enumerate(sorted_annotations):
-      skip_this = False
 
-      for skipword in SKIPWORDS+STOPWORDS+BLACKLIST_WORDS:
-        if skipword.lower() in annotation.description.lower().split(' '):
-          if(self.debug):
-            print("Skipping: " + str(annotation.description))
-          skip_this = True
-
+      skip_this = self.check_if_skip_word(annotation.description)
       if skip_this:
         continue
 
@@ -115,21 +112,18 @@ class GcloudParser:
         line_height = ymax - ymin
         total_price = None
         nr_of_articles = None
-        current_name = 'Totalt'
 
         for j, p_ann in enumerate(sorted_annotations):
           if i == j:
             continue
-          skip_this = False
-          for skipword in SKIPWORDS+BLACKLIST_WORDS+STOPWORDS:
-            if skipword in p_ann.description.lower().split(' '):
-              skip_this = True
-          
+
+          skip_this = self.check_if_skip_word(p_ann.description)
+          if skip_this:
+            continue
+
           if j in seen_prices or j in seen_indexes:
             continue
 
-          if skip_this:
-            continue
           p_xmin = np.min([v.x for v in p_ann.bounding_poly.vertices])
           p_xmax = np.max([v.x for v in p_ann.bounding_poly.vertices])
           p_ymin = np.min([v.y for v in p_ann.bounding_poly.vertices])
@@ -229,12 +223,10 @@ class GcloudParser:
         for j, p_ann in enumerate(sorted_annotations):
           if i == j:
             continue
-          skip_this = False
-          for skipword in SKIPWORDS+BLACKLIST_WORDS+STOPWORDS:
-            if skipword in p_ann.description.lower().split(' '):
-              skip_this = True
+          skip_this = self.check_if_skip_word(p_ann.description)
           if skip_this:
             continue
+
           p_xmin = np.min([v.x for v in p_ann.bounding_poly.vertices])
           p_xmax = np.max([v.x for v in p_ann.bounding_poly.vertices])
           p_ymin = np.min([v.y for v in p_ann.bounding_poly.vertices])
@@ -483,7 +475,7 @@ class GcloudParser:
     # they can't handle ÅÄÖ, therefore it needs to be handled separately
     re_hemkop = regex.compile(r'HEMK.P')
     for text in text_body.upper().split(' '):
-      if regex.fullmatch(re_hemkop, text):
+      if regex.search(re_hemkop, text):
         return 'hemköp'
 
     return None
@@ -541,6 +533,14 @@ class GcloudParser:
       return True
     else:
       return False
+
+  def check_if_skip_word(self, string):
+    for skipword in SKIPWORDS+BLACKLIST_WORDS+STOPWORDS:
+      if skipword.lower() in string.lower().split(' '):
+        if(self.debug):
+          print("Skipping: " + str(string))
+        return True
+    return False
 
   # Gets the amount of a product from a string
   # For the string "0,538 kg x 21,95 SEK/kg" it would return "0,538 kg"
@@ -625,7 +625,7 @@ class GcloudParser:
     rex = r'(\d)F(\d\d?\d?)'
     match = regex.search(rex, string)
     if not match:
-      return None
+      return None, None
     amount = int(match.group(1))
     price = int(match.group(2))
     st_price = price/amount
