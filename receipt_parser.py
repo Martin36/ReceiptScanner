@@ -124,6 +124,10 @@ class GcloudParser:
           for skipword in SKIPWORDS+BLACKLIST_WORDS+STOPWORDS:
             if skipword in p_ann.description.lower().split(' '):
               skip_this = True
+          
+          if j in seen_prices or j in seen_indexes:
+            continue
+
           if skip_this:
             continue
           p_xmin = np.min([v.x for v in p_ann.bounding_poly.vertices])
