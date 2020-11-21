@@ -60,6 +60,10 @@ class TestParser(unittest.TestCase):
     is_article = parser.check_article_name(article_name)
     self.assertTrue(is_article, "Should return true for names that start with * then 1 capital letter and the rest lower case")
 
+    article_name = '556030-5921'
+    is_article = parser.check_article_name(article_name)
+    self.assertFalse(is_article, "Should return false for names on the form XXX-XXXXX where X is an int")
+
     article_name = 'Brejk'
     parser.market = "hemköp"
     is_article = parser.check_article_name(article_name)

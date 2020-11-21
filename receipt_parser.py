@@ -22,6 +22,11 @@ X_OFFSET = 50
 # price should end AFTER. It is not an optimal solution since the 
 # required distance may differ between receipts
 PRICE_OFFSET = 200
+# This is used to check if an article has been scanned correctly
+# One common feature of the articles for different receipts is that
+# the name starts close to the left edge of the receipt
+ARTICLE_OFFSET = 200
+
 
 class GcloudParser:
   def __init__(self, debug=False, min_length=5, max_height=1):
@@ -391,6 +396,11 @@ class GcloudParser:
 
           if not self.check_article_name(current_name):
             skip_this = True
+          
+          # Verify that the bounding box of the article is close to 
+          # the left edge of the receipt
+          if bounding_box['xmin']-ARTICLE_OFFSET > g_xmin:
+            skip_this = True
          
           if not skip_this:
             if self.debug:
@@ -494,6 +504,12 @@ class GcloudParser:
   def check_article_name(self, article_name):
     if self.check_total_name(article_name):
       return False
+
+    # A word that only consists of numbers and a dash,
+    # should not be considered an article name
+    rex = r'\d+-\d*'
+    if regex.fullmatch(rex, article_name):
+      return False  
 
     words = article_name.split(' ')
     if words[0] == "*":
