@@ -1,6 +1,7 @@
 [
   {
-    "markets": "coop",
+    "name": "D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-20.pdf",
+    "market": "coop",
     "dates": [
       "2020-10-20"
     ],
@@ -356,70 +357,11 @@
         "price": "-25,05"
       }
     ],
-    "total": [
+    "totals": [
       {
         "name": "totals",
         "sum": "766,69",
         "amount": "32"
-      },
-      {
-        "name": "totals",
-        "sum": "794,59",
-        "amount": "23"
-      },
-      {
-        "name": "totals",
-        "sum": "395,42",
-        "amount": "16"
-      },
-      {
-        "name": "totals",
-        "sum": "606,71",
-        "amount": "22"
-      },
-      {
-        "name": "totals",
-        "sum": "1133,73",
-        "amount": "26"
-      },
-      {
-        "name": "totals",
-        "sum": "1133,73"
-      },
-      {
-        "name": "totals",
-        "sum": "337,60",
-        "amount": "18"
-      },
-      {
-        "name": "totals",
-        "sum": "337,60"
-      },
-      {
-        "name": "totals",
-        "sum": "327,25",
-        "amount": "11"
-      },
-      {
-        "name": "totals",
-        "sum": "327,25"
-      },
-      {
-        "name": "totals",
-        "sum": "628,07",
-        "amount": "17"
-      },
-      {
-        "name": "totals",
-        "sum": "597,07"
-      },
-      {
-        "name": "totals",
-        "sum": "220,62"
-      },
-      {
-        "name": "totals",
-        "sum": "601,41"
       }
     ],
     "bounding_box": {
@@ -430,7 +372,8 @@
     }
   },
   {
-    "markets": "coop",
+    "name": "D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-27.pdf",
+    "market": "coop",
     "dates": [
       "2020-10-27"
     ],
@@ -674,87 +617,29 @@
         "price": "-10,90"
       }
     ],
-    "total": [
-      {
-        "name": "totals",
-        "sum": "766,69",
-        "amount": "32"
-      },
+    "totals": [
       {
         "name": "totals",
         "sum": "794,59",
         "amount": "23"
-      },
-      {
-        "name": "totals",
-        "sum": "395,42",
-        "amount": "16"
-      },
-      {
-        "name": "totals",
-        "sum": "606,71",
-        "amount": "22"
-      },
-      {
-        "name": "totals",
-        "sum": "1133,73",
-        "amount": "26"
-      },
-      {
-        "name": "totals",
-        "sum": "1133,73"
-      },
-      {
-        "name": "totals",
-        "sum": "337,60",
-        "amount": "18"
-      },
-      {
-        "name": "totals",
-        "sum": "337,60"
-      },
-      {
-        "name": "totals",
-        "sum": "327,25",
-        "amount": "11"
-      },
-      {
-        "name": "totals",
-        "sum": "327,25"
-      },
-      {
-        "name": "totals",
-        "sum": "628,07",
-        "amount": "17"
-      },
-      {
-        "name": "totals",
-        "sum": "597,07"
-      },
-      {
-        "name": "totals",
-        "sum": "220,62"
-      },
-      {
-        "name": "totals",
-        "sum": "601,41"
       }
     ],
     "bounding_box": {
-      "xmin": 1164,
-      "xmax": 3084,
-      "ymin": -16,
-      "ymax": 5777
+      "xmin": 918,
+      "xmax": 3184,
+      "ymin": 240,
+      "ymax": 5745
     }
   },
   {
-    "markets": "coop",
+    "name": "D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-29.pdf",
+    "market": "coop",
     "dates": [
       "2020-10-29"
     ],
     "articles": [
       {
-        "name": "556030-5921 SEK",
+        "name": "556030-5921",
         "sum": "44,95",
         "amount": "1 st",
         "price": "44,95",
@@ -908,18 +793,6 @@
           "ymin": 5408,
           "ymax": 5511
         }
-      },
-      {
-        "name": "ATT ( ARTIKLAR )",
-        "sum": "395,42",
-        "amount": "1 st",
-        "price": "395,42",
-        "bounding_box": {
-          "xmin": 959,
-          "xmax": 1135,
-          "ymin": 5628,
-          "ymax": 5729
-        }
       }
     ],
     "discounts": [
@@ -932,81 +805,23 @@
         "price": "-0,90"
       }
     ],
-    "total": [
-      {
-        "name": "totals",
-        "sum": "766,69",
-        "amount": "32"
-      },
-      {
-        "name": "totals",
-        "sum": "794,59",
-        "amount": "23"
-      },
+    "totals": [
       {
         "name": "totals",
         "sum": "395,42",
         "amount": "16"
-      },
-      {
-        "name": "totals",
-        "sum": "606,71",
-        "amount": "22"
-      },
-      {
-        "name": "totals",
-        "sum": "1133,73",
-        "amount": "26"
-      },
-      {
-        "name": "totals",
-        "sum": "1133,73"
-      },
-      {
-        "name": "totals",
-        "sum": "337,60",
-        "amount": "18"
-      },
-      {
-        "name": "totals",
-        "sum": "337,60"
-      },
-      {
-        "name": "totals",
-        "sum": "327,25",
-        "amount": "11"
-      },
-      {
-        "name": "totals",
-        "sum": "327,25"
-      },
-      {
-        "name": "totals",
-        "sum": "628,07",
-        "amount": "17"
-      },
-      {
-        "name": "totals",
-        "sum": "597,07"
-      },
-      {
-        "name": "totals",
-        "sum": "220,62"
-      },
-      {
-        "name": "totals",
-        "sum": "601,41"
       }
     ],
     "bounding_box": {
-      "xmin": 1164,
-      "xmax": 3084,
-      "ymin": -16,
-      "ymax": 5777
+      "xmin": 763,
+      "xmax": 3392,
+      "ymin": 528,
+      "ymax": 5753
     }
   },
   {
-    "markets": "coop",
+    "name": "D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-11-05.pdf",
+    "market": "coop",
     "dates": [
       "2020-11-05"
     ],
@@ -1238,18 +1053,6 @@
           "ymin": 5424,
           "ymax": 5537
         }
-      },
-      {
-        "name": "ATT ( ARTIKLAR )",
-        "sum": "606,71",
-        "amount": "1 st",
-        "price": "606,71",
-        "bounding_box": {
-          "xmin": 956,
-          "xmax": 1128,
-          "ymin": 5654,
-          "ymax": 5767
-        }
       }
     ],
     "discounts": [
@@ -1262,81 +1065,23 @@
         "price": "-14,90"
       }
     ],
-    "total": [
-      {
-        "name": "totals",
-        "sum": "766,69",
-        "amount": "32"
-      },
-      {
-        "name": "totals",
-        "sum": "794,59",
-        "amount": "23"
-      },
-      {
-        "name": "totals",
-        "sum": "395,42",
-        "amount": "16"
-      },
+    "totals": [
       {
         "name": "totals",
         "sum": "606,71",
         "amount": "22"
-      },
-      {
-        "name": "totals",
-        "sum": "1133,73",
-        "amount": "26"
-      },
-      {
-        "name": "totals",
-        "sum": "1133,73"
-      },
-      {
-        "name": "totals",
-        "sum": "337,60",
-        "amount": "18"
-      },
-      {
-        "name": "totals",
-        "sum": "337,60"
-      },
-      {
-        "name": "totals",
-        "sum": "327,25",
-        "amount": "11"
-      },
-      {
-        "name": "totals",
-        "sum": "327,25"
-      },
-      {
-        "name": "totals",
-        "sum": "628,07",
-        "amount": "17"
-      },
-      {
-        "name": "totals",
-        "sum": "597,07"
-      },
-      {
-        "name": "totals",
-        "sum": "220,62"
-      },
-      {
-        "name": "totals",
-        "sum": "601,41"
       }
     ],
     "bounding_box": {
-      "xmin": 1164,
-      "xmax": 3084,
-      "ymin": -16,
-      "ymax": 5777
+      "xmin": 760,
+      "xmax": 3343,
+      "ymin": 0,
+      "ymax": 5773
     }
   },
   {
-    "markets": "hemköp",
+    "name": "D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-02.pdf",
+    "market": "hemköp",
     "dates": [
       "2020-10-02",
       "2020-10-02"
@@ -1417,8 +1162,8 @@
       {
         "name": "MOZZARELLA 2F20 V3",
         "sum": "20,00",
-        "amount": "1 st",
-        "price": "20,00",
+        "amount": "2 st",
+        "price": "10,00",
         "bounding_box": {
           "xmin": 1078,
           "xmax": 1491,
@@ -1463,14 +1208,26 @@
         }
       },
       {
-        "name": "PAPRIKΑ GUL",
+        "name": "PAPRIKA GUL",
         "sum": "19,58",
         "amount": "0,490kg",
         "price": "39,95kr/kg",
         "bounding_box": {
           "xmin": 1083,
-          "xmax": 2609,
+          "xmax": 2365,
           "ymin": 1769,
+          "ymax": 1921
+        }
+      },
+      {
+        "name": "-",
+        "sum": "13,90",
+        "amount": "1 st",
+        "price": "13,90",
+        "bounding_box": {
+          "xmin": 2592,
+          "xmax": 2609,
+          "ymin": 2040,
           "ymax": 2045
         }
       },
@@ -1483,19 +1240,19 @@
           "xmin": 1083,
           "xmax": 2609,
           "ymin": 1930,
-          "ymax": 2061
+          "ymax": 2045
         }
       },
       {
-        "name": "FL®SKYTTERFIL®",
+        "name": "PHILADELPHIA",
         "sum": "79,53",
-        "amount": "1,137kg",
-        "price": "69,95kr/kg",
+        "amount": "1 st",
+        "price": "79,53",
         "bounding_box": {
-          "xmin": 1084,
-          "xmax": 2365,
-          "ymin": 2082,
-          "ymax": 2325
+          "xmin": 1584,
+          "xmax": 2609,
+          "ymin": 2012,
+          "ymax": 2061
         }
       },
       {
@@ -1608,81 +1365,23 @@
       }
     ],
     "discounts": [],
-    "total": [
-      {
-        "name": "totals",
-        "sum": "766,69",
-        "amount": "32"
-      },
-      {
-        "name": "totals",
-        "sum": "794,59",
-        "amount": "23"
-      },
-      {
-        "name": "totals",
-        "sum": "395,42",
-        "amount": "16"
-      },
-      {
-        "name": "totals",
-        "sum": "606,71",
-        "amount": "22"
-      },
+    "totals": [
       {
         "name": "totals",
         "sum": "1133,73",
         "amount": "26"
-      },
-      {
-        "name": "totals",
-        "sum": "1133,73"
-      },
-      {
-        "name": "totals",
-        "sum": "337,60",
-        "amount": "18"
-      },
-      {
-        "name": "totals",
-        "sum": "337,60"
-      },
-      {
-        "name": "totals",
-        "sum": "327,25",
-        "amount": "11"
-      },
-      {
-        "name": "totals",
-        "sum": "327,25"
-      },
-      {
-        "name": "totals",
-        "sum": "628,07",
-        "amount": "17"
-      },
-      {
-        "name": "totals",
-        "sum": "597,07"
-      },
-      {
-        "name": "totals",
-        "sum": "220,62"
-      },
-      {
-        "name": "totals",
-        "sum": "601,41"
       }
     ],
     "bounding_box": {
-      "xmin": 1164,
-      "xmax": 3084,
-      "ymin": -16,
-      "ymax": 5777
+      "xmin": 1067,
+      "xmax": 2844,
+      "ymin": 304,
+      "ymax": 5619
     }
   },
   {
-    "markets": "hemköp",
+    "name": "D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-12.pdf",
+    "market": "hemköp",
     "dates": [],
     "articles": [
       {
@@ -1710,32 +1409,20 @@
         }
       },
       {
-        "name": "MOZZARELLA V3 2*20,00",
+        "name": "MOZZARELLA 2F20 V3",
         "sum": "40,00",
-        "amount": "2st",
+        "amount": "4 st",
         "price": "10,00",
         "bounding_box": {
           "xmin": 1059,
-          "xmax": 2367,
+          "xmax": 1555,
           "ymin": 794,
-          "ymax": 939
+          "ymax": 859
         }
       },
       {
-        "name": "2F20 V3 2*20,00",
+        "name": "PAPRIKA  MIX",
         "sum": "20,00",
-        "amount": "2st",
-        "price": "10,00",
-        "bounding_box": {
-          "xmin": 1541,
-          "xmax": 2367,
-          "ymin": 799,
-          "ymax": 939
-        }
-      },
-      {
-        "name": "ΡAPRIKΑ  ΜΙΧ",
-        "sum": "26,95",
         "amount": "2st",
         "price": "10,00",
         "bounding_box": {
@@ -1747,9 +1434,9 @@
       },
       {
         "name": "CROME FRA@CHE 34%",
-        "sum": "21,95",
+        "sum": "26,95",
         "amount": "1 st",
-        "price": "21,95",
+        "price": "26,95",
         "bounding_box": {
           "xmin": 1081,
           "xmax": 1279,
@@ -1759,9 +1446,9 @@
       },
       {
         "name": "VISPGRÔDDE 36%",
-        "sum": "37,95",
+        "sum": "21,95",
         "amount": "1 st",
-        "price": "37,95",
+        "price": "21,95",
         "bounding_box": {
           "xmin": 1078,
           "xmax": 1489,
@@ -1771,9 +1458,9 @@
       },
       {
         "name": "OREGANO",
-        "sum": "44,95",
+        "sum": "37,95",
         "amount": "1 st",
-        "price": "44,95",
+        "price": "37,95",
         "bounding_box": {
           "xmin": 1080,
           "xmax": 1364,
@@ -1783,9 +1470,9 @@
       },
       {
         "name": "PARMIG REG DOP 12M",
-        "sum": "22,95",
+        "sum": "44,95",
         "amount": "1 st",
-        "price": "22,95",
+        "price": "44,95",
         "bounding_box": {
           "xmin": 1082,
           "xmax": 1321,
@@ -1795,9 +1482,9 @@
       },
       {
         "name": "L@KPULVER",
-        "sum": "19,95",
+        "sum": "22,95",
         "amount": "1 st",
-        "price": "19,95",
+        "price": "22,95",
         "bounding_box": {
           "xmin": 1083,
           "xmax": 1450,
@@ -1807,9 +1494,9 @@
       },
       {
         "name": "MAJONN@S OKTA 450G",
-        "sum": "24,95",
+        "sum": "19,95",
         "amount": "1 st",
-        "price": "24,95",
+        "price": "19,95",
         "bounding_box": {
           "xmin": 1079,
           "xmax": 1405,
@@ -1819,9 +1506,9 @@
       },
       {
         "name": "VITLOKSPULVER",
-        "sum": "20,00",
+        "sum": "24,95",
         "amount": "1 st",
-        "price": "20,00",
+        "price": "24,95",
         "bounding_box": {
           "xmin": 1078,
           "xmax": 1617,
@@ -1830,15 +1517,15 @@
         }
       },
       {
-        "name": "L 6P FRIG@ INOM",
-        "sum": "337,60",
+        "name": "@GG L 6P FRIG@ INOM",
+        "sum": "20,00",
         "amount": "2st",
         "price": "10,00",
         "bounding_box": {
-          "xmin": 1250,
-          "xmax": 1953,
-          "ymin": 1527,
-          "ymax": 1985
+          "xmin": 1078,
+          "xmax": 1197,
+          "ymin": 1516,
+          "ymax": 1581
         }
       }
     ],
@@ -1848,81 +1535,23 @@
         "price": "-7,90"
       }
     ],
-    "total": [
-      {
-        "name": "totals",
-        "sum": "766,69",
-        "amount": "32"
-      },
-      {
-        "name": "totals",
-        "sum": "794,59",
-        "amount": "23"
-      },
-      {
-        "name": "totals",
-        "sum": "395,42",
-        "amount": "16"
-      },
-      {
-        "name": "totals",
-        "sum": "606,71",
-        "amount": "22"
-      },
-      {
-        "name": "totals",
-        "sum": "1133,73",
-        "amount": "26"
-      },
-      {
-        "name": "totals",
-        "sum": "1133,73"
-      },
+    "totals": [
       {
         "name": "totals",
         "sum": "337,60",
         "amount": "18"
-      },
-      {
-        "name": "totals",
-        "sum": "337,60"
-      },
-      {
-        "name": "totals",
-        "sum": "327,25",
-        "amount": "11"
-      },
-      {
-        "name": "totals",
-        "sum": "327,25"
-      },
-      {
-        "name": "totals",
-        "sum": "628,07",
-        "amount": "17"
-      },
-      {
-        "name": "totals",
-        "sum": "597,07"
-      },
-      {
-        "name": "totals",
-        "sum": "220,62"
-      },
-      {
-        "name": "totals",
-        "sum": "601,41"
       }
     ],
     "bounding_box": {
-      "xmin": 1164,
-      "xmax": 3084,
-      "ymin": -16,
-      "ymax": 5777
+      "xmin": 1059,
+      "xmax": 2828,
+      "ymin": 304,
+      "ymax": 4583
     }
   },
   {
-    "markets": "hemköp",
+    "name": "D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-18.pdf",
+    "market": "hemköp",
     "dates": [
       "2020-10-18"
     ],
@@ -1960,7 +1589,19 @@
           "xmin": 1082,
           "xmax": 2639,
           "ymin": 960,
-          "ymax": 1106
+          "ymax": 1103
+        }
+      },
+      {
+        "name": "* - Klubbpris:BROCCOLI",
+        "sum": "25,90",
+        "amount": "1 st",
+        "price": "25,90",
+        "bounding_box": {
+          "xmin": 1250,
+          "xmax": 1277,
+          "ymin": 1039,
+          "ymax": 1070
         }
       },
       {
@@ -2037,45 +1678,7 @@
       }
     ],
     "discounts": [],
-    "total": [
-      {
-        "name": "totals",
-        "sum": "766,69",
-        "amount": "32"
-      },
-      {
-        "name": "totals",
-        "sum": "794,59",
-        "amount": "23"
-      },
-      {
-        "name": "totals",
-        "sum": "395,42",
-        "amount": "16"
-      },
-      {
-        "name": "totals",
-        "sum": "606,71",
-        "amount": "22"
-      },
-      {
-        "name": "totals",
-        "sum": "1133,73",
-        "amount": "26"
-      },
-      {
-        "name": "totals",
-        "sum": "1133,73"
-      },
-      {
-        "name": "totals",
-        "sum": "337,60",
-        "amount": "18"
-      },
-      {
-        "name": "totals",
-        "sum": "337,60"
-      },
+    "totals": [
       {
         "name": "totals",
         "sum": "327,25",
@@ -2084,34 +1687,18 @@
       {
         "name": "totals",
         "sum": "327,25"
-      },
-      {
-        "name": "totals",
-        "sum": "628,07",
-        "amount": "17"
-      },
-      {
-        "name": "totals",
-        "sum": "597,07"
-      },
-      {
-        "name": "totals",
-        "sum": "220,62"
-      },
-      {
-        "name": "totals",
-        "sum": "601,41"
       }
     ],
     "bounding_box": {
-      "xmin": 1164,
-      "xmax": 3084,
-      "ymin": -16,
-      "ymax": 5777
+      "xmin": 1078,
+      "xmax": 2834,
+      "ymin": 304,
+      "ymax": 4745
     }
   },
   {
-    "markets": "hemköp",
+    "name": "D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-24.pdf",
+    "market": "hemköp",
     "dates": [
       "2020-10-24"
     ],
@@ -2239,8 +1826,8 @@
       {
         "name": "KOKOSMJOLK 2F24 V3",
         "sum": "24,00",
-        "amount": "1 st",
-        "price": "24,00",
+        "amount": "2 st",
+        "price": "12,00",
         "bounding_box": {
           "xmin": 1081,
           "xmax": 1492,
@@ -2261,7 +1848,7 @@
         }
       },
       {
-        "name": "PAPRIKΑ",
+        "name": "PAPRIKA",
         "sum": "31,95",
         "amount": "1 st",
         "price": "31,95",
@@ -2279,54 +1866,7 @@
         "price": "-8,85"
       }
     ],
-    "total": [
-      {
-        "name": "totals",
-        "sum": "766,69",
-        "amount": "32"
-      },
-      {
-        "name": "totals",
-        "sum": "794,59",
-        "amount": "23"
-      },
-      {
-        "name": "totals",
-        "sum": "395,42",
-        "amount": "16"
-      },
-      {
-        "name": "totals",
-        "sum": "606,71",
-        "amount": "22"
-      },
-      {
-        "name": "totals",
-        "sum": "1133,73",
-        "amount": "26"
-      },
-      {
-        "name": "totals",
-        "sum": "1133,73"
-      },
-      {
-        "name": "totals",
-        "sum": "337,60",
-        "amount": "18"
-      },
-      {
-        "name": "totals",
-        "sum": "337,60"
-      },
-      {
-        "name": "totals",
-        "sum": "327,25",
-        "amount": "11"
-      },
-      {
-        "name": "totals",
-        "sum": "327,25"
-      },
+    "totals": [
       {
         "name": "totals",
         "sum": "628,07",
@@ -2335,25 +1875,18 @@
       {
         "name": "totals",
         "sum": "597,07"
-      },
-      {
-        "name": "totals",
-        "sum": "220,62"
-      },
-      {
-        "name": "totals",
-        "sum": "601,41"
       }
     ],
     "bounding_box": {
-      "xmin": 1164,
-      "xmax": 3084,
-      "ymin": -16,
-      "ymax": 5777
+      "xmin": 1078,
+      "xmax": 2830,
+      "ymin": 304,
+      "ymax": 5619
     }
   },
   {
-    "markets": "ica",
+    "name": "D:\\Documents\\Kvitto Scanner\\Receipts\\ica-20-10-11.pdf",
+    "market": "ica",
     "dates": [
       "2020-10-11"
     ],
@@ -2389,21 +1922,21 @@
         "price": "22,90",
         "bounding_box": {
           "xmin": 568,
-          "xmax": 841,
+          "xmax": 824,
           "ymin": 3591,
-          "ymax": 3878
+          "ymax": 3719
         }
       },
       {
-        "name": "Pant",
+        "name": "+ Pant",
         "sum": "1,00",
         "amount": "1 st",
         "price": "1,00",
         "bounding_box": {
-          "xmin": 844,
-          "xmax": 1101,
-          "ymin": 3737,
-          "ymax": 3864
+          "xmin": 735,
+          "xmax": 841,
+          "ymin": 3725,
+          "ymax": 3878
         }
       },
       {
@@ -2415,19 +1948,19 @@
           "xmin": 569,
           "xmax": 1105,
           "ymin": 3882,
-          "ymax": 4147
+          "ymax": 4015
         }
       },
       {
-        "name": "Pant",
+        "name": "+ Pant",
         "sum": "1,00",
         "amount": "1 st",
         "price": "1,00",
         "bounding_box": {
-          "xmin": 840,
-          "xmax": 1096,
-          "ymin": 4030,
-          "ymax": 4160
+          "xmin": 707,
+          "xmax": 764,
+          "ymin": 4063,
+          "ymax": 4147
         }
       },
       {
@@ -2437,21 +1970,21 @@
         "price": "22,90",
         "bounding_box": {
           "xmin": 560,
-          "xmax": 1711,
+          "xmax": 900,
           "ymin": 4180,
-          "ymax": 4582
+          "ymax": 4335
         }
       },
       {
-        "name": "Pant",
+        "name": "+ Pant",
         "sum": "1,00",
         "amount": "1 st",
         "price": "1,00",
         "bounding_box": {
-          "xmin": 832,
-          "xmax": 1094,
-          "ymin": 4471,
-          "ymax": 4600
+          "xmin": 701,
+          "xmax": 758,
+          "ymin": 4498,
+          "ymax": 4582
         }
       },
       {
@@ -2511,98 +2044,39 @@
           "xmin": 564,
           "xmax": 959,
           "ymin": 5184,
-          "ymax": 5490
+          "ymax": 5331
         }
       },
       {
-        "name": "Pant",
+        "name": "+ Pant",
         "sum": "1,00",
         "amount": "1 st",
         "price": "1,00",
         "bounding_box": {
-          "xmin": 828,
-          "xmax": 1086,
-          "ymin": 5353,
-          "ymax": 5479
+          "xmin": 734,
+          "xmax": 3413,
+          "ymin": 5348,
+          "ymax": 5769
         }
       }
     ],
-    "discounts": [],
-    "total": [
+    "discounts": [
       {
-        "name": "totals",
-        "sum": "766,69",
-        "amount": "32"
-      },
-      {
-        "name": "totals",
-        "sum": "794,59",
-        "amount": "23"
-      },
-      {
-        "name": "totals",
-        "sum": "395,42",
-        "amount": "16"
-      },
-      {
-        "name": "totals",
-        "sum": "606,71",
-        "amount": "22"
-      },
-      {
-        "name": "totals",
-        "sum": "1133,73",
-        "amount": "26"
-      },
-      {
-        "name": "totals",
-        "sum": "1133,73"
-      },
-      {
-        "name": "totals",
-        "sum": "337,60",
-        "amount": "18"
-      },
-      {
-        "name": "totals",
-        "sum": "337,60"
-      },
-      {
-        "name": "totals",
-        "sum": "327,25",
-        "amount": "11"
-      },
-      {
-        "name": "totals",
-        "sum": "327,25"
-      },
-      {
-        "name": "totals",
-        "sum": "628,07",
-        "amount": "17"
-      },
-      {
-        "name": "totals",
-        "sum": "597,07"
-      },
-      {
-        "name": "totals",
-        "sum": "220,62"
-      },
-      {
-        "name": "totals",
-        "sum": "601,41"
+        "name": "Rabatt: Celsius",
+        "price": "-13,60"
       }
     ],
+    "totals": [],
     "bounding_box": {
-      "xmin": 1164,
-      "xmax": 3084,
-      "ymin": -16,
-      "ymax": 5777
+      "xmin": 524,
+      "xmax": 3479,
+      "ymin": 664,
+      "ymax": 5787
     }
   },
   {
-    "markets": "ica",
+    "name": "D:\\Documents\\Kvitto Scanner\\Receipts\\ica-20-11-09.pdf",
+    "market": "ica",
     "dates": [
       "2020-11-09"
     ],
@@ -2740,6 +2214,18 @@
         }
       },
       {
+        "name": "Hårpynt",
+        "sum": "39,90",
+        "amount": "1 st",
+        "price": "39,90",
+        "bounding_box": {
+          "xmin": 758,
+          "xmax": 1191,
+          "ymin": 3640,
+          "ymax": 3791
+        }
+      },
+      {
         "name": "Kycklingbröstfilé",
         "sum": "145,90",
         "amount": "2st",
@@ -2834,77 +2320,12 @@
         "price": "-66,38"
       }
     ],
-    "total": [
-      {
-        "name": "totals",
-        "sum": "766,69",
-        "amount": "32"
-      },
-      {
-        "name": "totals",
-        "sum": "794,59",
-        "amount": "23"
-      },
-      {
-        "name": "totals",
-        "sum": "395,42",
-        "amount": "16"
-      },
-      {
-        "name": "totals",
-        "sum": "606,71",
-        "amount": "22"
-      },
-      {
-        "name": "totals",
-        "sum": "1133,73",
-        "amount": "26"
-      },
-      {
-        "name": "totals",
-        "sum": "1133,73"
-      },
-      {
-        "name": "totals",
-        "sum": "337,60",
-        "amount": "18"
-      },
-      {
-        "name": "totals",
-        "sum": "337,60"
-      },
-      {
-        "name": "totals",
-        "sum": "327,25",
-        "amount": "11"
-      },
-      {
-        "name": "totals",
-        "sum": "327,25"
-      },
-      {
-        "name": "totals",
-        "sum": "628,07",
-        "amount": "17"
-      },
-      {
-        "name": "totals",
-        "sum": "597,07"
-      },
-      {
-        "name": "totals",
-        "sum": "220,62"
-      },
-      {
-        "name": "totals",
-        "sum": "601,41"
-      }
-    ],
+    "totals": [],
     "bounding_box": {
-      "xmin": 1164,
-      "xmax": 3084,
-      "ymin": -16,
-      "ymax": 5777
+      "xmin": 696,
+      "xmax": 3391,
+      "ymin": 102,
+      "ymax": 5861
     }
   }
 ]

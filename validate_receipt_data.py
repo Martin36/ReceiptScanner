@@ -22,7 +22,27 @@ class ReceiptDataValidator:
     return faulty_indx
 
   def check_nr_of_articles(self, parsed_data):
-    nr_of_parsed_articles = parsed_data['articles']
+    nr_parsed_articles = self.count_articles(parsed_data['articles'])
+    nr_receipt_articles = self.get_nr_receipt_articles(parsed_data['totals'])
+    if nr_parsed_articles != nr_receipt_articles:
+      return False
+    return True
+
+  def count_articles(self, articles):
+    total = 0
+    for article in articles:
+      amount = article['amount']
+      # If the article is measured in weight, it is counted as one
+      if "kg" in amount:
+        amount = 1
+      else:
+        amount = int(self.get_number_from_string(amount))
+      
+      total += amount
+    
+    return total
+      
+
 
   # Checking if the sum on the receipt is equal to the sum of the 
   # parsed articles. If it is not, then something may have been 
@@ -41,10 +61,19 @@ class ReceiptDataValidator:
     return parsed_number
   
   def get_number_from_string(self, string):
-    rex = '[\d]+[.,\d]+|[\d]*[.][\d]+|[\d]+'
+    rex = r'[\d]+[.,\d]+|[\d]*[.][\d]+|[\d]+'
     match = re.search(rex, string)
     if match:
       return self.convert_to_nr(match.group(0))
     return None
 
-
+  # TODO: What if there are multiple totals with nr of articles
+  def get_nr_receipt_articles(self, totals):
+    result = None
+    amount = None
+    for total in totals:
+      if 'amount' in total:
+        amount = total['amount']
+      if amount != None:
+        result = int(amount)
+    return result

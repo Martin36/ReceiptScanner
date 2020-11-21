@@ -12,7 +12,8 @@ MARKETS = ['ica', 'coop', 'hemköp']
 SKIPWORDS = ['SEK', 'www.coop.se', 'Tel.nr:', 'Kvitto:', 'Datum:', 'Kassör:', 'Org Nr:']
 STOPWORDS = []
 BLACKLIST_WORDS = []
-TOTAL_WORDS = ['betala', 'totalt', 'total']
+# TODO: What happens if an article name starts with 'att' (or any of the other words)?
+TOTAL_WORDS = ['att', 'betala', 'totalt', 'total']
 # This represents the offset on the x-axis that the additional information
 # has from the start of the article name. It needs to be tweaked so that it
 # works correctly
@@ -28,13 +29,15 @@ class GcloudParser:
     self.min_length = min_length
     self.max_height = max_height
     self.client = vision_v1.ImageAnnotatorClient()
-    self.allowed_labels = ['article', 'price', 'market', 'address', 'date', 'misc']
     self.totals = []
     self.market = None
     self.largets_number = 0
     self.bounding_box = None
 
   def parse_pdf(self, path):
+    self.totals = []
+    self.market = None
+    self.bounding_box = None
     pages = convert_from_path(path, 500)
     articles = []
     dates = []
@@ -71,7 +74,6 @@ class GcloudParser:
     discounts = []
     seen_indexes = []
     seen_prices = []
-    parsed_y = 0
     base_ann = gcloud_response.text_annotations[0]
     g_xmin = np.min([v.x for v in base_ann.bounding_poly.vertices])
     g_xmax = np.max([v.x for v in base_ann.bounding_poly.vertices])
@@ -348,7 +350,6 @@ class GcloudParser:
             current_price = self.convert_price(p_description)
             if self.debug:
               print('New price ' + str(current_price))
-            parsed_y = max(parsed_y, (p_ymax + p_ymin) / 2)
   
           elif p_type == 'text':
             # Checking if left side of bounding box for next word is before the right side of the first word
@@ -362,7 +363,6 @@ class GcloudParser:
               continue
 
             used_idx.append(j)
-            parsed_y = max(parsed_y, (p_ymax + p_ymin) / 2)
             if self.debug:
               print('Appending ' + current_name + ' ' + p_description)
             current_name += ' ' + p_ann.description
@@ -420,7 +420,10 @@ class GcloudParser:
             # but are actually multiple items
             if self.is_group_price(current_name):
               amount, st_price = self.extract_group_price(current_name)
-              new_amount = utils.get_number_from_string(current_amount)*amount
+              if not current_amount:
+                new_amount = amount
+              else:
+                new_amount = utils.get_number_from_string(current_amount)*amount
               current_amount = str(int(new_amount)) + ' st'
               current_st_price = utils.convert_to_price_string(st_price)
 
@@ -489,6 +492,9 @@ class GcloudParser:
   # Due to Hemköps inability to handle ÅÄÖ, random characters will appear
   # in the article names. Because of this the regex will need to match non-alpha chars
   def check_article_name(self, article_name):
+    if self.check_total_name(article_name):
+      return False
+
     words = article_name.split(' ')
     if words[0] == "*":
       return True
@@ -502,6 +508,14 @@ class GcloudParser:
       if regex.fullmatch(re_ica, words[0]):
         return True
 
+    return False
+
+  # Checks if the string is a line with the total sum 
+  def check_total_name(self, string):
+    total_names = ['ATT BETALA', 'BETALA', 'Totalt', 'Total']
+    for total_name in total_names:
+      if total_name in string:
+        return True
     return False
   
   # Function for detecting a price string

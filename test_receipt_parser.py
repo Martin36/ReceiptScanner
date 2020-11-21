@@ -75,6 +75,19 @@ class TestParser(unittest.TestCase):
     is_article = parser.check_article_name(article_name)
     self.assertFalse(is_article, "Should return false for names where only first letter is capital when market is coop or hemköp")
 
+  def test_check_total_name(self):
+    article_name = 'ATT BETALA'
+    is_total_name = parser.check_total_name(article_name)
+    self.assertTrue(is_total_name, "Should return true for names that are known to represent total amounts")
+
+    article_name = 'BETALA'
+    is_total_name = parser.check_total_name(article_name)
+    self.assertTrue(is_total_name, "Should return true for names that are known to represent total amounts")
+
+    article_name = 'blabla'
+    is_total_name = parser.check_total_name(article_name)
+    self.assertFalse(is_total_name, "Should return false for names that are not known to represent total amounts")
+
   def test_check_if_total(self):
     text = "Totalt"
     result = parser.check_if_total(text)
