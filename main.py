@@ -7,7 +7,7 @@ from receipt_parser import GcloudParser
 from validate_receipt_data import ReceiptDataValidator
 
 
-PATH = 'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-29.pdf'
+PATH = 'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-11-05.pdf'
 receipt_paths = [
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-20.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-27.pdf',
@@ -54,7 +54,7 @@ def parse_one_pdf():
 
 def parse_all_pdfs():
   if os.path.exists(os.path.join(sys.path[0], "articles.json")):
-    os.remove("articles.json")
+    os.remove(os.path.join(sys.path[0], "articles.json"))
 
   f = open(os.path.join(sys.path[0], "articles.json"), "a", encoding='utf8')
   j = []
@@ -93,6 +93,6 @@ def validate_json():
 def get_first(array):
   return next(iter(array), None)
 
-# validate_json()
+validate_json()
 # parse_all_pdfs()
-parse_one_pdf()
+# parse_one_pdf()

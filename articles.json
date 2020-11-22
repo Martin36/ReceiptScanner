@@ -325,15 +325,15 @@
         "price": "1,00",
         "bounding_box": {
           "xmin": 1262,
-          "xmax": 1439,
+          "xmax": 2005,
           "ymin": 4405,
-          "ymax": 4504
+          "ymax": 4758
         }
       }
     ],
     "discounts": [
       {
-        "name": "RABATTER",
+        "name": " 2 för 32kr",
         "price": "-3,90"
       },
       {
@@ -342,7 +342,7 @@
       },
       {
         "name": "Blandfärs 49,90/kg",
-        "price": "-9,95"
+        "price": "-50,50"
       },
       {
         "name": "Philadelphia 10kr",
@@ -350,6 +350,10 @@
       },
       {
         "name": "Philadelphia 10kr",
+        "price": "-9,95"
+      },
+      {
+        "name": "Kyckling 59,90",
         "price": "-25,05"
       },
       {
@@ -601,15 +605,15 @@
         "price": "42,50",
         "bounding_box": {
           "xmin": 956,
-          "xmax": 1273,
+          "xmax": 2954,
           "ymin": 4663,
-          "ymax": 4787
+          "ymax": 5519
         }
       }
     ],
     "discounts": [
       {
-        "name": "RABATTER",
+        "name": " 39,90kr/k DETTA KÖP %3D",
         "price": "-52,15"
       },
       {
@@ -639,27 +643,27 @@
     ],
     "articles": [
       {
-        "name": "556030-5921",
+        "name": "AVOCADO 3-PACK",
         "sum": "44,95",
         "amount": "1 st",
         "price": "44,95",
-        "bounding_box": {
-          "xmin": 1452,
-          "xmax": 2089,
-          "ymin": 2372,
-          "ymax": 2497
-        }
-      },
-      {
-        "name": "AVOCADO 3-PACK",
-        "sum": "59,16",
-        "amount": "1 st",
-        "price": "59,16",
         "bounding_box": {
           "xmin": 843,
           "xmax": 1263,
           "ymin": 2620,
           "ymax": 2730
+        }
+      },
+      {
+        "name": "GODIS LÖSVIKT",
+        "sum": "59,16",
+        "amount": "0,740 kg",
+        "price": "79,95 SEK/kg",
+        "bounding_box": {
+          "xmin": 838,
+          "xmax": 2403,
+          "ymin": 2720,
+          "ymax": 2986
         }
       },
       {
@@ -713,8 +717,8 @@
       {
         "name": "PAPRIKA GUL STYCK",
         "sum": "23,85",
-        "amount": "1 st",
-        "price": "23,85",
+        "amount": "3 st",
+        "price": "7,95",
         "bounding_box": {
           "xmin": 820,
           "xmax": 1414,
@@ -781,23 +785,15 @@
           "ymin": 4399,
           "ymax": 4547
         }
-      },
-      {
-        "name": "SUMMERING RABATTER DETTA KÖP",
-        "sum": "34,54",
-        "amount": "1 st",
-        "price": "34,54",
-        "bounding_box": {
-          "xmin": 944,
-          "xmax": 1499,
-          "ymin": 5408,
-          "ymax": 5511
-        }
       }
     ],
     "discounts": [
       {
-        "name": "STIMOROL/V6 för 25kr --4,00",
+        "name": "STIMOROL/V6 för 25kr",
+        "price": "-4,00"
+      },
+      {
+        "name": "Lösvitktsgodis 39,90kr/k",
         "price": "-29,64"
       },
       {
@@ -889,8 +885,8 @@
       {
         "name": "FLANKSTEK I BIT",
         "sum": "174,21",
-        "amount": "1 st",
-        "price": "174,21",
+        "amount": "0,898 kg",
+        "price": "194,00 SEK/kg",
         "bounding_box": {
           "xmin": 827,
           "xmax": 2426,
@@ -1041,23 +1037,11 @@
           "ymin": 4464,
           "ymax": 4726
         }
-      },
-      {
-        "name": "SUMMERING RABATTER DETTA KÖP",
-        "sum": "18,80",
-        "amount": "1 st",
-        "price": "18,80",
-        "bounding_box": {
-          "xmin": 951,
-          "xmax": 1479,
-          "ymin": 5424,
-          "ymax": 5537
-        }
       }
     ],
     "discounts": [
       {
-        "name": "RABATTER",
+        "name": "Celsius för 32kr",
         "price": "-3,90"
       },
       {
@@ -1150,8 +1134,8 @@
       {
         "name": "OLGFORS",
         "sum": "61,64",
-        "amount": "1 st",
-        "price": "61,64",
+        "amount": "0,518kg",
+        "price": "119,00kr/kg",
         "bounding_box": {
           "xmin": 1079,
           "xmax": 2363,
@@ -1220,18 +1204,6 @@
         }
       },
       {
-        "name": "-",
-        "sum": "13,90",
-        "amount": "1 st",
-        "price": "13,90",
-        "bounding_box": {
-          "xmin": 2592,
-          "xmax": 2609,
-          "ymin": 2040,
-          "ymax": 2045
-        }
-      },
-      {
         "name": "PHILADELPHIA VITL/OR",
         "sum": "43,90",
         "amount": "2st",
@@ -1244,15 +1216,15 @@
         }
       },
       {
-        "name": "PHILADELPHIA",
+        "name": "FL®SKYTTERFIL®",
         "sum": "79,53",
-        "amount": "1 st",
-        "price": "79,53",
+        "amount": "1,137kg",
+        "price": "69,95kr/kg",
         "bounding_box": {
-          "xmin": 1584,
-          "xmax": 2609,
-          "ymin": 2012,
-          "ymax": 2061
+          "xmin": 1084,
+          "xmax": 2365,
+          "ymin": 2082,
+          "ymax": 2325
         }
       },
       {
@@ -1590,18 +1562,6 @@
           "xmax": 2639,
           "ymin": 960,
           "ymax": 1103
-        }
-      },
-      {
-        "name": "* - Klubbpris:BROCCOLI",
-        "sum": "25,90",
-        "amount": "1 st",
-        "price": "25,90",
-        "bounding_box": {
-          "xmin": 1250,
-          "xmax": 1277,
-          "ymin": 1039,
-          "ymax": 1070
         }
       },
       {
@@ -1988,18 +1948,6 @@
         }
       },
       {
-        "name": "Appel juice",
-        "sum": "12,90",
-        "amount": "1 st",
-        "price": "12,90",
-        "bounding_box": {
-          "xmin": 832,
-          "xmax": 1144,
-          "ymin": 4614,
-          "ymax": 4758
-        }
-      },
-      {
         "name": "Papperskasse",
         "sum": "4,00",
         "amount": "1 st",
@@ -2202,10 +2150,10 @@
         }
       },
       {
-        "name": "Pant 2st*1,00",
+        "name": "Pant",
         "sum": "2,00",
-        "amount": "1 st",
-        "price": "2,00",
+        "amount": "2st",
+        "price": "1,00",
         "bounding_box": {
           "xmin": 1016,
           "xmax": 1255,

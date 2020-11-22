@@ -405,7 +405,9 @@ class GcloudParser:
                       
           # Verify that the bounding box of the article is close to 
           # the left edge of the receipt
-          if bounding_box['xmin']-ARTICLE_OFFSET > g_xmin:
+          # The exeption here is pant, which are a bit shifted to the right
+          if bounding_box['xmin']-ARTICLE_OFFSET > g_xmin and \
+             not self.check_if_pant(current_name):
             skip_this = True
          
           if self.check_discount_name(current_name):
@@ -566,6 +568,8 @@ class GcloudParser:
   # Function for checking if the current item is a discount
   # Discounts have a negative price
   def check_discount(self, string):
+    if type(string) != str:
+      return False
     rex = r'-+\d+,\d\d'
     if regex.fullmatch(rex, string):
       return True
@@ -642,12 +646,12 @@ class GcloudParser:
   # Gets the amount line from a string if it has any
   def extract_amount_line(self, string):
     string = string.strip()
-    re_kg = r'(\d+,\d+\s*kg\s*[x|\*]\s*\d\d,\d\d\s*.*/kg)'
+    re_kg = r'(\d+,\d+\s*kg\s*[x|\*]\s*\d+,\d\d\s*.*/kg)'
     result = regex.search(re_kg, string)
     if result:
       return result.group(1)
 
-    re_st = r'(\d+\s*(st)?\s*[x|\*]\s*\d\d,\d\d)'
+    re_st = r'(\d+\s*(st)?\s*[x|\*]\s*\d+,\d\d)'
     result = regex.search(re_st, string)
     if result:
       return result.group(1)

@@ -183,6 +183,10 @@ class TestParser(unittest.TestCase):
     is_discount = parser.check_discount(discount)
     self.assertFalse(is_discount, "Should not be discount if arbitrary string")
 
+    discount = None
+    is_discount = parser.check_discount(discount)
+    self.assertFalse(is_discount, "Should return false if input is not a string")
+
   def test_check_if_pant(self):
     string = "gfdspokPANT eqåpwoeads"
     is_pant = parser.check_if_pant(string)
