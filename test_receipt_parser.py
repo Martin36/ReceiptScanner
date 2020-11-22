@@ -167,6 +167,10 @@ class TestParser(unittest.TestCase):
     is_discount = parser.check_discount(discount)
     self.assertTrue(is_discount, "Should be discount if negative number")
 
+    discount = "--5,89"
+    is_discount = parser.check_discount(discount)
+    self.assertTrue(is_discount, "Should be discount if negative number, but with double minus signs")
+
     discount = "5,89"
     is_discount = parser.check_discount(discount)
     self.assertFalse(is_discount, "Should not be discount if positive number")

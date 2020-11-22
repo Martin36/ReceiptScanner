@@ -185,7 +185,6 @@ class GcloudParser:
         seen_indexes += used_idx
         seen_prices += used_pr
 
-
       if t_type == 'text':
         used_idx = []
         used_pr = []
@@ -294,8 +293,12 @@ class GcloudParser:
                 # in correct order
                 if g_xmax-PRICE_OFFSET < p_xmax:
                   # First check if this is a discount price
+                  # If the current price of the article is a discount price
+                  # this should not be added to the discount price, since a
+                  # discount can not have another discount
                   if current_discount_price == None and \
-                     self.check_discount(p_ann.description):
+                     self.check_discount(p_ann.description) and \
+                     not self.check_discount(current_price):
                      used_pr.append(j)
                      current_discount_price = p_ann.description
                   if current_price == None:
@@ -336,6 +339,8 @@ class GcloudParser:
             continue
   
           if p_type == 'number':
+            # Remove minus sign if it is multiple
+            p_description = utils.remove_double_minus_sign(p_description)
             # Keep track of the largest read number, which is the total amount
             parsed_number = float(p_description.replace(",", ".")) 
             if parsed_number > self.largets_number:
@@ -550,7 +555,7 @@ class GcloudParser:
   # A price string has the format (X)XX,XX
   # Returns false if the string does not represent a price
   def check_price(self, string):
-    rex = r'-?\d+[,|.]\d\d'
+    rex = r'-*\d+[,|.]\d\d'
     if regex.fullmatch(rex, string):
       return string
     return False
@@ -561,7 +566,7 @@ class GcloudParser:
   # Function for checking if the current item is a discount
   # Discounts have a negative price
   def check_discount(self, string):
-    rex = r'-\d+,\d\d'
+    rex = r'-+\d+,\d\d'
     if regex.fullmatch(rex, string):
       return True
     return False

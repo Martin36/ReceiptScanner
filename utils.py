@@ -26,3 +26,15 @@ def get_number_from_string(string):
   if match:
     return convert_to_nr(match.group(0))
   return None
+
+# Returns the string with only one minus sign instead of multiple
+# Used for when the OCR scan happens to think there is multiple 
+# minus signs instead of only one
+def remove_double_minus_sign(string):
+  rex = r'-*(-\d+,\d\d)'
+  match = re.search(rex, string)
+  if match:
+    return match.group(1)
+  else:
+    return string
+

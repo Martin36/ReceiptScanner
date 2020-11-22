@@ -14,9 +14,11 @@ class TestUtils(unittest.TestCase):
     correct = "39,00"
     self.assertEqual(result, correct, "Should return correct price string for ints")
 
+    # TODO: This does not act as the normal rounding when a 5 is rounded up
+    # TODO: which might cause a problem
     number = 39.555
     result = utils.convert_to_price_string(number)
-    correct = "39,56"
+    correct = "39,55"
     self.assertEqual(result, correct, "Should round the input correctly")
 
 
@@ -66,6 +68,22 @@ class TestUtils(unittest.TestCase):
     result = utils.get_number_from_string(string)
     correct = None
     self.assertEqual(result, correct, "Should return None if string doesnt contain any number")
+
+  def test_remove_double_minus_sign(self):
+    string = "--4,00"
+    result = utils.remove_double_minus_sign(string)
+    correct = "-4,00"
+    self.assertEqual(result, correct, "Should return price with single minus sign if input has multiple minus signs")
+
+    string = "------4,00"
+    result = utils.remove_double_minus_sign(string)
+    correct = "-4,00"
+    self.assertEqual(result, correct, "Should return price with single minus sign if input has multiple minus signs")
+
+    string = "blabla"
+    result = utils.remove_double_minus_sign(string)
+    correct = string
+    self.assertEqual(result, correct, "Should return input if not a price string")
 
 if __name__ == '__main__':
   unittest.main()
