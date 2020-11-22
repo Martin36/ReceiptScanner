@@ -36,8 +36,20 @@ def parse_one_pdf():
 
   # Validate the parsed data
   faulty_indx = validator.check_articles(articles)
-  print("Faulty articles: \n")
+  print("Faulty articles:")
   print(faulty_indx)
+
+  result_obj = {
+    "articles": articles, 
+    "dates": dates, 
+    "markets": markets, 
+    "discounts": discounts, 
+    "totals": totals, 
+    "bounding_box": bounding_box
+  }
+  is_corr_nr_articles = validator.check_nr_of_articles(result_obj)
+  if not is_corr_nr_articles:
+    print("The parsed nr of articles are not the same as the amount on the receipt")
 
 
 def parse_all_pdfs():

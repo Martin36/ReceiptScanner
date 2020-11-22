@@ -9,11 +9,12 @@ from google.cloud import vision_v1
 from pdf2image import convert_from_path
 
 MARKETS = ['ica', 'coop', 'hemköp']
-SKIPWORDS = ['SEK', 'www.coop.se', 'Tel.nr:', 'Kvitto:', 'Datum:', 'Kassör:', 'Org Nr:']
+SKIPWORDS = ['SEK', 'www.coop.se', 'Tel.nr:', 'Kvitto:', 'Datum:', 'Kassör:', 'Org Nr:', 'SUMMERING', 'RABATTER']
 STOPWORDS = []
 BLACKLIST_WORDS = []
 # TODO: What happens if an article name starts with 'att' (or any of the other words)?
 TOTAL_WORDS = ['att', 'betala', 'totalt', 'total']
+DISCOUNT_WORDS = ['summering', 'rabatter']
 # This represents the offset on the x-axis that the additional information
 # has from the start of the article name. It needs to be tweaked so that it
 # works correctly
@@ -25,7 +26,7 @@ PRICE_OFFSET = 200
 # This is used to check if an article has been scanned correctly
 # One common feature of the articles for different receipts is that
 # the name starts close to the left edge of the receipt
-ARTICLE_OFFSET = 200
+ARTICLE_OFFSET = 150
 
 
 class GcloudParser:
@@ -396,12 +397,15 @@ class GcloudParser:
 
           if not self.check_article_name(current_name):
             skip_this = True
-          
+                      
           # Verify that the bounding box of the article is close to 
           # the left edge of the receipt
           if bounding_box['xmin']-ARTICLE_OFFSET > g_xmin:
             skip_this = True
          
+          if self.check_discount_name(current_name):
+            skip_this = True
+
           if not skip_this:
             if self.debug:
               print('Adding ' + current_name + ' ' + str(current_price))
@@ -533,6 +537,14 @@ class GcloudParser:
       if total_name in string:
         return True
     return False
+
+  # This is used to prevent the "summar of discounts" line to be
+  # considered an article
+  def check_discount_name(self, string):
+    for discount_name in DISCOUNT_WORDS:
+      if discount_name.lower() in string.lower():
+        return True
+    return False
   
   # Function for detecting a price string
   # A price string has the format (X)XX,XX
@@ -576,8 +588,8 @@ class GcloudParser:
   # For the string "0,538 kg x 21,95 SEK/kg" it would return "0,538 kg"
   def get_amount(self, string):
     string = string.strip()
-    re_kg = r'(\d+,\d+\s*kg)\s*[x|\*]\s*\d\d,\d\d\s*.*/kg'
-    re_st = r'(\d+\s*(st)?)\s*[x|\*]\s*\d\d,\d\d'
+    re_kg = r'(\d+,\d+\s*kg)\s*[x|\*]\s*\d+,\d\d\s*.*/kg'
+    re_st = r'(\d+\s*(st)?)\s*[x|\*]\s*\d+,\d\d'
     
     kg_search = regex.search(re_kg, string)
     if kg_search:
@@ -594,8 +606,8 @@ class GcloudParser:
   # For the string "0,538 kg x 21,95 SEK/kg" it would return "21,95 SEK/kg"
   def get_st_price(self, string):
     string = string.strip()
-    re_kg = r'\d+,\d+\s*kg\s*[x|\*]\s*(\d\d,\d\d\s*.*/kg)'
-    re_st = r'\d+\s*(st)?\s*[x|\*]\s*(\d\d,\d\d)'
+    re_kg = r'\d+,\d+\s*kg\s*[x|\*]\s*(\d+,\d\d\s*.*/kg)'
+    re_st = r'\d+\s*(st)?\s*[x|\*]\s*(\d+,\d\d)'
     
     kg_search = regex.search(re_kg, string)
     if kg_search:
@@ -614,8 +626,8 @@ class GcloudParser:
   # Or the form X * XX,XX
   def is_amount_line(self, string):
     string = string.strip()
-    re_kg = r'\d+,\d+\s*kg\s*[x|\*]\s*\d\d,\d\d\s*.*/kg'
-    re_st = r'\d+\s*(st)?\s*[x|\*]\s*\d\d,\d\d'
+    re_kg = r'\d+,\d+\s*kg\s*[x|\*]\s*\d\d*,\d\d\s*.*/kg'
+    re_st = r'\d+\s*(st)?\s*[x|\*]\s*\d\d*,\d\d'
     if regex.search(re_kg, string):
       return True
     elif regex.search(re_st, string):

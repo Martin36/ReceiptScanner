@@ -92,6 +92,15 @@ class TestParser(unittest.TestCase):
     is_total_name = parser.check_total_name(article_name)
     self.assertFalse(is_total_name, "Should return false for names that are not known to represent total amounts")
 
+  def test_check_discount_name(self):
+    article_name = 'SUMMERING RABATTER DETTA KÖP'
+    is_discount_name = parser.check_discount_name(article_name)
+    self.assertTrue(is_discount_name, "Should return true for names that are known to represent discounts")
+
+    article_name = 'blabla'
+    is_discount_name = parser.check_discount_name(article_name)
+    self.assertFalse(is_discount_name, "Should return false for names that are not discounts")
+
   def test_check_if_total(self):
     text = "Totalt"
     result = parser.check_if_total(text)
@@ -181,6 +190,10 @@ class TestParser(unittest.TestCase):
 
   def test_is_amount_line(self):
     string = "2 st x 12,95"
+    is_amount_line = parser.is_amount_line(string)
+    self.assertTrue(is_amount_line, "Should return true when correct input (Coop st pris)")
+
+    string = '3 st x 7,95'
     is_amount_line = parser.is_amount_line(string)
     self.assertTrue(is_amount_line, "Should return true when correct input (Coop st pris)")
 
@@ -274,6 +287,10 @@ class TestParser(unittest.TestCase):
     amount = parser.get_amount(string)
     self.assertEqual(amount, "2 st")
 
+    string = '3 st x 7,95'
+    amount = parser.get_amount(string)
+    self.assertEqual(amount, "3 st")
+
     string = "2stx12,95"
     amount = parser.get_amount(string)
     self.assertEqual(amount, "2st")
@@ -306,6 +323,10 @@ class TestParser(unittest.TestCase):
     string = "2 st x 12,95"
     amount = parser.get_st_price(string)
     self.assertEqual(amount, "12,95")
+
+    string = '3 st x 7,95'
+    amount = parser.get_st_price(string)
+    self.assertEqual(amount, "7,95")
 
     string = "2stx12,95"
     amount = parser.get_st_price(string)
