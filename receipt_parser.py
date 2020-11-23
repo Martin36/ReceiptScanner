@@ -303,7 +303,7 @@ class GcloudParser:
                      current_discount_price = p_ann.description
                   if current_price == None:
                     used_pr.append(j)
-                    current_price = self.check_price(p_ann.description) 
+                    current_price = utils.check_price(p_ann.description) 
                   else:
                     # This means that we have already found a price for this article
                     # and the read item is a price, therefore this must be the price
@@ -321,7 +321,8 @@ class GcloudParser:
               # If we get here it means that the next word is aligned with
               # the current article, therefore it must be a new article
               # and we should stop expanding the bounding box on the y-axis
-              if self.check_article_name(p_ann.description):
+              if self.check_article_name(p_ann.description) or \
+                 p_type == 'total':
                 y_min_next_article = p_ymin
               continue
 
@@ -471,11 +472,11 @@ class GcloudParser:
     # TODO: What is 'hanging'?
     if text_body[-1] == ',':
       return 'hanging'
-    if self.check_price(text_body):
+    if utils.check_price(text_body):
       return 'number'
     if self.parse_date(text_body):
       return 'date'
-    if self.is_integer(text_body):
+    if utils.is_integer(text_body):
       return 'int'
     if self.check_market(text_body):
       return 'market'
@@ -553,15 +554,6 @@ class GcloudParser:
         return True
     return False
   
-  # Function for detecting a price string
-  # A price string has the format (X)XX,XX
-  # Returns false if the string does not represent a price
-  def check_price(self, string):
-    rex = r'-*\d+[,|.]\d\d'
-    if regex.fullmatch(rex, string):
-      return string
-    return False
-
   def convert_price(self, string):
     return string.replace('.', ',')
 
@@ -681,15 +673,6 @@ class GcloudParser:
     price = int(match.group(2))
     st_price = price/amount
     return amount, st_price
-
-  def is_integer(self, text_body):
-    try:
-      _ = int(text_body)
-    except:
-      return False
-    if round(float(text_body)) == float(text_body):
-      return True
-    return False
 
   def parse_date(self, date_str):
     for fmt in ['%d.%m.%y', '%Y-%m-%d', '%d.%m.%y %H:%M', '%d.%m.%Y', '%y-%m-%d']:

@@ -2,17 +2,19 @@ import json
 import os
 import sys
 import csv
+import utils
 from pprint import pprint
 from receipt_parser import GcloudParser
 from validate_receipt_data import ReceiptDataValidator
 
 
-PATH = 'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-11-05.pdf'
+PATH = 'D:\\Documents\\Kvitto Scanner\\Receipts\\ica-20-10-11.pdf'
 receipt_paths = [
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-20.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-27.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-29.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-11-05.pdf',
+  'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-11-22.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-02.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-12.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-18.pdf',
@@ -82,16 +84,18 @@ def validate_json():
     faulty_indx = validator.check_articles(receipt["articles"])
     if len(faulty_indx) != 0:
       print("Error for receipt '{} {}, for articles {}".format(receipt["market"], 
-        get_first(receipt["dates"]), faulty_indx))
+        utils.get_first(receipt["dates"]), faulty_indx))
     
     # Check that the nr of articles are correct
     if not validator.check_nr_of_articles(receipt):
       print("Error for receipt '{} {}, the parsed number of articles does not coincide with the number of the receipt"
-        .format(receipt["market"], get_first(receipt["dates"])))
-
-
-def get_first(array):
-  return next(iter(array), None)
+        .format(receipt["market"], utils.get_first(receipt["dates"])))
+  
+    # Check that the totals has been correctly parsed
+    totals_correct, err_msg = validator.check_totals(receipt['totals'])
+    if not totals_correct:
+      print("Error for receipt: {}".format(receipt['name']))
+      print(err_msg)
 
 validate_json()
 # parse_all_pdfs()

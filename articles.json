@@ -1064,6 +1064,314 @@
     }
   },
   {
+    "name": "D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-11-22.pdf",
+    "market": "coop",
+    "dates": [
+      "2020-11-22"
+    ],
+    "articles": [
+      {
+        "name": "BEARNAISE KALL SAS",
+        "sum": "24,95",
+        "amount": "1 st",
+        "price": "24,95",
+        "bounding_box": {
+          "xmin": 955,
+          "xmax": 1415,
+          "ymin": 1580,
+          "ymax": 1705
+        }
+      },
+      {
+        "name": "BREGOTT MELLAN",
+        "sum": "23,95",
+        "amount": "1 st",
+        "price": "23,95",
+        "bounding_box": {
+          "xmin": 970,
+          "xmax": 1315,
+          "ymin": 1676,
+          "ymax": 1801
+        }
+      },
+      {
+        "name": "CITY PULSE",
+        "sum": "18,95",
+        "amount": "1 st",
+        "price": "18,95",
+        "bounding_box": {
+          "xmin": 970,
+          "xmax": 1167,
+          "ymin": 1776,
+          "ymax": 1898
+        }
+      },
+      {
+        "name": "PANT 1KR BURK 1X1KR",
+        "sum": "1,00",
+        "amount": "1 st",
+        "price": "1,00",
+        "bounding_box": {
+          "xmin": 1047,
+          "xmax": 1311,
+          "ymin": 1876,
+          "ymax": 1985
+        }
+      },
+      {
+        "name": "CREME FRAICHE 34%",
+        "sum": "49,00",
+        "amount": "2 st",
+        "price": "24,50",
+        "bounding_box": {
+          "xmin": 970,
+          "xmax": 1459,
+          "ymin": 1972,
+          "ymax": 2199
+        }
+      },
+      {
+        "name": "CRISPY PEAR",
+        "sum": "18,95",
+        "amount": "1 st",
+        "price": "18,95",
+        "bounding_box": {
+          "xmin": 970,
+          "xmax": 1283,
+          "ymin": 2168,
+          "ymax": 2292
+        }
+      },
+      {
+        "name": "PANT 1KR BURK 1X1KR",
+        "sum": "1,00",
+        "amount": "1 st",
+        "price": "1,00",
+        "bounding_box": {
+          "xmin": 1047,
+          "xmax": 1283,
+          "ymin": 2272,
+          "ymax": 2393
+        }
+      },
+      {
+        "name": "ENERGIDRY RASPBERRY",
+        "sum": "21,90",
+        "amount": "2 st",
+        "price": "10,95",
+        "bounding_box": {
+          "xmin": 975,
+          "xmax": 1443,
+          "ymin": 2368,
+          "ymax": 2591
+        }
+      },
+      {
+        "name": "PANT 1KR BURK 1X1KR",
+        "sum": "2,00",
+        "amount": "2st",
+        "price": "1,00",
+        "bounding_box": {
+          "xmin": 1070,
+          "xmax": 1467,
+          "ymin": 2564,
+          "ymax": 2788
+        }
+      },
+      {
+        "name": "FLAMINGO",
+        "sum": "18,95",
+        "amount": "1 st",
+        "price": "18,95",
+        "bounding_box": {
+          "xmin": 972,
+          "xmax": 1363,
+          "ymin": 2764,
+          "ymax": 2883
+        }
+      },
+      {
+        "name": "PANT 1KR BURK 1X1KR",
+        "sum": "1,00",
+        "amount": "1 st",
+        "price": "1,00",
+        "bounding_box": {
+          "xmin": 1067,
+          "xmax": 1261,
+          "ymin": 2866,
+          "ymax": 2982
+        }
+      },
+      {
+        "name": "GUACAMOLE DIP MIX",
+        "sum": "21,90",
+        "amount": "2 st",
+        "price": "10,95",
+        "bounding_box": {
+          "xmin": 965,
+          "xmax": 1451,
+          "ymin": 2962,
+          "ymax": 3179
+        }
+      },
+      {
+        "name": "MAX SPEARMINT",
+        "sum": "14,50",
+        "amount": "1 st",
+        "price": "14,50",
+        "bounding_box": {
+          "xmin": 962,
+          "xmax": 1120,
+          "ymin": 3159,
+          "ymax": 3279
+        }
+      },
+      {
+        "name": "OLIVOLJA VIT TRYFFE",
+        "sum": "33,95",
+        "amount": "1 st",
+        "price": "33,95",
+        "bounding_box": {
+          "xmin": 958,
+          "xmax": 1379,
+          "ymin": 3260,
+          "ymax": 3371
+        }
+      },
+      {
+        "name": "PAPRIKA ORANGE STYC",
+        "sum": "29,85",
+        "amount": "3 st",
+        "price": "9,95",
+        "bounding_box": {
+          "xmin": 956,
+          "xmax": 1425,
+          "ymin": 3360,
+          "ymax": 3571
+        }
+      },
+      {
+        "name": "SALLAD ISBERG",
+        "sum": "22,58",
+        "amount": "0,870 kg",
+        "price": "25,95 SEK/kg",
+        "bounding_box": {
+          "xmin": 956,
+          "xmax": 2267,
+          "ymin": 3556,
+          "ymax": 3781
+        }
+      },
+      {
+        "name": "SMÖR OSALTAT",
+        "sum": "39,95",
+        "amount": "1 st",
+        "price": "39,95",
+        "bounding_box": {
+          "xmin": 918,
+          "xmax": 1187,
+          "ymin": 3748,
+          "ymax": 3873
+        }
+      },
+      {
+        "name": "TORTILLA CHIPS CHEE",
+        "sum": "13,95",
+        "amount": "1 st",
+        "price": "13,95",
+        "bounding_box": {
+          "xmin": 950,
+          "xmax": 1359,
+          "ymin": 3852,
+          "ymax": 3979
+        }
+      },
+      {
+        "name": "TORTILLA ORIGINAL L",
+        "sum": "41,95",
+        "amount": "1 st",
+        "price": "41,95",
+        "bounding_box": {
+          "xmin": 951,
+          "xmax": 1351,
+          "ymin": 3952,
+          "ymax": 4077
+        }
+      },
+      {
+        "name": "VISPGRADDE 36%",
+        "sum": "43,00",
+        "amount": "2 st",
+        "price": "21,50",
+        "bounding_box": {
+          "xmin": 955,
+          "xmax": 1455,
+          "ymin": 4056,
+          "ymax": 4282
+        }
+      },
+      {
+        "name": "VITVINSVINAGER",
+        "sum": "26,50",
+        "amount": "1 st",
+        "price": "26,50",
+        "bounding_box": {
+          "xmin": 950,
+          "xmax": 1653,
+          "ymin": 4262,
+          "ymax": 4381
+        }
+      },
+      {
+        "name": "WHITE PEACH",
+        "sum": "18,95",
+        "amount": "1 st",
+        "price": "18,95",
+        "bounding_box": {
+          "xmin": 949,
+          "xmax": 1216,
+          "ymin": 4360,
+          "ymax": 4479
+        }
+      },
+      {
+        "name": "PANT 1KR BURK 1X1KR",
+        "sum": "1,00",
+        "amount": "1 st",
+        "price": "1,00",
+        "bounding_box": {
+          "xmin": 1055,
+          "xmax": 1251,
+          "ymin": 4460,
+          "ymax": 4582
+        }
+      }
+    ],
+    "discounts": [
+      {
+        "name": "GRADDE 36% 5DL för 40k",
+        "price": "-3,00"
+      }
+    ],
+    "totals": [
+      {
+        "name": "totals",
+        "sum": "486,73",
+        "amount": "30"
+      },
+      {
+        "name": "totals",
+        "sum": "486,73"
+      }
+    ],
+    "bounding_box": {
+      "xmin": 918,
+      "xmax": 3088,
+      "ymin": -3,
+      "ymax": 5848
+    }
+  },
+  {
     "name": "D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-02.pdf",
     "market": "hemköp",
     "dates": [
@@ -2002,9 +2310,9 @@
         "price": "1,00",
         "bounding_box": {
           "xmin": 734,
-          "xmax": 3413,
+          "xmax": 831,
           "ymin": 5348,
-          "ymax": 5769
+          "ymax": 5490
         }
       }
     ],
@@ -2014,7 +2322,12 @@
         "price": "-13,60"
       }
     ],
-    "totals": [],
+    "totals": [
+      {
+        "name": "totals",
+        "sum": "220,62"
+      }
+    ],
     "bounding_box": {
       "xmin": 524,
       "xmax": 3479,
@@ -2268,7 +2581,12 @@
         "price": "-66,38"
       }
     ],
-    "totals": [],
+    "totals": [
+      {
+        "name": "totals",
+        "sum": "601,41"
+      }
+    ],
     "bounding_box": {
       "xmin": 696,
       "xmax": 3391,

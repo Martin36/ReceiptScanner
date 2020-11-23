@@ -85,5 +85,23 @@ class TestUtils(unittest.TestCase):
     correct = string
     self.assertEqual(result, correct, "Should return input if not a price string")
 
+  def test_check_price(self):
+    price = "34,99"
+    result = utils.check_price(price)
+    self.assertEqual(price, result, "Should return the price if the format is correct")
+
+    price = "34.99"
+    result = utils.check_price(price)
+    self.assertEqual(price, result, "Should work with dots")
+
+    price = "-34,99"
+    result = utils.check_price(price)
+    self.assertEqual(price, result, "Should be able to handle negative prices")
+
+    price = "blabla"
+    result = utils.check_price(price)
+    self.assertFalse(result, "Should be false if input is not a price")
+
+
 if __name__ == '__main__':
   unittest.main()

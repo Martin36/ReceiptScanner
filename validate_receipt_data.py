@@ -1,4 +1,5 @@
 import re
+import utils
 import numpy as np
 
 
@@ -34,6 +35,31 @@ class ReceiptDataValidator:
     if nr_parsed_articles != nr_receipt_articles:
       return False
     return True
+
+  # Checks if the total amount on the receip has been scanned correctly
+  def check_totals(self, totals):
+    if len(totals) == 0:
+      err_msg = "Error: No totals have been found on this receipt"
+      return False, err_msg
+    # Assume that no receipt can have more than 2 totals
+    if len(totals) > 2:
+      err_msg = "Error: More than two totals have been found on this receipt"
+      return False, err_msg
+    any_incorrect = False
+    err_msg = None
+    for total in totals:
+      # Each total should have either a sum or an amount (or both)
+      if "sum" in total:
+        if not utils.check_price(total['sum']):
+          any_incorrect = True
+          err_msg = "Error: total with incorrect sum"
+      if "amount" in total:
+        if not utils.is_integer(total['amount']):
+          any_incorrect = True
+          err_msg = "Error: total with incorrect amount"    
+    if any_incorrect:
+      return False, err_msg
+    return True, None
 
   def count_articles(self, articles):
     total = 0

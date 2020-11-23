@@ -38,3 +38,24 @@ def remove_double_minus_sign(string):
   else:
     return string
 
+def get_first(array):
+  return next(iter(array), None)
+
+# Function for detecting a price string
+# A price string has the format (X)XX,XX
+# Returns false if the string does not represent a price
+def check_price(string):
+  rex = r'-*\d+[,|.]\d\d'
+  if re.fullmatch(rex, string):
+    return string
+  return False
+
+def is_integer(text_body):
+  try:
+    _ = int(text_body)
+  except:
+    return False
+  if round(float(text_body)) == float(text_body):
+    return True
+  return False
+

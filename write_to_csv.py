@@ -1,6 +1,8 @@
 import json
 import os
 import csv
+import utils
+import numpy as np
 
 with open('articles.csv', 'w', newline='', encoding='utf8') as csvfile:
   csv_writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
@@ -13,9 +15,11 @@ with open('articles.csv', 'w', newline='', encoding='utf8') as csvfile:
 
   for receipt in json_data:
     
-    market = receipt['markets'][0]
-    date = receipt['dates'][0]
-    total = receipt['total']
+    market = receipt['market'][0]
+    date = utils.get_first(receipt['dates'])
+    # If the receipt contains multiple totals, the lowest is probably the amount paid
+    # with the higher being the sum without discounts
+    total = get_smallest_total(receipt['totals'])
 
     for article in receipt['articles'] + receipt['discounts']:
       name = article['name']
@@ -24,3 +28,7 @@ with open('articles.csv', 'w', newline='', encoding='utf8') as csvfile:
 
   f.close()
   print("Finished writing to csv file")
+
+def get_smallest_total(totals):
+  
+  np.min([utils.convert_to_nr(total['sum']) for total in receipt['totals']]) 
