@@ -389,6 +389,79 @@ class TestReceiptDataValidator(unittest.TestCase):
     result = validator.check_nr_of_articles(parsed_data)
     self.assertTrue(result, "Should return True if the nr of parsed articles and the amount read on the receipt are the same")
 
+  def test_check_totals(self):
+    totals = []
+    is_correct, err_msg = validator.check_totals(totals)
+    self.assertFalse(is_correct, "Should not be correct if totals is empty")
+    self.assertIsNotNone(err_msg, "Should have an err msg when totals is empty")
+
+    totals = [
+      {
+        "name": "totals",
+        "sum": "766,69",
+        "amount": "32"
+      },
+      {
+        "name": "totals",
+        "sum": "766,69",
+        "amount": "32"
+      },
+      {
+        "name": "totals",
+        "sum": "766,69",
+        "amount": "32"
+      },
+    ]
+    is_correct, err_msg = validator.check_totals(totals)
+    self.assertFalse(is_correct, "Should not be correct if totals contain more than two")
+    self.assertIsNotNone(err_msg, "Should have an err msg when totals contain more than two")
+
+    totals = [
+      {
+        "name": "totals",
+        "sum": "",
+        "amount": "32"
+      }
+    ]
+    is_correct, err_msg = validator.check_totals(totals)
+    self.assertFalse(is_correct, "Should be incorrect if one total contain an incorrect sum")
+    self.assertIsNotNone(err_msg, "Should have an err msg if one total contain an incorrect sum")
+
+    totals = [
+      {
+        "name": "totals",
+        "sum": "766,69",
+        "amount": "blabla"
+      }
+    ]
+    is_correct, err_msg = validator.check_totals(totals)
+    self.assertFalse(is_correct, "Should be incorrect if one total contain an incorrect amount")
+    self.assertIsNotNone(err_msg, "Should have an err msg if one total contain an incorrect amount")
+
+    totals = [
+      {
+        "name": "totals",
+      }
+    ]
+    is_correct, err_msg = validator.check_totals(totals)
+    self.assertFalse(is_correct, "Should be incorrect if one total does not contain a sum or amount")
+    self.assertIsNotNone(err_msg, "Should have an err msg if one total does not contain a sum or amount")
+
+    totals = [
+      {
+        "name": "totals",
+        "sum": "766,69",
+        "amount": "32"
+      }
+    ]
+    is_correct, err_msg = validator.check_totals(totals)
+    self.assertTrue(is_correct, "Should be correct if totals contain one total")
+    self.assertEqual(err_msg, None, "Should not have any err msg when totals correct")
+
+  # TODO: Implement this
+  # def test_check_dates(self):
+  #   dates = []
+
   def test_count_articles(self):
     articles = [
       {

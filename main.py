@@ -6,6 +6,7 @@ import utils
 from pprint import pprint
 from receipt_parser import GcloudParser
 from validate_receipt_data import ReceiptDataValidator
+from write_to_csv import write_to_csv
 
 
 PATH = 'D:\\Documents\\Kvitto Scanner\\Receipts\\ica-20-10-11.pdf'
@@ -96,7 +97,11 @@ def validate_json():
     if not totals_correct:
       print("Error for receipt: {}".format(receipt['name']))
       print(err_msg)
+    
+    # Check that the receipt has at least one date
+    
 
-validate_json()
+# validate_json()
 # parse_all_pdfs()
 # parse_one_pdf()
+write_to_csv()
