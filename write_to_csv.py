@@ -2,6 +2,7 @@ import json
 import os
 import csv
 import utils
+import sys
 import numpy as np
 
 with open('articles.csv', 'w', newline='', encoding='utf8') as csvfile:
@@ -30,5 +31,15 @@ with open('articles.csv', 'w', newline='', encoding='utf8') as csvfile:
   print("Finished writing to csv file")
 
 def get_smallest_total(totals):
-  
-  np.min([utils.convert_to_nr(total['sum']) for total in receipt['totals']]) 
+  if len(totals) == 0:
+    return ""
+  total_sum = sys.float_info.max
+  for total in totals:
+    if 'sum' in total:
+      sum_nr = utils.convert_to_nr(total['sum'])
+      if sum_nr < total_sum:
+        total_sum = sum_nr
+  if total_sum == sys.float_info.max:
+    # This means that no total sum were found
+    return ""
+  return str(total_sum)
