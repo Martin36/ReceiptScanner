@@ -7,7 +7,7 @@ import numpy as np
 
 def write_to_csv():
   with open(os.path.join(sys.path[0], 'articles.csv'), 'w', newline='', encoding='utf8') as csvfile:
-    csv_writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    csv_writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL, encoding='utf8')
     
     f = open(os.path.join(sys.path[0], 'articles.json'), 'r', encoding='utf8')
     json_data = json.load(f)
@@ -21,11 +21,11 @@ def write_to_csv():
       date = utils.get_first(receipt['dates'])
       # If the receipt contains multiple totals, the lowest is probably the amount paid
       # with the higher being the sum without discounts
-      total = get_smallest_total(receipt['totals'])
+      total = utils.convert_to_nr(get_smallest_total(receipt['totals']))
 
       for article in receipt['articles']:
         name = article['name']
-        price_sum = article['sum']
+        price_sum = utils.convert_to_nr(article['sum'])
         quantity = article['amount']
         price = article['price']
         csv_writer.writerow([market, date, total, name, price_sum, quantity, price])   

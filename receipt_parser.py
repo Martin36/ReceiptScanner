@@ -1,3 +1,4 @@
+# pylint: disable=no-member
 import io
 import os
 import datetime
@@ -680,6 +681,6 @@ class GcloudParser:
         try:
           new_purch_date = datetime.datetime.strptime(substr, fmt).strftime('%Y-%m-%d')
           return new_purch_date
-        except Exception as e:
+        except Exception:
           pass
     return None

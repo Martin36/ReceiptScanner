@@ -9,13 +9,14 @@ from validate_receipt_data import ReceiptDataValidator
 from write_to_csv import write_to_csv
 
 
-PATH = 'D:\\Documents\\Kvitto Scanner\\Receipts\\ica-20-10-11.pdf'
+PATH = 'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-12.pdf'
 receipt_paths = [
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-20.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-27.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-29.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-11-05.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-11-22.pdf',
+  'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-11-25.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-02.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-12.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-18.pdf',
@@ -62,7 +63,7 @@ def parse_all_pdfs():
   f = open(os.path.join(sys.path[0], "articles.json"), "a", encoding='utf8')
   j = []
 
-  for i, path in enumerate(receipt_paths):
+  for _, path in enumerate(receipt_paths):
     articles, dates, market, discounts, totals, bounding_box = parser.parse_pdf(path)
     j.append({
       "name": path,
@@ -99,9 +100,9 @@ def validate_json():
       print(err_msg)
     
     # Check that the receipt has at least one date
-    
+
 
 # validate_json()
 # parse_all_pdfs()
-# parse_one_pdf()
-write_to_csv()
+parse_one_pdf()
+# write_to_csv()
