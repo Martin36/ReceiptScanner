@@ -1372,6 +1372,322 @@
     }
   },
   {
+    "name": "D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-11-25.pdf",
+    "market": "coop",
+    "dates": [
+      "2020-11-25"
+    ],
+    "articles": [
+      {
+        "name": "AVOKADO NAT XTRA",
+        "sum": "34,95",
+        "amount": "1 st",
+        "price": "34,95",
+        "bounding_box": {
+          "xmin": 1195,
+          "xmax": 1489,
+          "ymin": 1510,
+          "ymax": 1603
+        }
+      },
+      {
+        "name": "BIFF BIT VAC BRAS Kampanj",
+        "sum": "64,52",
+        "amount": "0,935 kg",
+        "price": "69,00 SEK/kg",
+        "bounding_box": {
+          "xmin": 1190,
+          "xmax": 2314,
+          "ymin": 1580,
+          "ymax": 1788
+        }
+      },
+      {
+        "name": "BLOMKAL ST Kampanj",
+        "sum": "35,80",
+        "amount": "2 st",
+        "price": "17,90",
+        "bounding_box": {
+          "xmin": 1187,
+          "xmax": 1572,
+          "ymin": 1756,
+          "ymax": 1956
+        }
+      },
+      {
+        "name": "CHEVRE GETOST Kampanj",
+        "sum": "20,00",
+        "amount": "1 st",
+        "price": "20,00",
+        "bounding_box": {
+          "xmin": 1186,
+          "xmax": 1469,
+          "ymin": 1936,
+          "ymax": 2036
+        }
+      },
+      {
+        "name": "CLEMENTINER SENSES",
+        "sum": "44,95",
+        "amount": "1 st",
+        "price": "44,95",
+        "bounding_box": {
+          "xmin": 1184,
+          "xmax": 1669,
+          "ymin": 2026,
+          "ymax": 2136
+        }
+      },
+      {
+        "name": "FRUKOSTFLINGOR SPEC",
+        "sum": "21,50",
+        "amount": "1 st",
+        "price": "21,50",
+        "bounding_box": {
+          "xmin": 1188,
+          "xmax": 1793,
+          "ymin": 2114,
+          "ymax": 2222
+        }
+      },
+      {
+        "name": "GUACAMOLE DIP MIX",
+        "sum": "26,10",
+        "amount": "3 st",
+        "price": "8,70",
+        "bounding_box": {
+          "xmin": 1184,
+          "xmax": 1585,
+          "ymin": 2204,
+          "ymax": 2398
+        }
+      },
+      {
+        "name": "INTENZO",
+        "sum": "38,95",
+        "amount": "1 st",
+        "price": "38,95",
+        "bounding_box": {
+          "xmin": 1188,
+          "xmax": 1491,
+          "ymin": 2376,
+          "ymax": 2498
+        }
+      },
+      {
+        "name": "JATTEFRANSKA",
+        "sum": "26,50",
+        "amount": "1 st",
+        "price": "26,50",
+        "bounding_box": {
+          "xmin": 1181,
+          "xmax": 1707,
+          "ymin": 2468,
+          "ymax": 2596
+        }
+      },
+      {
+        "name": "KYCKLINGFILE",
+        "sum": "145,90",
+        "amount": "2 st",
+        "price": "72,95",
+        "bounding_box": {
+          "xmin": 1180,
+          "xmax": 1707,
+          "ymin": 2556,
+          "ymax": 2763
+        }
+      },
+      {
+        "name": "LÖK GÜL",
+        "sum": "5,08",
+        "amount": "0,568 kg",
+        "price": "8,95 SEK/kg",
+        "bounding_box": {
+          "xmin": 1153,
+          "xmax": 2263,
+          "ymin": 2739,
+          "ymax": 2951
+        }
+      },
+      {
+        "name": "MOŽŽARELLA Ġ",
+        "sum": "47,80",
+        "amount": "4 st",
+        "price": "11,95",
+        "bounding_box": {
+          "xmin": 1149,
+          "xmax": 1623,
+          "ymin": 2911,
+          "ymax": 3117
+        }
+      },
+      {
+        "name": "NÖTFÄRS 12%",
+        "sum": "167,09",
+        "amount": "1,944 kg",
+        "price": "85,95 SEK/kg",
+        "bounding_box": {
+          "xmin": 1189,
+          "xmax": 2300,
+          "ymin": 3100,
+          "ymax": 3301
+        }
+      },
+      {
+        "name": "OLIVER HALKIDIKI UR",
+        "sum": "25,95",
+        "amount": "1 st",
+        "price": "25,95",
+        "bounding_box": {
+          "xmin": 1187,
+          "xmax": 1443,
+          "ymin": 3278,
+          "ymax": 3371
+        }
+      },
+      {
+        "name": "RUSSIN 6P",
+        "sum": "26,95",
+        "amount": "1 st",
+        "price": "26,95",
+        "bounding_box": {
+          "xmin": 1188,
+          "xmax": 1443,
+          "ymin": 3368,
+          "ymax": 3469
+        }
+      },
+      {
+        "name": "SKANEROST",
+        "sum": "38,95",
+        "amount": "1 st",
+        "price": "38,95",
+        "bounding_box": {
+          "xmin": 1183,
+          "xmax": 1583,
+          "ymin": 3453,
+          "ymax": 3558
+        }
+      },
+      {
+        "name": "TOMAT PLOM-BABY Kampanj",
+        "sum": "20,00",
+        "amount": "1 st",
+        "price": "20,00",
+        "bounding_box": {
+          "xmin": 1187,
+          "xmax": 1415,
+          "ymin": 3536,
+          "ymax": 3650
+        }
+      },
+      {
+        "name": "TORTILLA CHIPS CHEE",
+        "sum": "11,95",
+        "amount": "1 st",
+        "price": "11,95",
+        "bounding_box": {
+          "xmin": 1185,
+          "xmax": 1527,
+          "ymin": 3632,
+          "ymax": 3734
+        }
+      },
+      {
+        "name": "VISPGRADDE 36%",
+        "sum": "37,95",
+        "amount": "1 st",
+        "price": "37,95",
+        "bounding_box": {
+          "xmin": 1184,
+          "xmax": 1613,
+          "ymin": 3722,
+          "ymax": 3823
+        }
+      },
+      {
+        "name": "VITKAL. Kampani",
+        "sum": "16,09",
+        "amount": "1 st",
+        "price": "16,09",
+        "bounding_box": {
+          "xmin": 1181,
+          "xmax": 1479,
+          "ymin": 3806,
+          "ymax": 3918
+        }
+      },
+      {
+        "name": "YOĞGI ORIG JDG/SMU",
+        "sum": "19,50",
+        "amount": "1 st",
+        "price": "19,50",
+        "bounding_box": {
+          "xmin": 1180,
+          "xmax": 1423,
+          "ymin": 3984,
+          "ymax": 4079
+        }
+      },
+      {
+        "name": "ÄGG 24-PACK 1428GR",
+        "sum": "79,90",
+        "amount": "2 st",
+        "price": "39,95",
+        "bounding_box": {
+          "xmin": 1163,
+          "xmax": 1561,
+          "ymin": 4076,
+          "ymax": 4268
+        }
+      },
+      {
+        "name": "PAPPERSKASSE 44L",
+        "sum": "8,00",
+        "amount": "2 st",
+        "price": "4,00",
+        "bounding_box": {
+          "xmin": 1175,
+          "xmax": 1689,
+          "ymin": 4434,
+          "ymax": 4626
+        }
+      }
+    ],
+    "discounts": [
+      {
+        "name": "Zoegas 49kr",
+        "price": "-28,90"
+      },
+      {
+        "name": "MOZZAŘELLA för 22kr",
+        "price": "-1,90"
+      },
+      {
+        "name": "MOZZARELLA för 22kr",
+        "price": "-1,90"
+      }
+    ],
+    "totals": [
+      {
+        "name": "totals",
+        "sum": "931,68",
+        "amount": "32"
+      },
+      {
+        "name": "totals",
+        "sum": "931,68"
+      }
+    ],
+    "bounding_box": {
+      "xmin": 1149,
+      "xmax": 3007,
+      "ymin": 8,
+      "ymax": 5786
+    }
+  },
+  {
     "name": "D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-02.pdf",
     "market": "hemköp",
     "dates": [
@@ -1662,7 +1978,9 @@
   {
     "name": "D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-12.pdf",
     "market": "hemköp",
-    "dates": [],
+    "dates": [
+      "2020-10-12"
+    ],
     "articles": [
       {
         "name": "KYCKLINGF®RS",

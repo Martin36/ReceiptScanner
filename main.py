@@ -100,9 +100,12 @@ def validate_json():
       print(err_msg)
     
     # Check that the receipt has at least one date
+    date_correct, err_msg = validator.check_dates(receipt['dates'])
+    if not date_correct:
+      print("Error for receipt: {}".format(receipt['name']))
+      print(err_msg)
 
-
-# validate_json()
+validate_json()
 # parse_all_pdfs()
-parse_one_pdf()
+# parse_one_pdf()
 # write_to_csv()
