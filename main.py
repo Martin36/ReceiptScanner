@@ -6,6 +6,7 @@ import utils
 from pprint import pprint
 from receipt_parser import GcloudParser
 from validate_receipt_data import ReceiptDataValidator
+from categorizer import Categorizer
 from write_to_csv import write_to_csv
 
 
@@ -27,6 +28,7 @@ receipt_paths = [
 
 parser = GcloudParser()
 validator = ReceiptDataValidator()
+categorizer = Categorizer(debug=True)
 
 def parse_one_pdf():
   articles, dates, markets, discounts, totals, bounding_box = parser.parse_pdf(PATH)
@@ -105,7 +107,16 @@ def validate_json():
       print("Error for receipt: {}".format(receipt['name']))
       print(err_msg)
 
-validate_json()
+def categorize_articles():
+  f = open(os.path.join(sys.path[0], "articles.json"), "r", encoding="utf8")
+  data = json.load(f)
+
+  receipt = data[0]
+  articles = categorizer.categorize_articles(receipt['articles'])  
+  #pprint(articles)
+
+# validate_json()
 # parse_all_pdfs()
 # parse_one_pdf()
 # write_to_csv()
+categorize_articles()

@@ -7,7 +7,7 @@ import numpy as np
 
 def write_to_csv():
   with open(os.path.join(sys.path[0], 'articles.csv'), 'w', newline='', encoding='utf8') as csvfile:
-    csv_writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL, encoding='utf8')
+    csv_writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
     
     f = open(os.path.join(sys.path[0], 'articles.json'), 'r', encoding='utf8')
     json_data = json.load(f)
