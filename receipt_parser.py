@@ -459,14 +459,65 @@ class GcloudParser:
             })
             seen_prices += used_pr
             seen_indexes += used_idx
-          
 
-      elif t_type == 'date':
+      if t_type == 'date':
         dates.append(self.parse_date(annotation.description))
 
-      elif t_type == 'market':
+      if t_type == 'market':
         if self.check_market(annotation.description):
           self.market = self.check_market(annotation.description)
+
+      if self.check_if_part_of_date(annotation.description):
+        # This could be a date if the parts of the date were parsed seperately
+        used_idx = []
+        used_pr = []
+        xmin = np.min([v.x for v in annotation.bounding_poly.vertices])
+        xmax = np.max([v.x for v in annotation.bounding_poly.vertices])
+        ymin = np.min([v.y for v in annotation.bounding_poly.vertices])
+        ymax = np.max([v.y for v in annotation.bounding_poly.vertices])
+        ymid = ymax - (ymax - ymin)/2
+        line_height = ymax - ymin
+        total_price = None
+        nr_of_articles = None
+        current_name = ''
+        current_name += annotation.description
+        used_idx.append(i)
+
+        for j, p_ann in enumerate(sorted_annotations):
+          if i == j:
+            continue
+
+          skip_this = self.check_if_skip_word(p_ann.description)
+          if skip_this:
+            continue
+
+          if j in seen_prices or j in seen_indexes:
+            continue
+
+          p_xmin = np.min([v.x for v in p_ann.bounding_poly.vertices])
+          p_xmax = np.max([v.x for v in p_ann.bounding_poly.vertices])
+          p_ymin = np.min([v.y for v in p_ann.bounding_poly.vertices])
+          p_ymax = np.max([v.y for v in p_ann.bounding_poly.vertices])
+
+          # This means that the first word is underneath the next word
+          # Therefore we can skip this, since we never want to add a word
+          # above the first       
+          if p_ymax < ymin:
+            continue
+
+          # This means the the first word is above the next word
+          if p_ymin > ymax:
+            continue
+          
+          used_idx.append(j)
+          current_name += p_ann.description
+          
+          # Check if the current name is a date, and add it to dates array
+          if self.check_annotation_type(current_name) == 'date':
+            seen_indexes += used_idx
+            dates.append(self.parse_date(current_name))
+            break
+
     return articles, dates, self.market, discounts
 
   def check_annotation_type(self, text_body):
@@ -490,6 +541,12 @@ class GcloudParser:
     for total in TOTAL_WORDS:
       if total.lower() == text_body.lower():
         return True
+    return False
+
+  def check_if_part_of_date(self, text_body):
+    rex = r'^(\d{4}|\d{2})(-|-\d{2})?(-|-\d{2})?$'
+    if regex.search(rex, text_body):
+      return True
     return False
 
   def check_market(self, text_body):

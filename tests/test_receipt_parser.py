@@ -33,6 +33,31 @@ class TestParser(unittest.TestCase):
     result = parser.check_annotation_type(text_body)
     self.assertEqual(result, 'text', "Should return text for all other inputs")
 
+  def test_check_if_part_of_date(self):
+    text_body = "2020-10-12"
+    result = parser.check_if_part_of_date(text_body)
+    self.assertTrue(result, "Should return True if correct part of date")
+
+    text_body = "2020-10"
+    result = parser.check_if_part_of_date(text_body)
+    self.assertTrue(result, "Should return True if correct part of date")
+
+    text_body = "2020-"
+    result = parser.check_if_part_of_date(text_body)
+    self.assertTrue(result, "Should return True if correct part of date")
+
+    text_body = "20-10-20"
+    result = parser.check_if_part_of_date(text_body)
+    self.assertTrue(result, "Should return True if correct part of date")
+
+    text_body = "20"
+    result = parser.check_if_part_of_date(text_body)
+    self.assertTrue(result, "Should return True if correct part of date")
+
+    text_body = "12309823-12980192512"
+    result = parser.check_if_part_of_date(text_body)
+    self.assertFalse(result, "Should return False if not part of date")
+
   def test_check_article_name(self):
     article_name = "QWEÄÖPLÄÖÜÊÉ"
     is_article = parser.check_article_name(article_name)
