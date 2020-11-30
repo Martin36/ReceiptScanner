@@ -96,7 +96,7 @@ def replace_weird_chars(string):
   char_mappings = [
     {
       'char':'®',
-      'new_char': 'O'
+      'new_char': '@'
     }
   ]
   for _, char_mapping in enumerate(char_mappings):

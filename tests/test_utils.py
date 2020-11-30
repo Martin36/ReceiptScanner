@@ -112,7 +112,7 @@ class TestUtils(unittest.TestCase):
 
     string = 'FL®SKYTTERFIL®'
     result = utils.remove_diactrics(string)
-    correct = 'FLOSKYTTERFILO'
+    correct = 'FL@SKYTTERFIL@'
     self.assertEqual(result, correct, "Should not change a string containing no diactrics")
 
     string = 'MOŽŽARELLA Ġ'
@@ -143,8 +143,8 @@ class TestUtils(unittest.TestCase):
   def test_replace_weird_chars(self):
     string = 'FL®SKYTTERFIL®'
     result = utils.replace_weird_chars(string)
-    correct = 'FLOSKYTTERFILO'
-    self.assertEqual(result, correct, 'Should replace ® with O')
+    correct = 'FL@SKYTTERFIL@'
+    self.assertEqual(result, correct, 'Should replace ® with @')
 
     string = 'blabla'
     result = utils.replace_weird_chars(string)

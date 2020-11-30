@@ -11,7 +11,7 @@ from prettyfier import Prettyfier
 from write_to_csv import write_to_csv
 
 
-PATH = 'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-12.pdf'
+PATH = 'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-11-29.pdf'
 receipt_paths = [
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-20.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-27.pdf',
@@ -70,7 +70,9 @@ def parse_all_pdfs():
   j = []
 
   for _, path in enumerate(receipt_paths):
+    print("Parsing receipt: {}".format(path))
     articles, dates, market, discounts, totals, bounding_box = parser.parse_pdf(path)
+    articles = prettyfier.clean_article_names(articles)  
     j.append({
       "name": path,
       "market": market, 
@@ -83,6 +85,7 @@ def parse_all_pdfs():
 
   f.write(json.dumps(j, indent=2, ensure_ascii=False))
   f.close()
+  print("Finished parsing all receipts")
 
 def validate_json():
   f = open(os.path.join(sys.path[0], "articles.json"), "r", encoding="utf8")

@@ -54,6 +54,8 @@ class GcloudParser:
       gcloud_response = self.detect_text('tmp.jpg')
       os.system('del tmp.jpg')
       _art, _dat, _mar, _dis = self.parse_response(gcloud_response)
+      if not _art:
+        continue
       articles += _art
       dates += _dat
       discounts += _dis
@@ -81,6 +83,8 @@ class GcloudParser:
     discounts = []
     seen_indexes = []
     seen_prices = []
+    if len(gcloud_response.text_annotations) == 0:
+      return None, None, None, None
     base_ann = gcloud_response.text_annotations[0]
     g_xmin = np.min([v.x for v in base_ann.bounding_poly.vertices])
     g_xmax = np.max([v.x for v in base_ann.bounding_poly.vertices])
