@@ -22,6 +22,7 @@ receipt_paths = [
   'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-12.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-18.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-24.pdf',
+  'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-11-29.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\ica-20-10-11.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\ica-20-11-09.pdf',
 ]

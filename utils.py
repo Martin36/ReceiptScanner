@@ -1,5 +1,8 @@
 import re
 import numpy as np
+import unidecode
+
+SWE_LETTERS = ['å', 'Å', 'ä', 'Ä', 'ö', 'Ö']
 
 # This function converts a float or int number to a string 
 # on the format XX,XX where X is an int
@@ -59,3 +62,32 @@ def is_integer(text_body):
     return True
   return False
 
+# Removed all the things above letters such as Ã becomes A
+# But it also keeps the swedish letters ÅÄÖ
+def remove_diactrics(string):
+  swe_char_arr = find_swe_chars(string)
+  decoded_str = unidecode.unidecode(string)
+  final_str = return_swe_chars(decoded_str, swe_char_arr)
+  return final_str
+
+def find_swe_chars(string):
+  result = []
+  for _, c in enumerate(SWE_LETTERS):
+    idx = string.find(c)
+    while idx != -1:
+      result.append({
+        'letter': c,
+        'idx': idx
+      })
+      idx = string.find(c, idx + 1)
+  return result
+
+# Returns swedish characters to a word where the diactrics has been removed
+def return_swe_chars(string, char_arr):
+  print(char_arr)
+  string_list = list(string)
+  for _, char_obj in enumerate(char_arr):
+    letter = char_obj['letter']
+    idx = char_obj['idx']
+    string_list[idx] = letter
+  return "".join(string_list)

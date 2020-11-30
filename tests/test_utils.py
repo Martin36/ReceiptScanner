@@ -105,6 +105,36 @@ class TestUtils(unittest.TestCase):
     result = utils.check_price(price)
     self.assertFalse(result, "Should be false if input is not a price")
 
+  def test_remove_diactrics(self):
+    string = 'NOTF@RS 12%'
+    result = utils.remove_diactrics(string)
+    self.assertEqual(result, string, "Should not change a string containing @ signs")
+
+    string = 'MOŽŽARELLA Ġ'
+    result = utils.remove_diactrics(string)
+    correct = 'MOZZARELLA G'
+    self.assertEqual(result, correct, "Should change a string containing diactrics")
+
+    string = 'MOZZAŘELLA för 22kr'
+    result = utils.remove_diactrics(string)
+    correct = 'MOZZARELLA för 22kr'
+    self.assertEqual(result, correct, "Should only change a non-swedish diactrics")
+
+  def test_find_swe_chars(self):
+    string = 'MOZZAŘELLA för 22kr'
+    result = utils.find_swe_chars(string)
+    self.assertEqual(len(result), 1, "Should find correct amount of swe chars")
+    result_obj = result[0]
+    self.assertEqual(result_obj['letter'], 'ö', 'Should find the correct swe char')
+    self.assertEqual(result_obj['idx'], 12, 'Should find the correct idx of char')
+
+  def test_return_swe_chars(self):
+    string = 'MOZZAŘELLA for 22kr'
+    char_arr = [{'letter': 'ö', 'idx': 12}]
+    correct = 'MOZZAŘELLA för 22kr'
+    result = utils.return_swe_chars(string, char_arr)
+    self.assertEqual(result, correct, "Should return the correct char at the correct pos")
+    
 
 if __name__ == '__main__':
   unittest.main()
