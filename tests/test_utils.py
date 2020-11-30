@@ -110,6 +110,11 @@ class TestUtils(unittest.TestCase):
     result = utils.remove_diactrics(string)
     self.assertEqual(result, string, "Should not change a string containing @ signs")
 
+    string = 'FL®SKYTTERFIL®'
+    result = utils.remove_diactrics(string)
+    correct = 'FLOSKYTTERFILO'
+    self.assertEqual(result, correct, "Should not change a string containing no diactrics")
+
     string = 'MOŽŽARELLA Ġ'
     result = utils.remove_diactrics(string)
     correct = 'MOZZARELLA G'
@@ -135,6 +140,17 @@ class TestUtils(unittest.TestCase):
     result = utils.return_swe_chars(string, char_arr)
     self.assertEqual(result, correct, "Should return the correct char at the correct pos")
     
+  def test_replace_weird_chars(self):
+    string = 'FL®SKYTTERFIL®'
+    result = utils.replace_weird_chars(string)
+    correct = 'FLOSKYTTERFILO'
+    self.assertEqual(result, correct, 'Should replace ® with O')
+
+    string = 'blabla'
+    result = utils.replace_weird_chars(string)
+    correct = 'blabla'
+    self.assertEqual(result, correct, 'Should not replace any chars in a string without weird chars')
+
 
 if __name__ == '__main__':
   unittest.main()

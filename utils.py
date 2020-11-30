@@ -65,6 +65,7 @@ def is_integer(text_body):
 # Removed all the things above letters such as Ã becomes A
 # But it also keeps the swedish letters ÅÄÖ
 def remove_diactrics(string):
+  string = replace_weird_chars(string)
   swe_char_arr = find_swe_chars(string)
   decoded_str = unidecode.unidecode(string)
   final_str = return_swe_chars(decoded_str, swe_char_arr)
@@ -84,10 +85,23 @@ def find_swe_chars(string):
 
 # Returns swedish characters to a word where the diactrics has been removed
 def return_swe_chars(string, char_arr):
-  print(char_arr)
   string_list = list(string)
   for _, char_obj in enumerate(char_arr):
     letter = char_obj['letter']
     idx = char_obj['idx']
     string_list[idx] = letter
   return "".join(string_list)
+
+def replace_weird_chars(string):
+  char_mappings = [
+    {
+      'char':'®',
+      'new_char': 'O'
+    }
+  ]
+  for _, char_mapping in enumerate(char_mappings):
+    char = char_mapping['char']
+    new_char = char_mapping['new_char']
+    if char in string:
+      string = string.replace(char, new_char)
+  return string
