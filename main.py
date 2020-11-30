@@ -123,7 +123,7 @@ def categorize_articles():
   #pprint(articles)
 
 # validate_json()
-# parse_all_pdfs()
-parse_one_pdf()
+parse_all_pdfs()
+# parse_one_pdf()
 # write_to_csv()
 # categorize_articles()
