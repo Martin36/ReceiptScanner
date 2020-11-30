@@ -7,6 +7,7 @@ from pprint import pprint
 from receipt_parser import GcloudParser
 from validate_receipt_data import ReceiptDataValidator
 from categorizer import Categorizer
+from prettyfier import Prettyfier
 from write_to_csv import write_to_csv
 
 
@@ -30,9 +31,11 @@ receipt_paths = [
 parser = GcloudParser()
 validator = ReceiptDataValidator()
 categorizer = Categorizer(debug=True)
+prettyfier = Prettyfier()
 
 def parse_one_pdf():
   articles, dates, markets, discounts, totals, bounding_box = parser.parse_pdf(PATH)
+  articles = prettyfier.clean_article_names(articles)
   pprint(articles)
   #print(len(articles))
   print(dates)
@@ -118,6 +121,6 @@ def categorize_articles():
 
 # validate_json()
 # parse_all_pdfs()
-# parse_one_pdf()
+parse_one_pdf()
 # write_to_csv()
-categorize_articles()
+# categorize_articles()
