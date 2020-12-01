@@ -3,12 +3,13 @@ import re
 import categories
 
 MAPPINGS = {
-  'avokado': categories.GRONSAKER,
+  'avo.ado': categories.GRONSAKER,
   'blandf.rs': categories.KOTT,
   '.gg': categories.MEJERI,
   'pant': categories.PANT,
   'dressing': categories.SASER,
   'bacon': categories.CHARK,
+  'basilika': categories.KRYDDOR,  # TODO: What if this would be "basilika the plant", instead of the spice
   'biff': categories.KOTT,
   'banan': categories.FRUKT,
   'bearnaise': categories.SASER,
@@ -20,6 +21,7 @@ MAPPINGS = {
   'city pulse': categories.DRYCK,
   'citron lime': categories.DRYCK,
   'cel flamingo': categories.DRYCK,
+  'crispy pear': categories.DRYCK,
   'hallon bcaa': categories.DRYCK,
   'k.rsb.rstomat': categories.GRONSAKER,
   # 'chevre': categories.MEJERI,
@@ -27,7 +29,6 @@ MAPPINGS = {
   'clementin': categories.FRUKT,
   'cr.me': categories.MEJERI,
   'dark temptation': categories.KAFFE,
-  'deo': categories.HYGIEN,
   'dryck': categories.DRYCK,
   'drink': categories.DRYCK,
   'energidry': categories.DRYCK,
@@ -36,10 +37,13 @@ MAPPINGS = {
   'flankstek': categories.KOTT,
   'frisco': categories.SPANNMAL,
   'flingor': categories.SPANNMAL,
+  'flamingo': categories.DRYCK,
+  'fiberhusk': categories.OVRIGT,
   'godis': categories.SNACKS,
   'gr.dde': categories.MEJERI,
   'guacamole dip mix': categories.KRYDDOR,
   'gurka': categories.GRONSAKER,
+  'handdisk': categories.HYGIEN,
   'h.grev': categories.KOTT,
   'hallon acai': categories.DRYCK,
   'brioche': categories.SPANNMAL,
@@ -49,7 +53,7 @@ MAPPINGS = {
   'isbergssallad': categories.GRONSAKER,
   'j.ttefranska': categories.SPANNMAL,
   'choklad': categories.SNACKS,
-  'kokosmjölk': categories.OVRIGT,
+  'kokosmj.lk': categories.OVRIGT,
   'kyckling': categories.KOTT,
   'l.kpulver': categories.KRYDDOR,
   'lax': categories.FISK,
@@ -89,14 +93,15 @@ MAPPINGS = {
   'sm.r': categories.MEJERI,  # TODO: Det här kommer även matcha "Smörgås" t.ex.
   'spareribs': categories.KOTT,
   'sylt': categories.SNACKS,
+  'tampong': categories.OVRIGT,
   'tomatpur': categories.OVRIGT,
   'tomater krossade': categories.OVRIGT, # TODO: Finns det någon kategori som man kan lägga det här i?
-  'totmat': categories.GRONSAKER,
+  'tomat': categories.GRONSAKER,
   'torsk': categories.FISK,
   'tortilla chips': categories.SNACKS,
   'tortilla original': categories.SPANNMAL,
   'tv.ttservetter': categories.HYGIEN,
-  'utlra long': categories.OVRIGT,
+  'ultra long': categories.OVRIGT,
   'ultra night': categories.OVRIGT,
   'vitk.l': categories.GRONSAKER,
   'vitl.kspulver': categories.KRYDDOR,
@@ -107,6 +112,7 @@ MAPPINGS = {
   'yoggi': categories.MEJERI,
   'korv': categories.CHARK,
   'tv.l': categories.HYGIEN,
+  'de.': categories.HYGIEN,
 }
 
 class Categorizer:
@@ -122,6 +128,16 @@ class Categorizer:
       article['category'] = category
     
     return articles
+
+  def categorize_discounts(self, discounts):
+    if len(discounts) == 0:
+      return
+
+    for discount in discounts:
+      category = self.get_category(discount['name'])
+      discount['category'] = category
+    
+    return discounts
 
 
   def get_category(self, name):

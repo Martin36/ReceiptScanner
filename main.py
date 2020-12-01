@@ -30,7 +30,7 @@ receipt_paths = [
 
 parser = GcloudParser()
 validator = ReceiptDataValidator()
-categorizer = Categorizer(debug=True)
+categorizer = Categorizer()
 prettyfier = Prettyfier()
 
 def parse_one_pdf():
@@ -113,17 +113,28 @@ def validate_json():
     if not date_correct:
       print("Error for receipt: {}".format(receipt['name']))
       print(err_msg)
+  print("All receipts validated")
 
 def categorize_articles():
-  f = open(os.path.join(sys.path[0], "articles.json"), "r", encoding="utf8")
+  f = open(os.path.join(sys.path[0], "articles.json"), "r+", encoding="utf8")
   data = json.load(f)
 
-  receipt = data[0]
-  articles = categorizer.categorize_articles(receipt['articles'])  
-  #pprint(articles)
+  for _, receipt in enumerate(data):
+    print("Categorizing articles for receipt {}".format(receipt['name']))
+    articles = categorizer.categorize_articles(receipt['articles']) 
+    discounts = categorizer.categorize_discounts(receipt['discounts'])
+    receipt['articles'] = articles 
+    receipt['discounts'] = discounts
+
+  # Remove everything in the file 
+  f.seek(0)
+  f.truncate()
+  f.write(json.dumps(data, indent=2, ensure_ascii=False))
+  f.close()
+  print("Finished categorizing all receipts")
 
 # validate_json()
-parse_all_pdfs()
+# parse_all_pdfs()
 # parse_one_pdf()
-# write_to_csv()
-# categorize_articles()
+categorize_articles()
+write_to_csv()

@@ -16,7 +16,8 @@
           "xmax": 2314,
           "ymin": 1292,
           "ymax": 1495
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "BLANDFARS 20% 50/50",
@@ -28,7 +29,8 @@
           "xmax": 2311,
           "ymin": 1468,
           "ymax": 1670
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "BLOMKAL GRÖN",
@@ -40,7 +42,8 @@
           "xmax": 2311,
           "ymin": 1648,
           "ymax": 1855
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "BLOMKAL ST",
@@ -52,7 +55,8 @@
           "xmax": 1487,
           "ymin": 1816,
           "ymax": 1915
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "BRYSSEL NAT 50OG",
@@ -64,7 +68,8 @@
           "xmax": 1487,
           "ymin": 1902,
           "ymax": 2019
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "CITRON LIME",
@@ -76,7 +81,8 @@
           "xmax": 1445,
           "ymin": 1996,
           "ymax": 2112
-        }
+        },
+        "category": "Dryck"
       },
       {
         "name": "PANT 1KR BURK 1X1KR",
@@ -88,7 +94,8 @@
           "xmax": 1443,
           "ymin": 2084,
           "ymax": 2201
-        }
+        },
+        "category": "Pant"
       },
       {
         "name": "CREME FRAICHE 34%",
@@ -100,7 +107,8 @@
           "xmax": 1603,
           "ymin": 2172,
           "ymax": 2384
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "DARK TEMPTATION",
@@ -112,7 +120,8 @@
           "xmax": 1359,
           "ymin": 2375,
           "ymax": 2460
-        }
+        },
+        "category": "Kaffe"
       },
       {
         "name": "DRYCK VATTENM/PARON",
@@ -124,7 +133,8 @@
           "xmax": 1411,
           "ymin": 2453,
           "ymax": 2558
-        }
+        },
+        "category": "Dryck"
       },
       {
         "name": "GURKA STYCK",
@@ -136,7 +146,8 @@
           "xmax": 1575,
           "ymin": 2540,
           "ymax": 2725
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "HALLON ACAI",
@@ -148,7 +159,8 @@
           "xmax": 1447,
           "ymin": 2720,
           "ymax": 2805
-        }
+        },
+        "category": "Dryck"
       },
       {
         "name": "PANT 1KR BURK 1X1KR",
@@ -160,7 +172,8 @@
           "xmax": 1443,
           "ymin": 2808,
           "ymax": 2888
-        }
+        },
+        "category": "Pant"
       },
       {
         "name": "INTENZO XLT",
@@ -172,7 +185,8 @@
           "xmax": 1487,
           "ymin": 2900,
           "ymax": 2975
-        }
+        },
+        "category": "Kaffe"
       },
       {
         "name": "KYCKLING FARS Medlem M",
@@ -184,7 +198,8 @@
           "xmax": 1575,
           "ymin": 2974,
           "ymax": 3159
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "KYCKLINGFILE",
@@ -196,7 +211,8 @@
           "xmax": 1706,
           "ymin": 3142,
           "ymax": 3338
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "MULTIVITAMINDRINK",
@@ -208,7 +224,8 @@
           "xmax": 1918,
           "ymin": 3318,
           "ymax": 3430
-        }
+        },
+        "category": "Dryck"
       },
       {
         "name": "ORIGINAL KRAMIG HAL",
@@ -220,7 +237,8 @@
           "xmax": 1562,
           "ymin": 3414,
           "ymax": 3521
-        }
+        },
+        "category": null
       },
       {
         "name": "PHILADELP ORIGINAL",
@@ -232,7 +250,8 @@
           "xmax": 1572,
           "ymin": 3504,
           "ymax": 3698
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "SATSUMAS",
@@ -244,7 +263,8 @@
           "xmax": 2298,
           "ymin": 3683,
           "ymax": 3879
-        }
+        },
+        "category": "Frukt"
       },
       {
         "name": "SKANERÖST",
@@ -256,7 +276,8 @@
           "xmax": 1570,
           "ymin": 3855,
           "ymax": 3967
-        }
+        },
+        "category": "Spannmål"
       },
       {
         "name": "SMÖR OSALTAT",
@@ -268,7 +289,8 @@
           "xmax": 1351,
           "ymin": 3952,
           "ymax": 4066
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "SQUEEZY JORDGSYLT",
@@ -280,7 +302,8 @@
           "xmax": 1482,
           "ymin": 4042,
           "ymax": 4155
-        }
+        },
+        "category": "Snacks"
       },
       {
         "name": "4TOMATER KROSSADE",
@@ -292,7 +315,8 @@
           "xmax": 1571,
           "ymin": 4122,
           "ymax": 4247
-        }
+        },
+        "category": "Övrigt"
       },
       {
         "name": "VISPGRADDE 36%",
@@ -304,7 +328,8 @@
           "xmax": 1603,
           "ymin": 4207,
           "ymax": 4334
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "WHITE PEACH",
@@ -316,7 +341,8 @@
           "xmax": 1412,
           "ymin": 4307,
           "ymax": 4422
-        }
+        },
+        "category": "Dryck"
       },
       {
         "name": "PANT 1KR BURK 1X1KR",
@@ -328,7 +354,8 @@
           "xmax": 2005,
           "ymin": 4405,
           "ymax": 4758
-        }
+        },
+        "category": "Pant"
       }
     ],
     "discounts": [
@@ -392,7 +419,8 @@
           "xmax": 1453,
           "ymin": 2048,
           "ymax": 2275
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "FRUKOSTFLINGOR SPEC",
@@ -404,7 +432,8 @@
           "xmax": 1695,
           "ymin": 2244,
           "ymax": 2388
-        }
+        },
+        "category": "Spannmål"
       },
       {
         "name": "GETOST ST MAURE Kampanj",
@@ -416,7 +445,8 @@
           "xmax": 1283,
           "ymin": 2352,
           "ymax": 2489
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "GODIS LÖSVIKT",
@@ -428,7 +458,8 @@
           "xmax": 2326,
           "ymin": 2460,
           "ymax": 2707
-        }
+        },
+        "category": "Snacks"
       },
       {
         "name": "GUACAMOLE DIP MIX",
@@ -440,7 +471,8 @@
           "xmax": 1463,
           "ymin": 2664,
           "ymax": 2908
-        }
+        },
+        "category": "Kryddor"
       },
       {
         "name": "GURKA STYCK",
@@ -452,7 +484,8 @@
           "xmax": 1457,
           "ymin": 2880,
           "ymax": 3115
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "LAXFILE HELSIDA BEN Kampanj",
@@ -464,7 +497,8 @@
           "xmax": 2326,
           "ymin": 3088,
           "ymax": 3332
-        }
+        },
+        "category": "Fisk"
       },
       {
         "name": "LÖK VIT G",
@@ -476,7 +510,8 @@
           "xmax": 1159,
           "ymin": 3304,
           "ymax": 3431
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "ÖLIVER HALKIDIKI UR",
@@ -488,7 +523,8 @@
           "xmax": 1275,
           "ymin": 3408,
           "ymax": 3519
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "PUMPA HALLOWEN",
@@ -500,7 +536,8 @@
           "xmax": 2327,
           "ymin": 3516,
           "ymax": 3752
-        }
+        },
+        "category": "Övrigt"
       },
       {
         "name": "SKALKNIV CM",
@@ -512,7 +549,8 @@
           "xmax": 1375,
           "ymin": 3716,
           "ymax": 3847
-        }
+        },
+        "category": "Övrigt"
       },
       {
         "name": "SMÖR OSALTAT",
@@ -524,7 +562,8 @@
           "xmax": 1179,
           "ymin": 3824,
           "ymax": 3943
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "TOMAT PLOM-BABY",
@@ -536,7 +575,8 @@
           "xmax": 1228,
           "ymin": 3937,
           "ymax": 4057
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "TORTILLA CHIPS CHEE",
@@ -548,7 +588,8 @@
           "xmax": 1373,
           "ymin": 4044,
           "ymax": 4167
-        }
+        },
+        "category": "Snacks"
       },
       {
         "name": "TORTILLA ORIGINAL L",
@@ -560,7 +601,8 @@
           "xmax": 1411,
           "ymin": 4140,
           "ymax": 4275
-        }
+        },
+        "category": "Spannmål"
       },
       {
         "name": "VISPGRADDE 36%",
@@ -572,7 +614,8 @@
           "xmax": 1488,
           "ymin": 4245,
           "ymax": 4379
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "YOGGI ORIG JDG/SMU",
@@ -584,7 +627,8 @@
           "xmax": 1232,
           "ymin": 4359,
           "ymax": 4483
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "AGG 24-PACK 1428GR",
@@ -596,7 +640,8 @@
           "xmax": 1472,
           "ymin": 4463,
           "ymax": 4686
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "ÖLKORV VITLÖK",
@@ -608,7 +653,8 @@
           "xmax": 2954,
           "ymin": 4663,
           "ymax": 5519
-        }
+        },
+        "category": "Chark"
       }
     ],
     "discounts": [
@@ -652,7 +698,8 @@
           "xmax": 1263,
           "ymin": 2620,
           "ymax": 2730
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "GODIS LÖSVIKT",
@@ -664,7 +711,8 @@
           "xmax": 2403,
           "ymin": 2720,
           "ymax": 2986
-        }
+        },
+        "category": "Snacks"
       },
       {
         "name": "KEXCHOKLAD MINI",
@@ -676,7 +724,8 @@
           "xmax": 1443,
           "ymin": 2956,
           "ymax": 3103
-        }
+        },
+        "category": "Snacks"
       },
       {
         "name": "MAX SPEARMINT",
@@ -688,7 +737,8 @@
           "xmax": 1403,
           "ymin": 3084,
           "ymax": 3341
-        }
+        },
+        "category": "Övrigt"
       },
       {
         "name": "OB PROCOMFORT SUPER",
@@ -700,7 +750,8 @@
           "xmax": 1011,
           "ymin": 3320,
           "ymax": 3459
-        }
+        },
+        "category": "Övrigt"
       },
       {
         "name": "ORIGINALROST",
@@ -712,7 +763,8 @@
           "xmax": 1567,
           "ymin": 3440,
           "ymax": 3571
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "PAPRIKA GUL STYCK",
@@ -724,7 +776,8 @@
           "xmax": 1414,
           "ymin": 3556,
           "ymax": 3815
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "PLOPP MINI PASE",
@@ -736,7 +789,8 @@
           "xmax": 1165,
           "ymin": 3795,
           "ymax": 3943
-        }
+        },
+        "category": "Snacks"
       },
       {
         "name": "PROCOMFORT SUPER",
@@ -748,7 +802,8 @@
           "xmax": 1440,
           "ymin": 3913,
           "ymax": 4180
-        }
+        },
+        "category": "Övrigt"
       },
       {
         "name": "ULTRA LONG + VP Kampanj",
@@ -760,7 +815,8 @@
           "xmax": 1124,
           "ymin": 4158,
           "ymax": 4295
-        }
+        },
+        "category": "Övrigt"
       },
       {
         "name": "ULTRA NIGHT VP Kampanj",
@@ -772,7 +828,8 @@
           "xmax": 1124,
           "ymin": 4282,
           "ymax": 4419
-        }
+        },
+        "category": "Övrigt"
       },
       {
         "name": "WERTHERS ORIGINAL",
@@ -784,7 +841,8 @@
           "xmax": 1309,
           "ymin": 4399,
           "ymax": 4547
-        }
+        },
+        "category": "Snacks"
       }
     ],
     "discounts": [
@@ -832,7 +890,8 @@
           "xmax": 1473,
           "ymin": 2036,
           "ymax": 2166
-        }
+        },
+        "category": "Kryddor"
       },
       {
         "name": "CITY PULSE",
@@ -844,7 +903,8 @@
           "xmax": 1049,
           "ymin": 2149,
           "ymax": 2290
-        }
+        },
+        "category": "Dryck"
       },
       {
         "name": "PANT 1KR BURK 1X1KR",
@@ -856,7 +916,8 @@
           "xmax": 1215,
           "ymin": 2272,
           "ymax": 2414
-        }
+        },
+        "category": "Pant"
       },
       {
         "name": "DEO CITRUS ESSENS",
@@ -868,7 +929,8 @@
           "xmax": 1007,
           "ymin": 2388,
           "ymax": 2522
-        }
+        },
+        "category": "Hygien"
       },
       {
         "name": "FILTER OBLEKT 1X4",
@@ -880,7 +942,8 @@
           "xmax": 1171,
           "ymin": 2508,
           "ymax": 2645
-        }
+        },
+        "category": "Kaffe"
       },
       {
         "name": "FLANKSTEK I BIT",
@@ -892,7 +955,8 @@
           "xmax": 2426,
           "ymin": 2632,
           "ymax": 2916
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "GURKA STYCK SE",
@@ -904,7 +968,8 @@
           "xmax": 1395,
           "ymin": 2880,
           "ymax": 3147
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "OLIVOLJA FRUKTIG",
@@ -916,7 +981,8 @@
           "xmax": 1303,
           "ymin": 3120,
           "ymax": 3263
-        }
+        },
+        "category": "Oljor"
       },
       {
         "name": "ORIGINAL",
@@ -928,7 +994,8 @@
           "xmax": 1289,
           "ymin": 3242,
           "ymax": 3387
-        }
+        },
+        "category": null
       },
       {
         "name": "PAPRIKA ORANGE_STYC",
@@ -940,7 +1007,8 @@
           "xmax": 1359,
           "ymin": 3368,
           "ymax": 3629
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "PASTA GIRANDOLE",
@@ -952,7 +1020,8 @@
           "xmax": 1123,
           "ymin": 3604,
           "ymax": 3751
-        }
+        },
+        "category": "Spannmål"
       },
       {
         "name": "PESTO GENOVESE",
@@ -964,7 +1033,8 @@
           "xmax": 1143,
           "ymin": 3740,
           "ymax": 3877
-        }
+        },
+        "category": "Övrigt"
       },
       {
         "name": "ROLL-ON ORCHID",
@@ -976,7 +1046,8 @@
           "xmax": 1255,
           "ymin": 3858,
           "ymax": 3997
-        }
+        },
+        "category": "Hygien"
       },
       {
         "name": "TOMAT PLOM-BABY",
@@ -988,7 +1059,8 @@
           "xmax": 1123,
           "ymin": 3972,
           "ymax": 4119
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "WHITE PEACH",
@@ -1000,7 +1072,8 @@
           "xmax": 1099,
           "ymin": 4096,
           "ymax": 4241
-        }
+        },
+        "category": "Dryck"
       },
       {
         "name": "PANT 1KR BURK 1X1KR",
@@ -1012,7 +1085,8 @@
           "xmax": 1179,
           "ymin": 4222,
           "ymax": 4359
-        }
+        },
+        "category": "Pant"
       },
       {
         "name": "YOGGI ORIG SKOGSBAR",
@@ -1024,7 +1098,8 @@
           "xmax": 1101,
           "ymin": 4344,
           "ymax": 4479
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "ÄGG 24-PACK 1428GR",
@@ -1036,7 +1111,8 @@
           "xmax": 1347,
           "ymin": 4464,
           "ymax": 4726
-        }
+        },
+        "category": "Mejeri"
       }
     ],
     "discounts": [
@@ -1080,7 +1156,8 @@
           "xmax": 1415,
           "ymin": 1580,
           "ymax": 1705
-        }
+        },
+        "category": "Såser"
       },
       {
         "name": "BREGOTT MELLAN",
@@ -1092,7 +1169,8 @@
           "xmax": 1315,
           "ymin": 1676,
           "ymax": 1801
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "CITY PULSE",
@@ -1104,7 +1182,8 @@
           "xmax": 1167,
           "ymin": 1776,
           "ymax": 1898
-        }
+        },
+        "category": "Dryck"
       },
       {
         "name": "PANT 1KR BURK 1X1KR",
@@ -1116,7 +1195,8 @@
           "xmax": 1311,
           "ymin": 1876,
           "ymax": 1985
-        }
+        },
+        "category": "Pant"
       },
       {
         "name": "CREME FRAICHE 34%",
@@ -1128,7 +1208,8 @@
           "xmax": 1459,
           "ymin": 1972,
           "ymax": 2199
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "CRISPY PEAR",
@@ -1140,7 +1221,8 @@
           "xmax": 1283,
           "ymin": 2168,
           "ymax": 2292
-        }
+        },
+        "category": "Dryck"
       },
       {
         "name": "PANT 1KR BURK 1X1KR",
@@ -1152,7 +1234,8 @@
           "xmax": 1283,
           "ymin": 2272,
           "ymax": 2393
-        }
+        },
+        "category": "Pant"
       },
       {
         "name": "ENERGIDRY RASPBERRY",
@@ -1164,7 +1247,8 @@
           "xmax": 1443,
           "ymin": 2368,
           "ymax": 2591
-        }
+        },
+        "category": "Dryck"
       },
       {
         "name": "PANT 1KR BURK 1X1KR",
@@ -1176,7 +1260,8 @@
           "xmax": 1467,
           "ymin": 2564,
           "ymax": 2788
-        }
+        },
+        "category": "Pant"
       },
       {
         "name": "FLAMINGO",
@@ -1188,7 +1273,8 @@
           "xmax": 1363,
           "ymin": 2764,
           "ymax": 2883
-        }
+        },
+        "category": "Dryck"
       },
       {
         "name": "PANT 1KR BURK 1X1KR",
@@ -1200,7 +1286,8 @@
           "xmax": 1261,
           "ymin": 2866,
           "ymax": 2982
-        }
+        },
+        "category": "Pant"
       },
       {
         "name": "GUACAMOLE DIP MIX",
@@ -1212,7 +1299,8 @@
           "xmax": 1451,
           "ymin": 2962,
           "ymax": 3179
-        }
+        },
+        "category": "Kryddor"
       },
       {
         "name": "MAX SPEARMINT",
@@ -1224,7 +1312,8 @@
           "xmax": 1120,
           "ymin": 3159,
           "ymax": 3279
-        }
+        },
+        "category": "Övrigt"
       },
       {
         "name": "OLIVOLJA VIT TRYFFE",
@@ -1236,7 +1325,8 @@
           "xmax": 1379,
           "ymin": 3260,
           "ymax": 3371
-        }
+        },
+        "category": "Oljor"
       },
       {
         "name": "PAPRIKA ORANGE STYC",
@@ -1248,7 +1338,8 @@
           "xmax": 1425,
           "ymin": 3360,
           "ymax": 3571
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "SALLAD ISBERG",
@@ -1260,7 +1351,8 @@
           "xmax": 2267,
           "ymin": 3556,
           "ymax": 3781
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "SMÖR OSALTAT",
@@ -1272,7 +1364,8 @@
           "xmax": 1187,
           "ymin": 3748,
           "ymax": 3873
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "TORTILLA CHIPS CHEE",
@@ -1284,7 +1377,8 @@
           "xmax": 1359,
           "ymin": 3852,
           "ymax": 3979
-        }
+        },
+        "category": "Snacks"
       },
       {
         "name": "TORTILLA ORIGINAL L",
@@ -1296,7 +1390,8 @@
           "xmax": 1351,
           "ymin": 3952,
           "ymax": 4077
-        }
+        },
+        "category": "Spannmål"
       },
       {
         "name": "VISPGRADDE 36%",
@@ -1308,7 +1403,8 @@
           "xmax": 1455,
           "ymin": 4056,
           "ymax": 4282
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "VITVINSVINAGER",
@@ -1320,7 +1416,8 @@
           "xmax": 1653,
           "ymin": 4262,
           "ymax": 4381
-        }
+        },
+        "category": "Övrigt"
       },
       {
         "name": "WHITE PEACH",
@@ -1332,7 +1429,8 @@
           "xmax": 1216,
           "ymin": 4360,
           "ymax": 4479
-        }
+        },
+        "category": "Dryck"
       },
       {
         "name": "PANT 1KR BURK 1X1KR",
@@ -1344,7 +1442,8 @@
           "xmax": 1251,
           "ymin": 4460,
           "ymax": 4582
-        }
+        },
+        "category": "Pant"
       }
     ],
     "discounts": [
@@ -1388,7 +1487,8 @@
           "xmax": 1489,
           "ymin": 1510,
           "ymax": 1603
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "BIFF BIT VAC BRAS Kampanj",
@@ -1400,7 +1500,8 @@
           "xmax": 2314,
           "ymin": 1580,
           "ymax": 1788
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "BLOMKAL ST Kampanj",
@@ -1412,7 +1513,8 @@
           "xmax": 1572,
           "ymin": 1756,
           "ymax": 1956
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "CHEVRE GETOST Kampanj",
@@ -1424,7 +1526,8 @@
           "xmax": 1469,
           "ymin": 1936,
           "ymax": 2036
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "CLEMENTINER SENSES",
@@ -1436,7 +1539,8 @@
           "xmax": 1669,
           "ymin": 2026,
           "ymax": 2136
-        }
+        },
+        "category": "Frukt"
       },
       {
         "name": "FRUKOSTFLINGOR SPEC",
@@ -1448,7 +1552,8 @@
           "xmax": 1793,
           "ymin": 2114,
           "ymax": 2222
-        }
+        },
+        "category": "Spannmål"
       },
       {
         "name": "GUACAMOLE DIP MIX",
@@ -1460,7 +1565,8 @@
           "xmax": 1585,
           "ymin": 2204,
           "ymax": 2398
-        }
+        },
+        "category": "Kryddor"
       },
       {
         "name": "INTENZO",
@@ -1472,7 +1578,8 @@
           "xmax": 1491,
           "ymin": 2376,
           "ymax": 2498
-        }
+        },
+        "category": "Kaffe"
       },
       {
         "name": "JATTEFRANSKA",
@@ -1484,7 +1591,8 @@
           "xmax": 1707,
           "ymin": 2468,
           "ymax": 2596
-        }
+        },
+        "category": "Spannmål"
       },
       {
         "name": "KYCKLINGFILE",
@@ -1496,7 +1604,8 @@
           "xmax": 1707,
           "ymin": 2556,
           "ymax": 2763
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "LÖK GUL",
@@ -1508,7 +1617,8 @@
           "xmax": 2263,
           "ymin": 2739,
           "ymax": 2951
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "MOZZARELLA G",
@@ -1520,7 +1630,8 @@
           "xmax": 1623,
           "ymin": 2911,
           "ymax": 3117
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "NÖTFÄRS 12%",
@@ -1532,7 +1643,8 @@
           "xmax": 2300,
           "ymin": 3100,
           "ymax": 3301
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "OLIVER HALKIDIKI UR",
@@ -1544,7 +1656,8 @@
           "xmax": 1443,
           "ymin": 3278,
           "ymax": 3371
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "RUSSIN 6P",
@@ -1556,7 +1669,8 @@
           "xmax": 1443,
           "ymin": 3368,
           "ymax": 3469
-        }
+        },
+        "category": "Snacks"
       },
       {
         "name": "SKANEROST",
@@ -1568,7 +1682,8 @@
           "xmax": 1583,
           "ymin": 3453,
           "ymax": 3558
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "TOMAT PLOM-BABY Kampanj",
@@ -1580,7 +1695,8 @@
           "xmax": 1415,
           "ymin": 3536,
           "ymax": 3650
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "TORTILLA CHIPS CHEE",
@@ -1592,7 +1708,8 @@
           "xmax": 1527,
           "ymin": 3632,
           "ymax": 3734
-        }
+        },
+        "category": "Snacks"
       },
       {
         "name": "VISPGRADDE 36%",
@@ -1604,7 +1721,8 @@
           "xmax": 1613,
           "ymin": 3722,
           "ymax": 3823
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "VITKAL. Kampani",
@@ -1616,7 +1734,8 @@
           "xmax": 1479,
           "ymin": 3806,
           "ymax": 3918
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "YOGGI ORIG JDG/SMU",
@@ -1628,7 +1747,8 @@
           "xmax": 1423,
           "ymin": 3984,
           "ymax": 4079
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "ÄGG 24-PACK 1428GR",
@@ -1640,7 +1760,8 @@
           "xmax": 1561,
           "ymin": 4076,
           "ymax": 4268
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "PAPPERSKASSE 44L",
@@ -1652,7 +1773,8 @@
           "xmax": 1689,
           "ymin": 4434,
           "ymax": 4626
-        }
+        },
+        "category": "Övrigt"
       }
     ],
     "discounts": [
@@ -1704,7 +1826,8 @@
           "xmax": 2365,
           "ymin": 546,
           "ymax": 789
-        }
+        },
+        "category": "Fisk"
       },
       {
         "name": "TORSKRYGG 3FIL@ 450G",
@@ -1716,7 +1839,8 @@
           "xmax": 2636,
           "ymin": 796,
           "ymax": 947
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "AM DRESSING 425G",
@@ -1728,7 +1852,8 @@
           "xmax": 1155,
           "ymin": 960,
           "ymax": 1011
-        }
+        },
+        "category": "Såser"
       },
       {
         "name": "WINEGUMS",
@@ -1740,7 +1865,8 @@
           "xmax": 1405,
           "ymin": 1039,
           "ymax": 1093
-        }
+        },
+        "category": "Snacks"
       },
       {
         "name": "BLGF@RS",
@@ -1752,7 +1878,8 @@
           "xmax": 2365,
           "ymin": 1112,
           "ymax": 1269
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "OLGFORS",
@@ -1764,7 +1891,8 @@
           "xmax": 2363,
           "ymin": 1274,
           "ymax": 1431
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "MOZZARELLA 2F20 V3",
@@ -1776,7 +1904,8 @@
           "xmax": 1491,
           "ymin": 1444,
           "ymax": 1497
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "HAMBURGERBR BRIOCHE",
@@ -1788,7 +1917,8 @@
           "xmax": 1535,
           "ymin": 1525,
           "ymax": 1577
-        }
+        },
+        "category": "Spannmål"
       },
       {
         "name": "FRISCO HAMBBRO D 4P",
@@ -1800,7 +1930,8 @@
           "xmax": 1321,
           "ymin": 1605,
           "ymax": 1659
-        }
+        },
+        "category": "Spannmål"
       },
       {
         "name": "VITL@KSPULVER EK048G",
@@ -1812,7 +1943,8 @@
           "xmax": 1619,
           "ymin": 1678,
           "ymax": 1743
-        }
+        },
+        "category": "Kryddor"
       },
       {
         "name": "PAPRIKA GUL",
@@ -1824,7 +1956,8 @@
           "xmax": 2365,
           "ymin": 1769,
           "ymax": 1921
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "PHILADELPHIA VITL/OR",
@@ -1836,7 +1969,8 @@
           "xmax": 2609,
           "ymin": 1930,
           "ymax": 2045
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "FL@SKYTTERFIL@",
@@ -1848,7 +1982,8 @@
           "xmax": 2365,
           "ymin": 2082,
           "ymax": 2325
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "FLOSKYTTERFIL@",
@@ -1860,7 +1995,8 @@
           "xmax": 2363,
           "ymin": 2324,
           "ymax": 2563
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "HERRGO RD",
@@ -1872,7 +2008,8 @@
           "xmax": 2365,
           "ymin": 2562,
           "ymax": 2723
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "NOTFORS 12%",
@@ -1884,7 +2021,8 @@
           "xmax": 2364,
           "ymin": 2728,
           "ymax": 2887
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "NOTFORS 12%",
@@ -1896,7 +2034,8 @@
           "xmax": 2365,
           "ymin": 2889,
           "ymax": 3047
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "ISBERGSSALLAD",
@@ -1908,7 +2047,8 @@
           "xmax": 2365,
           "ymin": 3061,
           "ymax": 3209
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "TOMATER KVIST",
@@ -1920,7 +2060,8 @@
           "xmax": 2363,
           "ymin": 3223,
           "ymax": 3371
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "CROME FRA@CHE 34%",
@@ -1932,7 +2073,8 @@
           "xmax": 1279,
           "ymin": 3375,
           "ymax": 3440
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "BANANER EKO",
@@ -1944,7 +2086,8 @@
           "xmax": 2363,
           "ymin": 3466,
           "ymax": 3615
-        }
+        },
+        "category": "Frukt"
       },
       {
         "name": "@GG M 15P FRIG@ INOM",
@@ -1956,7 +2099,8 @@
           "xmax": 1197,
           "ymin": 3618,
           "ymax": 3683
-        }
+        },
+        "category": "Mejeri"
       }
     ],
     "discounts": [],
@@ -1991,7 +2135,8 @@
           "xmax": 1574,
           "ymin": 544,
           "ymax": 615
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "BACON SKIVAT 140G",
@@ -2003,7 +2148,8 @@
           "xmax": 1781,
           "ymin": 628,
           "ymax": 769
-        }
+        },
+        "category": "Chark"
       },
       {
         "name": "MOZZARELLA 2F20 V3",
@@ -2015,7 +2161,8 @@
           "xmax": 1555,
           "ymin": 794,
           "ymax": 859
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "PAPRIKA  MIX",
@@ -2027,7 +2174,8 @@
           "xmax": 1365,
           "ymin": 880,
           "ymax": 929
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "CROME FRA@CHE 34%",
@@ -2039,7 +2187,8 @@
           "xmax": 1279,
           "ymin": 950,
           "ymax": 1015
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "VISPGRODDE 36%",
@@ -2051,7 +2200,8 @@
           "xmax": 1489,
           "ymin": 1031,
           "ymax": 1096
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "OREGANO",
@@ -2063,7 +2213,8 @@
           "xmax": 1364,
           "ymin": 1121,
           "ymax": 1173
-        }
+        },
+        "category": "Kryddor"
       },
       {
         "name": "PARMIG REG DOP 12M",
@@ -2075,7 +2226,8 @@
           "xmax": 1321,
           "ymin": 1202,
           "ymax": 1253
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "L@KPULVER",
@@ -2087,7 +2239,8 @@
           "xmax": 1450,
           "ymin": 1274,
           "ymax": 1339
-        }
+        },
+        "category": "Kryddor"
       },
       {
         "name": "MAJONN@S OKTA 450G",
@@ -2099,7 +2252,8 @@
           "xmax": 1405,
           "ymin": 1354,
           "ymax": 1419
-        }
+        },
+        "category": "Övrigt"
       },
       {
         "name": "VITLOKSPULVER",
@@ -2111,7 +2265,8 @@
           "xmax": 1617,
           "ymin": 1433,
           "ymax": 1501
-        }
+        },
+        "category": "Kryddor"
       },
       {
         "name": "@GG L 6P FRIG@ INOM",
@@ -2123,7 +2278,8 @@
           "xmax": 1197,
           "ymin": 1516,
           "ymax": 1581
-        }
+        },
+        "category": "Mejeri"
       }
     ],
     "discounts": [
@@ -2163,7 +2319,8 @@
           "xmax": 2363,
           "ymin": 544,
           "ymax": 783
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "MORKROST  450G",
@@ -2175,7 +2332,8 @@
           "xmax": 2637,
           "ymin": 788,
           "ymax": 947
-        }
+        },
+        "category": "Kaffe"
       },
       {
         "name": "BROCCOLI",
@@ -2187,7 +2345,8 @@
           "xmax": 2639,
           "ymin": 960,
           "ymax": 1103
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "FRISCO HAMBBRD 4P",
@@ -2199,7 +2358,8 @@
           "xmax": 1322,
           "ymin": 1122,
           "ymax": 1173
-        }
+        },
+        "category": "Spannmål"
       },
       {
         "name": "FIBERHUSK G.FR BAKN",
@@ -2211,7 +2371,8 @@
           "xmax": 1450,
           "ymin": 1203,
           "ymax": 1254
-        }
+        },
+        "category": "Övrigt"
       },
       {
         "name": "PAPRIKA ROD",
@@ -2223,7 +2384,8 @@
           "xmax": 2364,
           "ymin": 1281,
           "ymax": 1431
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "ISBERGSSALLAD",
@@ -2235,7 +2397,8 @@
           "xmax": 2365,
           "ymin": 1444,
           "ymax": 1591
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "TOMATER BABYPLOMMON",
@@ -2247,7 +2410,8 @@
           "xmax": 1368,
           "ymin": 1606,
           "ymax": 1658
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "KOKOSMJOLK 17-18%",
@@ -2259,7 +2423,8 @@
           "xmax": 1491,
           "ymin": 1678,
           "ymax": 1743
-        }
+        },
+        "category": "Övrigt"
       }
     ],
     "discounts": [],
@@ -2298,7 +2463,8 @@
           "xmax": 1111,
           "ymin": 556,
           "ymax": 587
-        }
+        },
+        "category": null
       },
       {
         "name": "NOTF@RS 12%",
@@ -2310,7 +2476,8 @@
           "xmax": 2363,
           "ymin": 626,
           "ymax": 863
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "LAXFIL@",
@@ -2322,7 +2489,8 @@
           "xmax": 1365,
           "ymin": 869,
           "ymax": 935
-        }
+        },
+        "category": "Fisk"
       },
       {
         "name": "LED PAR16 35W",
@@ -2334,7 +2502,8 @@
           "xmax": 1197,
           "ymin": 1041,
           "ymax": 1091
-        }
+        },
+        "category": "Övrigt"
       },
       {
         "name": "LAXFILE CTRIM",
@@ -2346,7 +2515,8 @@
           "xmax": 2438,
           "ymin": 1123,
           "ymax": 1349
-        }
+        },
+        "category": "Fisk"
       },
       {
         "name": "TOMATPURO 200G",
@@ -2358,7 +2528,8 @@
           "xmax": 1449,
           "ymin": 1352,
           "ymax": 1419
-        }
+        },
+        "category": "Övrigt"
       },
       {
         "name": "GRANA PADANO OST 12M",
@@ -2370,7 +2541,8 @@
           "xmax": 1283,
           "ymin": 1444,
           "ymax": 1495
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "ISBERGSSALLAD",
@@ -2382,7 +2554,8 @@
           "xmax": 2365,
           "ymin": 1525,
           "ymax": 1673
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "PAPRIKA GUL",
@@ -2394,7 +2567,8 @@
           "xmax": 2366,
           "ymin": 1688,
           "ymax": 1910
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "FETAOST  10OG",
@@ -2406,7 +2580,8 @@
           "xmax": 1909,
           "ymin": 1848,
           "ymax": 1995
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "KOKOSMJOLK 2F24 V3",
@@ -2418,7 +2593,8 @@
           "xmax": 1492,
           "ymin": 2002,
           "ymax": 2067
-        }
+        },
+        "category": "Övrigt"
       },
       {
         "name": "SALLADSKRYDDA GREK",
@@ -2430,7 +2606,8 @@
           "xmax": 1617,
           "ymin": 2092,
           "ymax": 2143
-        }
+        },
+        "category": "Kryddor"
       },
       {
         "name": "PAPRIKA",
@@ -2442,7 +2619,8 @@
           "xmax": 1366,
           "ymin": 2173,
           "ymax": 2223
-        }
+        },
+        "category": "Kryddor"
       }
     ],
     "discounts": [
@@ -2487,7 +2665,8 @@
           "xmax": 1572,
           "ymin": 459,
           "ymax": 536
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "LAXFILE",
@@ -2499,7 +2678,8 @@
           "xmax": 1364,
           "ymin": 543,
           "ymax": 611
-        }
+        },
+        "category": "Fisk"
       },
       {
         "name": "CREME FRAICHE 34%",
@@ -2511,7 +2691,8 @@
           "xmax": 1280,
           "ymin": 700,
           "ymax": 770
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "CLEMENTINER",
@@ -2523,7 +2704,8 @@
           "xmax": 2363,
           "ymin": 798,
           "ymax": 951
-        }
+        },
+        "category": "Frukt"
       },
       {
         "name": "PAPRIKA GUL",
@@ -2535,7 +2717,8 @@
           "xmax": 2367,
           "ymin": 960,
           "ymax": 1111
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "HAMBURGERBR BRIOCHE",
@@ -2547,7 +2730,8 @@
           "xmax": 1535,
           "ymin": 1121,
           "ymax": 1173
-        }
+        },
+        "category": "Spannmål"
       },
       {
         "name": "SUPER TAMPONG",
@@ -2559,7 +2743,8 @@
           "xmax": 2609,
           "ymin": 1202,
           "ymax": 1317
-        }
+        },
+        "category": "Övrigt"
       },
       {
         "name": "AM DRESSING 425G",
@@ -2571,7 +2756,8 @@
           "xmax": 1155,
           "ymin": 1364,
           "ymax": 1415
-        }
+        },
+        "category": "Såser"
       },
       {
         "name": "FRUKTDRYCK NEKT ÄP",
@@ -2583,7 +2769,8 @@
           "xmax": 1492,
           "ymin": 1442,
           "ymax": 1498
-        }
+        },
+        "category": "Dryck"
       },
       {
         "name": "PLATINUM HANDDISK",
@@ -2595,7 +2782,8 @@
           "xmax": 2077,
           "ymin": 1526,
           "ymax": 1673
-        }
+        },
+        "category": "Hygien"
       },
       {
         "name": "VISPGRÄDDE 36%",
@@ -2607,7 +2795,8 @@
           "xmax": 1489,
           "ymin": 1667,
           "ymax": 1744
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "GURKA",
@@ -2619,7 +2808,8 @@
           "xmax": 1283,
           "ymin": 1768,
           "ymax": 1821
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "MOZZARELLA",
@@ -2631,7 +2821,8 @@
           "xmax": 1491,
           "ymin": 1848,
           "ymax": 1900
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "TOMATER BABYPLOMMON",
@@ -2643,7 +2834,8 @@
           "xmax": 1368,
           "ymin": 2010,
           "ymax": 2062
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "BASILIKA",
@@ -2655,7 +2847,8 @@
           "xmax": 1407,
           "ymin": 2092,
           "ymax": 2143
-        }
+        },
+        "category": "Kryddor"
       },
       {
         "name": "DE050ML M R-ON DRY I",
@@ -2667,7 +2860,8 @@
           "xmax": 1365,
           "ymin": 2172,
           "ymax": 2223
-        }
+        },
+        "category": "Hygien"
       },
       {
         "name": "ISBERGSSALLAD",
@@ -2679,7 +2873,8 @@
           "xmax": 2365,
           "ymin": 2253,
           "ymax": 2399
-        }
+        },
+        "category": "Grönsaker"
       }
     ],
     "discounts": [
@@ -2719,7 +2914,8 @@
           "xmax": 2682,
           "ymin": 2992,
           "ymax": 3283
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "Blomkål",
@@ -2731,7 +2927,8 @@
           "xmax": 2680,
           "ymin": 3292,
           "ymax": 3575
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "*Cel Flamingo35.5c1",
@@ -2743,7 +2940,8 @@
           "xmax": 824,
           "ymin": 3591,
           "ymax": 3719
-        }
+        },
+        "category": "Dryck"
       },
       {
         "name": "+ Pant",
@@ -2755,7 +2953,8 @@
           "xmax": 841,
           "ymin": 3725,
           "ymax": 3878
-        }
+        },
+        "category": "Pant"
       },
       {
         "name": "*Celsius Citr/Lime",
@@ -2767,7 +2966,8 @@
           "xmax": 1105,
           "ymin": 3882,
           "ymax": 4015
-        }
+        },
+        "category": "Dryck"
       },
       {
         "name": "+ Pant",
@@ -2779,7 +2979,8 @@
           "xmax": 764,
           "ymin": 4063,
           "ymax": 4147
-        }
+        },
+        "category": "Pant"
       },
       {
         "name": "*City Pulse",
@@ -2791,7 +2992,8 @@
           "xmax": 900,
           "ymin": 4180,
           "ymax": 4335
-        }
+        },
+        "category": "Dryck"
       },
       {
         "name": "+ Pant",
@@ -2803,7 +3005,8 @@
           "xmax": 758,
           "ymin": 4498,
           "ymax": 4582
-        }
+        },
+        "category": "Pant"
       },
       {
         "name": "Papperskasse",
@@ -2815,7 +3018,8 @@
           "xmax": 1359,
           "ymin": 4752,
           "ymax": 4917
-        }
+        },
+        "category": "Övrigt"
       },
       {
         "name": "Sköljmedel vårskog",
@@ -2827,7 +3031,8 @@
           "xmax": 1207,
           "ymin": 4896,
           "ymax": 5060
-        }
+        },
+        "category": "Hygien"
       },
       {
         "name": "Vispgrädde 36%",
@@ -2839,7 +3044,8 @@
           "xmax": 1223,
           "ymin": 5044,
           "ymax": 5216
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "*White Peach",
@@ -2851,7 +3057,8 @@
           "xmax": 959,
           "ymin": 5184,
           "ymax": 5331
-        }
+        },
+        "category": "Dryck"
       },
       {
         "name": "+ Pant",
@@ -2863,7 +3070,8 @@
           "xmax": 831,
           "ymin": 5348,
           "ymax": 5490
-        }
+        },
+        "category": "Pant"
       }
     ],
     "discounts": [
@@ -2902,7 +3110,8 @@
           "xmax": 1574,
           "ymin": 1724,
           "ymax": 2021
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "Blandfärs 50/50",
@@ -2914,7 +3123,8 @@
           "xmax": 2695,
           "ymin": 1984,
           "ymax": 2300
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "Blueberry Frost",
@@ -2926,7 +3136,8 @@
           "xmax": 1325,
           "ymin": 2277,
           "ymax": 2519
-        }
+        },
+        "category": "Mejeri"
       },
       {
         "name": "Pant",
@@ -2938,7 +3149,8 @@
           "xmax": 1263,
           "ymin": 2408,
           "ymax": 2551
-        }
+        },
+        "category": "Pant"
       },
       {
         "name": "City Pulse",
@@ -2950,7 +3162,8 @@
           "xmax": 1011,
           "ymin": 2556,
           "ymax": 2792
-        }
+        },
+        "category": "Dryck"
       },
       {
         "name": "Pant",
@@ -2962,7 +3175,8 @@
           "xmax": 1259,
           "ymin": 2698,
           "ymax": 2808
-        }
+        },
+        "category": "Pant"
       },
       {
         "name": "Dove Tvål 100g",
@@ -2974,7 +3188,8 @@
           "xmax": 1011,
           "ymin": 2829,
           "ymax": 2945
-        }
+        },
+        "category": "Hygien"
       },
       {
         "name": "F1 Tvål Exo Orchid",
@@ -2986,7 +3201,8 @@
           "xmax": 971,
           "ymin": 2942,
           "ymax": 3088
-        }
+        },
+        "category": "Hygien"
       },
       {
         "name": "Flyt Tvål Milk & A",
@@ -2998,7 +3214,8 @@
           "xmax": 1003,
           "ymin": 3096,
           "ymax": 3224
-        }
+        },
+        "category": "Hygien"
       },
       {
         "name": "*Hallon BCAA",
@@ -3010,7 +3227,8 @@
           "xmax": 2183,
           "ymin": 3212,
           "ymax": 3639
-        }
+        },
+        "category": "Dryck"
       },
       {
         "name": "Pant",
@@ -3022,7 +3240,8 @@
           "xmax": 1255,
           "ymin": 3512,
           "ymax": 3623
-        }
+        },
+        "category": "Pant"
       },
       {
         "name": "Hårpynt",
@@ -3034,7 +3253,8 @@
           "xmax": 1191,
           "ymin": 3640,
           "ymax": 3791
-        }
+        },
+        "category": "Övrigt"
       },
       {
         "name": "Kycklingbröstfile",
@@ -3046,7 +3266,8 @@
           "xmax": 1823,
           "ymin": 3752,
           "ymax": 4054
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "*Körsbärstomat",
@@ -3058,7 +3279,8 @@
           "xmax": 2507,
           "ymin": 4060,
           "ymax": 4331
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "Paprikamix",
@@ -3070,7 +3292,8 @@
           "xmax": 1370,
           "ymin": 4328,
           "ymax": 4475
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "Sallat roman",
@@ -3082,7 +3305,8 @@
           "xmax": 1111,
           "ymin": 4457,
           "ymax": 4591
-        }
+        },
+        "category": "Grönsaker"
       },
       {
         "name": "Satsumas",
@@ -3094,7 +3318,8 @@
           "xmax": 1243,
           "ymin": 4606,
           "ymax": 4731
-        }
+        },
+        "category": "Frukt"
       },
       {
         "name": "Spareribs",
@@ -3106,7 +3331,8 @@
           "xmax": 2696,
           "ymin": 4724,
           "ymax": 5040
-        }
+        },
+        "category": "Kött"
       },
       {
         "name": "Tvättservetter m 1*",
@@ -3118,7 +3344,8 @@
           "xmax": 1643,
           "ymin": 4996,
           "ymax": 5158
-        }
+        },
+        "category": "Hygien"
       }
     ],
     "discounts": [

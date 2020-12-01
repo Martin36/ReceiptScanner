@@ -13,7 +13,8 @@ def write_to_csv():
     json_data = json.load(f)
 
     # Add the header
-    csv_writer.writerow(['Market', 'Date', 'Receipt total', 'Article name', 'Sum', 'Quantity', 'Price'])
+    csv_writer.writerow(['Market', 'Date', 'Receipt total', 'Article name', 
+      'Sum', 'Quantity', 'Price', 'Category'])
 
     for receipt in json_data:
       
@@ -21,21 +22,27 @@ def write_to_csv():
       date = utils.get_first(receipt['dates'])
       # If the receipt contains multiple totals, the lowest is probably the amount paid
       # with the higher being the sum without discounts
-      total = utils.convert_to_nr(get_smallest_total(receipt['totals']))
+      total = get_smallest_total(receipt['totals'])
 
       for article in receipt['articles']:
         name = article['name']
-        price_sum = utils.convert_to_nr(article['sum'])
+        price_sum = article['sum']
         quantity = article['amount']
         price = article['price']
-        csv_writer.writerow([market, date, total, name, price_sum, quantity, price])   
+        category = article['category']
+        csv_writer.writerow(
+          [market, date, total, name, price_sum, quantity, price, category]
+        )   
 
       for discount in receipt['discounts']:
         name = discount['name']
-        price_sum = ""
+        price_sum = discount['price']
         quantity = ""
         price = discount['price']
-        csv_writer.writerow([market, date, total, name, price_sum, quantity, price])   
+        category = discount['category']
+        csv_writer.writerow(
+          [market, date, total, name, price_sum, quantity, price, category]
+        )   
 
     f.close()
     print("Finished writing to csv file")
