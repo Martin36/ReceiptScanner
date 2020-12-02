@@ -11,7 +11,7 @@ from prettyfier import Prettyfier
 from write_to_csv import write_to_csv
 
 
-PATH = 'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-20.pdf'
+PATH = 'D:\\Documents\\Kvitto Scanner\\Receipts\\citygross-20-12-01.pdf'
 receipt_paths = [
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-20.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-27.pdf',
@@ -19,6 +19,7 @@ receipt_paths = [
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-11-05.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-11-22.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-11-25.pdf',
+  'D:\\Documents\\Kvitto Scanner\\Receipts\\citygross-20-12-01.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-02.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-12.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-18.pdf',

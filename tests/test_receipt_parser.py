@@ -247,6 +247,14 @@ class TestParser(unittest.TestCase):
     is_amount_line = parser.is_amount_line(string)
     self.assertTrue(is_amount_line, "Should return true when there is no 'st' in the string")
 
+    string = '0.820 kg 84.95 kr/kg'
+    is_amount_line = parser.is_amount_line(string)
+    self.assertTrue(is_amount_line, "Should return true when numbers are written with dots")
+
+    string = '2 st 5.00 kr/st'
+    is_amount_line = parser.is_amount_line(string)
+    self.assertTrue(is_amount_line, "Should return true when numbers are written with dots")
+
   def test_extract_amount_line(self):
     string = "BLANDFARS 1,131kg*79,00kr/kg"
     amount_line = "1,131kg*79,00kr/kg"
@@ -266,6 +274,7 @@ class TestParser(unittest.TestCase):
     amount_line = "2*20,00"
     result = parser.extract_amount_line(string)
     self.assertEqual(result, amount_line, "Should return true when there is no 'st' in the string")
+
 
   def test_is_group_price(self):
     string = "MOZZARELLA 2F20 V3 2*20,00"
@@ -333,6 +342,14 @@ class TestParser(unittest.TestCase):
     amount = parser.get_amount(string)
     self.assertEqual(amount, "1,131kg", "Should be able to handle leading and trailing spaces")
 
+    string = '0.820 kg 84.95 kr/kg'
+    amount = parser.get_amount(string)
+    self.assertEqual(amount, "0.820 kg", "Should be able to extract data from strings with dots")
+
+    string = '2 st 5.00 kr/st'
+    amount = parser.get_amount(string)
+    self.assertEqual(amount, "2 st", "Should be able to extract data from strings with dots")
+
     string = "blablalba"
     amount = parser.get_amount(string)
     self.assertFalse(amount, "Should return false if an invalid quantity string")
@@ -366,9 +383,18 @@ class TestParser(unittest.TestCase):
     amount = parser.get_st_price(string)
     self.assertEqual(amount, "79,00kr/kg", "Should be able to handle leading and trailing spaces")
 
+    string = '0.820 kg 84.95 kr/kg'
+    amount = parser.get_st_price(string)
+    self.assertEqual(amount, "84.95 kr/kg", "Should be able to extract data from strings with dots")
+
+    string = '2 st 5.00 kr/st'
+    amount = parser.get_st_price(string)
+    self.assertEqual(amount, "5.00", "Should be able to extract data from strings with dots")
+
     string = "blablalba"
     amount = parser.get_st_price(string)
     self.assertFalse(amount, "Should return false if an invalid quantity string")
+
 
 
 if __name__ == '__main__':

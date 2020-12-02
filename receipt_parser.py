@@ -9,7 +9,7 @@ import utils
 from google.cloud import vision_v1
 from pdf2image import convert_from_path
 
-MARKETS = ['ica', 'coop', 'hemköp']
+MARKETS = ['ica', 'coop', 'hemköp', 'city gross']
 SKIPWORDS = ['SEK', 'www.coop.se', 'Tel.nr:', 'Kvitto:', 'Datum:', 'Kassör:', 'Org Nr:', 'SUMMERING']
 STOPWORDS = []
 BLACKLIST_WORDS = []
@@ -674,8 +674,8 @@ class GcloudParser:
   # For the string "0,538 kg x 21,95 SEK/kg" it would return "0,538 kg"
   def get_amount(self, string):
     string = string.strip()
-    re_kg = r'(\d+,\d+\s*kg)\s*[x|\*]\s*\d+,\d\d\s*.*/kg'
-    re_st = r'(\d+\s*(st)?)\s*[x|\*]\s*\d+,\d\d'
+    re_kg = r'(\d+[,|\.]\d+\s*kg)\s*[x|\*|\s]\s*\d+[,|\.]\d\d\s*.*/kg'
+    re_st = r'(\d+\s*(st)?)\s*[x|\*|\s]\s*\d+[,|\.]\d\d'
     
     kg_search = regex.search(re_kg, string)
     if kg_search:
@@ -692,8 +692,8 @@ class GcloudParser:
   # For the string "0,538 kg x 21,95 SEK/kg" it would return "21,95 SEK/kg"
   def get_st_price(self, string):
     string = string.strip()
-    re_kg = r'\d+,\d+\s*kg\s*[x|\*]\s*(\d+,\d\d\s*.*/kg)'
-    re_st = r'\d+\s*(st)?\s*[x|\*]\s*(\d+,\d\d)'
+    re_kg = r'\d+[,|\.]\d+\s*kg\s*[x|\*|\s]\s*(\d+[,|\.]\d\d\s*.*/kg)'
+    re_st = r'\d+\s*(st)?\s*[x|\*|\s]\s*(\d+[,|\.]\d\d)'
     
     kg_search = regex.search(re_kg, string)
     if kg_search:
@@ -710,10 +710,11 @@ class GcloudParser:
   # It could be on the form: X,XXX kr x XX,XX SEK/kg (where X is an int)
   # Or it could be on the form: X st x XX,XX
   # Or the form X * XX,XX
+  # City gross has the form X.XXX kg XX.XX kr/kg
   def is_amount_line(self, string):
     string = string.strip()
-    re_kg = r'\d+,\d+\s*kg\s*[x|\*]\s*\d\d*,\d\d\s*.*/kg'
-    re_st = r'\d+\s*(st)?\s*[x|\*]\s*\d\d*,\d\d'
+    re_kg = r'\d+[,|\.]\d+\s*kg\s*[x|\*|\s]\s*\d\d*[,|\.]\d\d\s*.*/kg'
+    re_st = r'\d+\s*(st)?\s*[x|\*|\s]\s*\d\d*[,|\.]\d\d'
     if regex.search(re_kg, string):
       return True
     elif regex.search(re_st, string):
@@ -723,12 +724,12 @@ class GcloudParser:
   # Gets the amount line from a string if it has any
   def extract_amount_line(self, string):
     string = string.strip()
-    re_kg = r'(\d+,\d+\s*kg\s*[x|\*]\s*\d+,\d\d\s*.*/kg)'
+    re_kg = r'(\d+[,|\.]\d+\s*kg\s*[x|\*|\s]\s*\d+[,|\.]\d\d\s*.*/kg)'
     result = regex.search(re_kg, string)
     if result:
       return result.group(1)
 
-    re_st = r'(\d+\s*(st)?\s*[x|\*]\s*\d+,\d\d)'
+    re_st = r'(\d+\s*(st)?\s*[x|\*|\.]\s*\d+[,|\.]\d\d)'
     result = regex.search(re_st, string)
     if result:
       return result.group(1)
