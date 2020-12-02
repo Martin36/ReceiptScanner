@@ -53,6 +53,7 @@ MAPPINGS = {
   'isbergssallad': categories.GRONSAKER,
   'j.ttefranska': categories.SPANNMAL,
   'choklad': categories.SNACKS,
+  'kaffe': categories.KAFFE,
   'kokosmj.lk': categories.OVRIGT,
   'kyckling': categories.KOTT,
   'l.kpulver': categories.KRYDDOR,

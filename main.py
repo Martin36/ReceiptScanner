@@ -11,7 +11,7 @@ from prettyfier import Prettyfier
 from write_to_csv import write_to_csv
 
 
-PATH = 'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-11-29.pdf'
+PATH = 'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-20.pdf'
 receipt_paths = [
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-20.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-27.pdf',
@@ -135,6 +135,6 @@ def categorize_articles():
 
 # validate_json()
 # parse_all_pdfs()
-# parse_one_pdf()
-categorize_articles()
-write_to_csv()
+parse_one_pdf()
+# categorize_articles()
+# write_to_csv()

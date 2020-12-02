@@ -10,7 +10,7 @@ from google.cloud import vision_v1
 from pdf2image import convert_from_path
 
 MARKETS = ['ica', 'coop', 'hemköp']
-SKIPWORDS = ['SEK', 'www.coop.se', 'Tel.nr:', 'Kvitto:', 'Datum:', 'Kassör:', 'Org Nr:', 'SUMMERING', 'RABATTER']
+SKIPWORDS = ['SEK', 'www.coop.se', 'Tel.nr:', 'Kvitto:', 'Datum:', 'Kassör:', 'Org Nr:', 'SUMMERING']
 STOPWORDS = []
 BLACKLIST_WORDS = []
 # TODO: What happens if an article name starts with 'att' (or any of the other words)?
@@ -99,6 +99,8 @@ class GcloudParser:
       }
     sorted_annotations = gcloud_response.text_annotations[1:]
     current_name = ''    
+    # This is used for tracking where the discount items start (e.g. on Coop receipts)
+    discounts_start = None
     
     for i, annotation in enumerate(sorted_annotations):
 
@@ -112,7 +114,7 @@ class GcloudParser:
       t_type = self.check_annotation_type(annotation.description)
 
       if self.debug:
-        print(annotation.description + ' ' + t_type)
+        print(annotation.description + ' ' + t_type)       
 
       if t_type == 'total':
         used_idx = []
@@ -198,6 +200,11 @@ class GcloudParser:
         ymin = np.min([v.y for v in annotation.bounding_poly.vertices])
         ymax = np.max([v.y for v in annotation.bounding_poly.vertices])
         ymid = ymax - (ymax - ymin)/2
+
+        if not discounts_start and \
+           annotation.description.lower() in DISCOUNT_WORDS:
+          discounts_start = ymin
+
         # This represents the bounding box of the current item
         # It includes the additional information that is underneath the name
         # of the article
@@ -256,8 +263,12 @@ class GcloudParser:
           # and if the quantity string is finished, then we can skip this part
           # line_height/2 is added to the condition because sometimes p_ymin 
           # can be smaller for the next word on the line
+          # We also don't want to add any more text if the first word is below
+          # the discount header (only existing for Coop receipts), because discounts
+          # doesn't span multiple lines
           if p_ymin > ymid and \
              p_ymin+line_height/2 < y_min_next_article and \
+             not self.check_if_below_discount(p_ymin, discounts_start) and \
              (not self.is_amount_line(current_quantity_string) or \
               current_price == None):
             # If this is the case, it could be a row that contains information
@@ -324,11 +335,15 @@ class GcloudParser:
                 continue
             else:
               # If we get here it means that the next word is aligned with
-              # the current article, therefore it must be a new article
+              # the current article, therefore it could be a new article
               # and we should stop expanding the bounding box on the y-axis
               if self.check_article_name(p_ann.description) or \
                  p_type == 'total':
                 y_min_next_article = p_ymin
+              # It could also be a discount 
+              if p_ann.description.lower() in DISCOUNT_WORDS and \
+                 not discounts_start:
+                discounts_start = p_ymin
               continue
 
           line_overlap = np.min([p_ymax-ymin, ymax-p_ymin]) / np.max([p_ymax-p_ymin, ymax-ymin])
@@ -368,7 +383,8 @@ class GcloudParser:
             if self.debug:
               print('New price ' + str(current_price))
   
-          elif p_type == 'text':
+          elif p_type == 'text' or \
+               p_type == 'int':
             # Checking if left side of bounding box for next word is before the right side of the first word
             # in that case it means that the next word comes BEFORE the word that is already added, 
             # and should not be added
@@ -616,6 +632,13 @@ class GcloudParser:
         return True
     return False
   
+  def check_if_below_discount(self, ymin, discounts_start):
+    if not discounts_start:
+      return False
+    if ymin > discounts_start:
+      return True
+    return False
+
   def convert_price(self, string):
     return string.replace('.', ',')
 
