@@ -41,6 +41,11 @@ class TestUtils(unittest.TestCase):
     correct = 39.90
     self.assertEqual(result, correct, "Should return parsed float if number contains dot")
 
+    string = "39. 90"
+    result = utils.convert_to_nr(string)
+    correct = 39.90
+    self.assertEqual(result, correct, "Should be able to handle strings with spaces")
+
     string = "blabla"
     result = utils.convert_to_nr(string)
     correct = None

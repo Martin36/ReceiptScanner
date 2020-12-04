@@ -1,6 +1,7 @@
 import re
 import numpy as np
 import unidecode
+import datetime
 
 SWE_LETTERS = ['å', 'Å', 'ä', 'Ä', 'ö', 'Ö']
 
@@ -15,6 +16,7 @@ def convert_to_price_string(number):
     return None
 
 def convert_to_nr(string):
+  string = string.replace(" ", "")
   try:
     parsed_number = float(string.replace(",", ".")) 
   except ValueError:
@@ -105,3 +107,13 @@ def replace_weird_chars(string):
     if char in string:
       string = string.replace(char, new_char)
   return string
+
+def parse_date(date_str):
+  for fmt in ['%d.%m.%y', '%Y-%m-%d', '%d.%m.%y %H:%M', '%d.%m.%Y', '%y-%m-%d']:
+    for substr in date_str.split(' '):
+      try:
+        new_purch_date = datetime.datetime.strptime(substr, fmt).strftime('%Y-%m-%d')
+        return new_purch_date
+      except Exception:
+        pass
+  return None

@@ -395,6 +395,18 @@ class TestParser(unittest.TestCase):
     amount = parser.get_st_price(string)
     self.assertFalse(amount, "Should return false if an invalid quantity string")
 
+  def test_is_citygross_special(self):
+    string = ' VISPGRADDE 36% ( 71.85) Antal: 3 st 23.95kr/st Mixrabatt (- 27.00)'
+    result = parser.is_citygross_special(string)
+    self.assertTrue(result, "Should return True if correct special article string")
+
+  def test_get_special_article_info(self):
+    name_str = 'ARLA GRADDE 14,95/ST'
+    qty_str = ' VISPGRADDE 36% ( 71.85) Antal: 3 st 23.95kr/st Mixrabatt (- 27.00)'
+    price, amount, st_price = parser.get_special_article_info(name_str, qty_str)
+    self.assertEqual(price, "44,85", "Should get the correct price")
+    self.assertEqual(amount, "3 st", "Should get the correct amount")
+    self.assertEqual(st_price, "14,95/ST", "Should get the correct st price")
 
 
 if __name__ == '__main__':

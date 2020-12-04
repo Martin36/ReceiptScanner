@@ -1,7 +1,6 @@
 # pylint: disable=no-member
 import io
 import os
-import datetime
 import numpy as np
 import regex
 import utils
@@ -403,6 +402,15 @@ class GcloudParser:
         y_min_next_article = g_ymax
         if self.debug:
           print(current_name + ' ' + str(current_price))
+
+        if not current_price and \
+           self.is_citygross_special(current_quantity_string):
+          price, amount, st_price = self.get_special_article_info(current_name, 
+            current_quantity_string)
+          current_price = price
+          current_amount = amount
+          current_st_price = st_price
+
         if current_price:
           skip_this = False
           if self.debug:
@@ -455,7 +463,8 @@ class GcloudParser:
               current_name = current_name.replace(current_quantity_string, '')  
 
             # Check if the article has a correct quantity string
-            if self.is_amount_line(current_quantity_string):
+            if self.is_amount_line(current_quantity_string) and \
+               (not current_amount or not current_st_price):
               current_amount = self.get_amount(current_quantity_string)
               current_st_price = self.get_st_price(current_quantity_string)
 
@@ -481,7 +490,7 @@ class GcloudParser:
             seen_indexes += used_idx
 
       if t_type == 'date':
-        dates.append(self.parse_date(annotation.description))
+        dates.append(utils.parse_date(annotation.description))
 
       if t_type == 'market':
         if self.check_market(annotation.description):
@@ -535,7 +544,7 @@ class GcloudParser:
           # Check if the current name is a date, and add it to dates array
           if self.check_annotation_type(current_name) == 'date':
             seen_indexes += used_idx
-            dates.append(self.parse_date(current_name))
+            dates.append(utils.parse_date(current_name))
             break
 
     return articles, dates, self.market, discounts
@@ -546,7 +555,7 @@ class GcloudParser:
       return 'hanging'
     if utils.check_price(text_body):
       return 'number'
-    if self.parse_date(text_body):
+    if utils.parse_date(text_body):
       return 'date'
     if utils.is_integer(text_body):
       return 'int'
@@ -760,12 +769,47 @@ class GcloudParser:
     st_price = price/amount
     return amount, st_price
 
-  def parse_date(self, date_str):
-    for fmt in ['%d.%m.%y', '%Y-%m-%d', '%d.%m.%y %H:%M', '%d.%m.%Y', '%y-%m-%d']:
-      for substr in date_str.split(' '):
-        try:
-          new_purch_date = datetime.datetime.strptime(substr, fmt).strftime('%Y-%m-%d')
-          return new_purch_date
-        except Exception:
-          pass
-    return None
+  # City Gross receipt can have special items where the sum is in
+  # parentesis and there is no price on the far right
+  def is_citygross_special(self, string):
+    reg = r'\(\s*\d\d[\.|,]\d\d\s*\)'
+    if regex.search(reg, string):
+      return True
+    return False
+
+  def get_special_article_info(self, name_str, qty_str):
+    reg_price = r'\(\s*(\d\d[\.|,]\d\d)\s*\)'
+    reg_dis = r'\(\s*(-\s*\d\d[\.|,]\d\d)\s*\)'
+    reg_amount = r'\d+\s*st'
+    reg_st_pr = r'\d\d[,|\.]\d\d/ST'
+    price = None
+    amount = None
+    st_price = None
+    discount = None
+    
+    match_price = regex.search(reg_price, qty_str)
+    if match_price:
+      price = match_price.group(1)
+    
+    match_dis = regex.search(reg_dis, qty_str)
+    if match_dis:
+      discount = match_dis.group(1)
+
+    # Calculate the actual price
+    if discount:
+      price = utils.convert_to_nr(price)
+      discount = utils.convert_to_nr(discount)
+      price += discount
+      price = utils.convert_to_price_string(price)
+
+    match_amount = regex.search(reg_amount, qty_str)
+    if match_amount:
+      amount = match_amount.group(0)
+
+    match_st_pr = regex.search(reg_st_pr, name_str)
+    if match_st_pr:
+      st_price = match_st_pr.group(0)
+    
+    return price, amount, st_price
+  
+
