@@ -88,10 +88,7 @@ class GcloudParser:
     if len(gcloud_response.text_annotations) == 0:
       return None, None, None, None
     base_ann = gcloud_response.text_annotations[0]
-    g_xmin = np.min([v.x for v in base_ann.bounding_poly.vertices])
-    g_xmax = np.max([v.x for v in base_ann.bounding_poly.vertices])
-    g_ymin = np.min([v.y for v in base_ann.bounding_poly.vertices])
-    g_ymax = np.max([v.y for v in base_ann.bounding_poly.vertices])
+    g_xmin, g_xmax, g_ymin, g_ymax = utils.get_bounding_box(base_ann.bounding_poly.vertices)
     if self.bounding_box == None:
       self.bounding_box = {
         'xmin': g_xmin.item(),  # Converts from numpy type to regular
@@ -202,10 +199,7 @@ class GcloudParser:
       if t_type == 'text':
         used_idx = []
         used_pr = []
-        xmin = np.min([v.x for v in annotation.bounding_poly.vertices])
-        xmax = np.max([v.x for v in annotation.bounding_poly.vertices])
-        ymin = np.min([v.y for v in annotation.bounding_poly.vertices])
-        ymax = np.max([v.y for v in annotation.bounding_poly.vertices])
+        xmin, xmax, ymin, ymax = utils.get_bounding_box(annotation.bounding_poly.vertices)
         ymid = ymax - (ymax - ymin)/2
 
         if not discounts_start and \
@@ -253,10 +247,7 @@ class GcloudParser:
           if skip_this:
             continue
 
-          p_xmin = np.min([v.x for v in p_ann.bounding_poly.vertices])
-          p_xmax = np.max([v.x for v in p_ann.bounding_poly.vertices])
-          p_ymin = np.min([v.y for v in p_ann.bounding_poly.vertices])
-          p_ymax = np.max([v.y for v in p_ann.bounding_poly.vertices])
+          p_xmin, p_xmax, p_ymin, p_ymax = utils.get_bounding_box(p_ann.bounding_poly.vertices)
 
           # This means that the first word is underneath the next word
           # Therefore we can skip this, since we never want to add a word
@@ -520,10 +511,7 @@ class GcloudParser:
         # This could be a date if the parts of the date were parsed seperately
         used_idx = []
         used_pr = []
-        xmin = np.min([v.x for v in annotation.bounding_poly.vertices])
-        xmax = np.max([v.x for v in annotation.bounding_poly.vertices])
-        ymin = np.min([v.y for v in annotation.bounding_poly.vertices])
-        ymax = np.max([v.y for v in annotation.bounding_poly.vertices])
+        xmin, xmax, ymin, ymax = utils.get_bounding_box(annotation.bounding_poly.vertices)
         ymid = ymax - (ymax - ymin)/2
         line_height = ymax - ymin
         total_price = None
@@ -543,10 +531,7 @@ class GcloudParser:
           if j in seen_prices or j in seen_indexes:
             continue
 
-          p_xmin = np.min([v.x for v in p_ann.bounding_poly.vertices])
-          p_xmax = np.max([v.x for v in p_ann.bounding_poly.vertices])
-          p_ymin = np.min([v.y for v in p_ann.bounding_poly.vertices])
-          p_ymax = np.max([v.y for v in p_ann.bounding_poly.vertices])
+          p_xmin, p_xmax, p_ymin, p_ymax = utils.get_bounding_box(p_ann.bounding_poly.vertices)
 
           # This means that the first word is underneath the next word
           # Therefore we can skip this, since we never want to add a word

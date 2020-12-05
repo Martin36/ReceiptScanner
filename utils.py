@@ -118,4 +118,10 @@ def parse_date(date_str):
         pass
   return None
 
+def get_bounding_box(vertices):
+  xmin = np.min([v.x for v in vertices])
+  xmax = np.max([v.x for v in vertices])
+  ymin = np.min([v.y for v in vertices])
+  ymax = np.max([v.y for v in vertices])
+  return xmin, xmax, ymin, ymax
 
