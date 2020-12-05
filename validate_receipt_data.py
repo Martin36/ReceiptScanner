@@ -23,15 +23,17 @@ class ReceiptDataValidator:
   def check_nr_of_articles(self, parsed_data):
     nr_parsed_articles = self.count_articles(parsed_data['articles'])
     nr_receipt_articles = self.get_nr_receipt_articles(parsed_data['totals'])
+    err_msg = None
     if not nr_receipt_articles:
       # This means that the amount of articles is not specified on the receipt
       # and therefore this validation is not relevant
       # TODO: This could also mean that the nr of articles were not scanned correctly
       # TODO: How should that case be handled?
-      return True
+      return True, err_msg
     if nr_parsed_articles != nr_receipt_articles:
-      return False
-    return True
+      err_msg = 'Error: nr of parsed articles were {}, but the amount on the receipt were {}'.format(nr_parsed_articles, nr_receipt_articles)
+      return False, err_msg
+    return True, err_msg
 
   # Checks if the total amount on the receipt has been scanned correctly
   def check_totals(self, totals):

@@ -39,15 +39,17 @@ class GcloudParser:
     self.market = None
     self.largets_number = 0
     self.bounding_box = None
+    self.articles = []
+    self.discounts = []
 
   def parse_pdf(self, path):
     self.totals = []
     self.market = None
     self.bounding_box = None
+    self.articles = []
+    self.discounts = []
     pages = convert_from_path(path, 500)
-    articles = []
     dates = []
-    discounts = []
     for page in pages:
       page.save('tmp.jpg')
       gcloud_response = self.detect_text('tmp.jpg')
@@ -55,10 +57,10 @@ class GcloudParser:
       _art, _dat, _mar, _dis = self.parse_response(gcloud_response)
       if not _art:
         continue
-      articles += _art
+      self.articles += _art
       dates += _dat
-      discounts += _dis
-    return articles, dates, self.market, discounts, self.totals, self.bounding_box
+      self.discounts += _dis
+    return self.articles, dates, self.market, self.discounts, self.totals, self.bounding_box
 
   # Detects text in the file.
   def detect_text(self, path):
@@ -82,6 +84,7 @@ class GcloudParser:
     discounts = []
     seen_indexes = []
     seen_prices = []
+    # Handles the case when one page is empty
     if len(gcloud_response.text_annotations) == 0:
       return None, None, None, None
     base_ann = gcloud_response.text_annotations[0]
@@ -152,6 +155,11 @@ class GcloudParser:
           # If the current word is too far underneath the first, we skip it
           if p_ymin-2*line_height > ymax:
             continue
+
+          # There may not be any space between the parentesis and article 
+          # amount, therefore we have to remove the parentesis before checking
+          # annotation type
+          p_ann.description = p_ann.description.replace('(', '')
 
           p_type = self.check_annotation_type(p_ann.description)
 
@@ -255,7 +263,12 @@ class GcloudParser:
           # above the first       
           if p_ymax < ymin:
             continue
-
+          
+          if self.check_market(current_name):
+            seen_indexes += used_idx
+            self.market = current_name.lower()
+            break
+                    
           p_type = self.check_annotation_type(p_ann.description)
 
           # Check if the next word is underneath the first
@@ -450,10 +463,12 @@ class GcloudParser:
             # Check if the current discount price has a value
             # then this item has an discount associated with it
             if current_discount_price != None:
-              discounts.append({
+              discount = {
                 'name': current_quantity_string,
                 'price': current_discount_price
-              })
+              }
+              if not self.check_discount_exists(discount):
+                discounts.append(discount)
 
             # Sometimes the quantity string is on the same line as the article
             # In this case we need to move it from the article string to the 
@@ -479,13 +494,18 @@ class GcloudParser:
               current_amount = str(int(new_amount)) + ' st'
               current_st_price = utils.convert_to_price_string(st_price)
 
-            articles.append({
+            article = {
               'name': current_name.strip(),
               'sum': current_price,
               'amount': current_amount if current_amount else '1 st',
               'price': current_st_price if current_st_price else current_price,
-              'bounding_box': bounding_box
-            })
+              'bounding_box': bounding_box,
+              'additional_info': current_quantity_string
+            }
+
+            if not self.check_article_exists(article):
+              articles.append(article)
+
             seen_prices += used_pr
             seen_indexes += used_idx
 
@@ -580,7 +600,7 @@ class GcloudParser:
 
   def check_market(self, text_body):
     for market in MARKETS:
-      if market.lower() in text_body.lower().split(' '):
+      if market.lower() in text_body.lower():
         return market
     
     # Hemköp will probably not be handled correctly since 
@@ -812,4 +832,18 @@ class GcloudParser:
     
     return price, amount, st_price
   
+  def check_discount_exists(self, discount):
+    for dis_item in self.discounts:
+      if dis_item['name'] == discount['name'] and \
+         dis_item['price'] == discount['price']:
+        return True
+    return False
 
+  def check_article_exists(self, article):
+    for art_item in self.articles:
+      if art_item['name'] == article['name'] and \
+         art_item['sum'] == article['sum'] and \
+         art_item['amount'] == article['amount'] and \
+         art_item['price'] == article['price']:
+        return True
+    return False

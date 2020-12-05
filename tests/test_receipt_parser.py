@@ -158,6 +158,10 @@ class TestParser(unittest.TestCase):
     result = parser.check_market(market)
     self.assertEqual(result, "hemköp", "Should work for hemköp, even if Ö is incorrect")
 
+    market = 'CITY GROSS'
+    result = parser.check_market(market)
+    self.assertEqual(result, "city gross", "Should work for city gross")
+
     market = "blablabla"
     result = parser.check_market(market)
     self.assertEqual(result, None, "Should return none if input is not a market recognized by the algorithm")
@@ -407,6 +411,11 @@ class TestParser(unittest.TestCase):
     self.assertEqual(price, "44,85", "Should get the correct price")
     self.assertEqual(amount, "3 st", "Should get the correct amount")
     self.assertEqual(st_price, "14,95/ST", "Should get the correct st price")
+
+  def test_check_discount_exists(self):
+
+
+  def test_check_article_exists(self):
 
 
 if __name__ == '__main__':

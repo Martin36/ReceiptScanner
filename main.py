@@ -20,6 +20,7 @@ receipt_paths = [
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-11-22.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-11-25.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\citygross-20-12-01.pdf',
+  'D:\\Documents\\Kvitto Scanner\\Receipts\\citygross-20-12-04.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-02.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-12.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-18.pdf',
@@ -58,9 +59,9 @@ def parse_one_pdf():
     "totals": totals, 
     "bounding_box": bounding_box
   }
-  is_corr_nr_articles = validator.check_nr_of_articles(result_obj)
+  is_corr_nr_articles, err_msg = validator.check_nr_of_articles(result_obj)
   if not is_corr_nr_articles:
-    print("The parsed nr of articles are not the same as the amount on the receipt")
+    print(err_msg)
 
 
 def parse_all_pdfs():
