@@ -28,6 +28,7 @@ receipt_paths = [
   'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-11-29.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\ica-20-10-11.pdf',
   'D:\\Documents\\Kvitto Scanner\\Receipts\\ica-20-11-09.pdf',
+  'D:\\Documents\\Kvitto Scanner\\Receipts\\ica-20-12-07.pdf',
 ]
 
 parser = GcloudParser()

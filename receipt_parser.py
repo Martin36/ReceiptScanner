@@ -340,8 +340,7 @@ class GcloudParser:
               # If we get here it means that the next word is aligned with
               # the current article, therefore it could be a new article
               # and we should stop expanding the bounding box on the y-axis
-              if self.check_article_name(p_ann.description) or \
-                 p_type == 'total':
+              if self.check_if_next_article(p_ann.description, p_type):
                 y_min_next_article = p_ymin
               # It could also be a discount 
               if p_ann.description.lower() in DISCOUNT_WORDS and \
@@ -581,6 +580,17 @@ class GcloudParser:
     rex = r'^(\d{4}|\d{2})(-|-\d{2})?(-|-\d{2})?$'
     if regex.search(rex, text_body):
       return True
+    return False
+
+  def check_if_next_article(self, text_body, p_type):
+    if self.check_article_name(text_body) or \
+       p_type == 'total':
+      return True
+    # Handles  the special case for city gross 
+    # TODO: Find a better solution for this
+    if text_body.lower() in ['sum'] and \
+       self.market in ['city gross']:
+       return True
     return False
 
   def check_market(self, text_body):
