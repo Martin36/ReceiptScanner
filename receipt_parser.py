@@ -9,7 +9,7 @@ from google.cloud import vision_v1
 from pdf2image import convert_from_path
 
 MARKETS = ['ica', 'coop', 'hemköp', 'city gross']
-SKIPWORDS = ['SEK', 'www.coop.se', 'Tel.nr:', 'Kvitto:', 'Datum:', 'Kassör:', 'Org Nr:', 'SUMMERING']
+SKIPWORDS = ['SEK', 'www.coop.se', 'Tel.nr:', 'Kvitto:', 'Datum:', 'Kassör:', 'Org Nr:', 'SUMMERING', 'summa', 'sumna', 'subtotalrabatt']
 STOPWORDS = []
 BLACKLIST_WORDS = []
 # TODO: What happens if an article name starts with 'att' (or any of the other words)?
@@ -623,7 +623,7 @@ class GcloudParser:
 
     # Coop and Hemköp receipts have all articles in only capital letters
     # so if the market is any of them we skip this regex match
-    if self.market not in ['coop', 'hemköp']:
+    if self.market not in ['coop', 'hemköp', 'city gross']:
       re_ica = regex.compile(r'\*?[[:upper:]][[:lower:]]*')
       if regex.fullmatch(re_ica, words[0]):
         return True
