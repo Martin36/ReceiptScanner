@@ -37,12 +37,12 @@ categorizer = Categorizer()
 prettyfier = Prettyfier()
 
 def parse_one_pdf():
-  articles, dates, markets, discounts, totals, bounding_box = parser.parse_pdf(PATH)
+  articles, dates, market, discounts, totals, bounding_box = parser.parse_pdf(PATH)
   articles = prettyfier.clean_article_names(articles)
   pprint(articles)
   #print(len(articles))
   print(dates)
-  print(markets)
+  print(market)
   pprint(discounts)
   print(totals)
   pprint(bounding_box)
@@ -55,7 +55,7 @@ def parse_one_pdf():
   result_obj = {
     "articles": articles, 
     "dates": dates, 
-    "markets": markets, 
+    "market": market, 
     "discounts": discounts, 
     "totals": totals, 
     "bounding_box": bounding_box

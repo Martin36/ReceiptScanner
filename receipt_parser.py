@@ -4,6 +4,7 @@ import os
 import numpy as np
 import regex
 import utils
+import unidecode
 
 from google.cloud import vision_v1
 from pdf2image import convert_from_path
@@ -836,7 +837,7 @@ class GcloudParser:
 
   def check_article_exists(self, article):
     for art_item in self.articles:
-      if art_item['name'] == article['name'] and \
+      if unidecode.unidecode(art_item['name']) == unidecode.unidecode(article['name']) and \
          art_item['sum'] == article['sum'] and \
          art_item['amount'] == article['amount'] and \
          art_item['price'] == article['price']:

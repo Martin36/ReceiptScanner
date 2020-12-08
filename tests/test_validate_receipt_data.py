@@ -483,7 +483,8 @@ class TestReceiptDataValidator(unittest.TestCase):
         "price": "14,50",
       },
     ]
-    result = validator.count_articles(articles)
+    market = 'coop'
+    result = validator.count_articles(articles, market)
     correct = 4
     self.assertEqual(result, correct, "Should return correct amount of articles")
 
@@ -513,7 +514,7 @@ class TestReceiptDataValidator(unittest.TestCase):
         }
       }
     ]
-    result = validator.count_articles(articles)
+    result = validator.count_articles(articles, market)
     correct = 3
     self.assertEqual(result, correct, "Should count weight-based articles as 1")
 
@@ -553,6 +554,12 @@ class TestReceiptDataValidator(unittest.TestCase):
     result = validator.get_nr_receipt_articles(totals)
     correct = 32
     self.assertEqual(result, correct, "Should return correct amount, even if one of the entries does not have any amount")
+
+  def test_check_if_skip_article(self):
+    name = '#PANT'
+    result = validator.check_if_skip_article(name)
+    self.assertTrue(result, "Should skip pant articles")
+
 
 if __name__ == '__main__':
   unittest.main()

@@ -2,6 +2,8 @@ import re
 import utils
 import numpy as np
 
+# Articles that should not be counted (for now, only for city gross receipts)
+SKIP_ARTICLES = ['pant']
 
 class ReceiptDataValidator:
   def __init__(self, debug=False):
@@ -21,7 +23,8 @@ class ReceiptDataValidator:
     return faulty_indx
 
   def check_nr_of_articles(self, parsed_data):
-    nr_parsed_articles = self.count_articles(parsed_data['articles'])
+    market = parsed_data['market']
+    nr_parsed_articles = self.count_articles(parsed_data['articles'], market)
     nr_receipt_articles = self.get_nr_receipt_articles(parsed_data['totals'])
     err_msg = None
     if not nr_receipt_articles:
@@ -78,9 +81,13 @@ class ReceiptDataValidator:
           return False, err_msg
     return True, None
 
-  def count_articles(self, articles):
+  def count_articles(self, articles, market):
     total = 0
     for article in articles:
+      # For city gross receipts, pant and bags should not be counted
+      if market == 'city gross' and \
+         self.check_if_skip_article(article['name']):
+        continue
       amount = article['amount']
       # If the article is measured in weight, it is counted as one
       if "kg" in amount:
@@ -100,3 +107,10 @@ class ReceiptDataValidator:
       if amount != None:
         result = int(amount)
     return result
+
+  def check_if_skip_article(self, name):
+    for string in SKIP_ARTICLES:
+      reg = re.compile(string)
+      if re.search(reg, name.lower()):
+        return True
+    return False
