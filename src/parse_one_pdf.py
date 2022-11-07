@@ -1,6 +1,6 @@
-from receipt_parser import GcloudParser
-from validate_receipt_data import ReceiptDataValidator
-from prettyfier import Prettyfier
+from src.receipt_parser import GcloudParser
+from src.validate_receipt_data import ReceiptDataValidator
+from src.prettyfier import Prettyfier
 
 
 PATH = "data/receipts/coop/coop-22-02-22.pdf"

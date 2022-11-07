@@ -4,7 +4,7 @@ import os
 import datetime
 import numpy as np
 import regex
-import utils
+import src.utils as utils
 
 from google.cloud import vision_v1
 from pdf2image import convert_from_path

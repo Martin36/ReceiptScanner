@@ -1,6 +1,6 @@
 import re
 
-import categories
+import src.categories as categories
 
 MAPPINGS = {
   'avo.ado': categories.GRONSAKER,

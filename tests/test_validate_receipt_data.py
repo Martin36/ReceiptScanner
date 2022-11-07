@@ -2,7 +2,7 @@ import unittest
 import sys, os
 from os.path import dirname, join, abspath
 sys.path.insert(0, abspath(join(dirname(__file__), '..')))
-from validate_receipt_data import ReceiptDataValidator
+from src.validate_receipt_data import ReceiptDataValidator
 
 validator = ReceiptDataValidator()
 

@@ -1,13 +1,13 @@
 import json
 import os
 import sys
-import utils
+import src.utils as utils
 from glob import glob
-from receipt_parser import GcloudParser
-from validate_receipt_data import ReceiptDataValidator
-from categorizer import Categorizer
-from prettyfier import Prettyfier
-from write_to_csv import write_to_csv
+from src.receipt_parser import GcloudParser
+from src.validate_receipt_data import ReceiptDataValidator
+from src.categorizer import Categorizer
+from src.prettyfier import Prettyfier
+from src.write_to_csv import write_to_csv
 
 
 PATH = "data/receipts/coop/coop-22-02-22.pdf"

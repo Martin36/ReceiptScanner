@@ -2,7 +2,7 @@ import unittest
 import sys, os
 from os.path import dirname, join, abspath
 sys.path.insert(0, abspath(join(dirname(__file__), '..')))
-from categorizer import Categorizer
+from src.categorizer import Categorizer
 
 categorizer = Categorizer()
 

@@ -1,4 +1,4 @@
-import utils
+import src.utils as utils
 
 
 class Prettyfier:

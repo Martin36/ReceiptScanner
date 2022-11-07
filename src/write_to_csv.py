@@ -1,7 +1,7 @@
 import json
 import os
 import csv
-import utils
+import src.utils as utils
 import sys
 import numpy as np
 
