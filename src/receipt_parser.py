@@ -1,35 +1,15 @@
 # pylint: disable=no-member
 import io
-import os
 import datetime
 import numpy as np
 import regex
-import src.utils as utils
+import utils
 
 from google.cloud import vision_v1
 from pdf2image import convert_from_path
-
-MARKETS = ['ica', 'coop', 'hemköp', 'city gross']
-SKIPWORDS = ['SEK', 'www.coop.se', 'Tel.nr:', 'Kvitto:', 
-             'Kvitto', 'Datum:', 'Datum', 'Kassör:', 'Org Nr:', 
-             'Org', 'Nr:', 'SUMMERING', 'KÖP', 'Kassör',
-             'Kassör:']
-# TODO: What happens if an article name starts with 'att' (or any of the other words)?
-TOTAL_WORDS = ['att', 'betala', 'totalt', 'total']
-DISCOUNT_WORDS = ['summering', 'rabatter']
-# This represents the offset on the x-axis that the additional information
-# has from the start of the article name. It needs to be tweaked so that it
-# works correctly
-X_OFFSET = 50
-# This represents the distance from the edge of the receipt that the 
-# price should end AFTER. It is not an optimal solution since the 
-# required distance may differ between receipts
-PRICE_OFFSET = 200
-# This is used to check if an article has been scanned correctly
-# One common feature of the articles for different receipts is that
-# the name starts close to the left edge of the receipt
-ARTICLE_OFFSET = 150
-
+from constants import ( MARKETS, SKIPWORDS, TOTAL_WORDS, 
+                       DISCOUNT_WORDS, X_OFFSET, PRICE_OFFSET, 
+                       ARTICLE_OFFSET )
 
 class GcloudParser:
   def __init__(self, debug=False, min_length=5, max_height=1):
@@ -86,10 +66,7 @@ class GcloudParser:
     if len(gcloud_response.text_annotations) == 0:
       return None, None, None, None
     base_ann = gcloud_response.text_annotations[0]
-    g_xmin = np.min([v.x for v in base_ann.bounding_poly.vertices])
-    g_xmax = np.max([v.x for v in base_ann.bounding_poly.vertices])
-    g_ymin = np.min([v.y for v in base_ann.bounding_poly.vertices])
-    g_ymax = np.max([v.y for v in base_ann.bounding_poly.vertices])
+    g_xmin, g_xmax, g_ymin, g_ymax = utils.get_bb_corners(base_ann.bounding_poly.vertices)    
     if self.bounding_box == None:
       self.bounding_box = {
         'xmin': g_xmin.item(),  # Converts from numpy type to regular
@@ -119,10 +96,7 @@ class GcloudParser:
       if t_type == 'total':
         used_idx = []
         used_pr = []
-        xmin = np.min([v.x for v in annotation.bounding_poly.vertices])
-        xmax = np.max([v.x for v in annotation.bounding_poly.vertices])
-        ymin = np.min([v.y for v in annotation.bounding_poly.vertices])
-        ymax = np.max([v.y for v in annotation.bounding_poly.vertices])
+        xmin, xmax, ymin, ymax = utils.get_bb_corners(annotation.bounding_poly.vertices)
         ymid = ymax - (ymax - ymin)/2
         line_height = ymax - ymin
         total_price = None
@@ -139,11 +113,7 @@ class GcloudParser:
           if j in seen_prices or j in seen_indexes:
             continue
 
-          p_xmin = np.min([v.x for v in p_ann.bounding_poly.vertices])
-          p_xmax = np.max([v.x for v in p_ann.bounding_poly.vertices])
-          p_ymin = np.min([v.y for v in p_ann.bounding_poly.vertices])
-          p_ymax = np.max([v.y for v in p_ann.bounding_poly.vertices])
-
+          p_xmin, p_xmax, p_ymin, p_ymax = utils.get_bb_corners(p_ann.bounding_poly.vertices)
           # This means that the first word is underneath the next word
           # Therefore we can skip this, since we never want to add a word
           # above the first       
@@ -195,10 +165,7 @@ class GcloudParser:
       if t_type == 'text':
         used_idx = []
         used_pr = []
-        xmin = np.min([v.x for v in annotation.bounding_poly.vertices])
-        xmax = np.max([v.x for v in annotation.bounding_poly.vertices])
-        ymin = np.min([v.y for v in annotation.bounding_poly.vertices])
-        ymax = np.max([v.y for v in annotation.bounding_poly.vertices])
+        xmin, xmax, ymin, ymax = utils.get_bb_corners(annotation.bounding_poly.vertices)
         ymid = ymax - (ymax - ymin)/2
 
         if not discounts_start and \
@@ -246,11 +213,7 @@ class GcloudParser:
           if skip_this:
             continue
 
-          p_xmin = np.min([v.x for v in p_ann.bounding_poly.vertices])
-          p_xmax = np.max([v.x for v in p_ann.bounding_poly.vertices])
-          p_ymin = np.min([v.y for v in p_ann.bounding_poly.vertices])
-          p_ymax = np.max([v.y for v in p_ann.bounding_poly.vertices])
-
+          p_xmin, p_xmax, p_ymin, p_ymax = utils.get_bb_corners(p_ann.bounding_poly.vertices)
           # This means that the first word is underneath the next word
           # Therefore we can skip this, since we never want to add a word
           # above the first       
@@ -493,10 +456,7 @@ class GcloudParser:
         # This could be a date if the parts of the date were parsed seperately
         used_idx = []
         used_pr = []
-        xmin = np.min([v.x for v in annotation.bounding_poly.vertices])
-        xmax = np.max([v.x for v in annotation.bounding_poly.vertices])
-        ymin = np.min([v.y for v in annotation.bounding_poly.vertices])
-        ymax = np.max([v.y for v in annotation.bounding_poly.vertices])
+        xmin, xmax, ymin, ymax = utils.get_bb_corners(annotation.bounding_poly.vertices)
         ymid = ymax - (ymax - ymin)/2
         line_height = ymax - ymin
         total_price = None
@@ -516,11 +476,7 @@ class GcloudParser:
           if j in seen_prices or j in seen_indexes:
             continue
 
-          p_xmin = np.min([v.x for v in p_ann.bounding_poly.vertices])
-          p_xmax = np.max([v.x for v in p_ann.bounding_poly.vertices])
-          p_ymin = np.min([v.y for v in p_ann.bounding_poly.vertices])
-          p_ymax = np.max([v.y for v in p_ann.bounding_poly.vertices])
-
+          p_xmin, p_xmax, p_ymin, p_ymax = utils.get_bb_corners(p_ann.bounding_poly.vertices)
           # This means that the first word is underneath the next word
           # Therefore we can skip this, since we never want to add a word
           # above the first       
@@ -689,6 +645,7 @@ class GcloudParser:
 
     else:
       return False
+
 
   # Gets the price for each of a product from a string
   # For the string "0,538 kg x 21,95 SEK/kg" it would return "21,95 SEK/kg"

@@ -1,9 +1,9 @@
 import unittest
-import sys, os
+import sys
 from os.path import dirname, join, abspath
 sys.path.insert(0, abspath(join(dirname(__file__), '..')))
 
-from src.write_to_csv import *
+from write_to_csv import *
 
 class TestWriteToCsv(unittest.TestCase):
 

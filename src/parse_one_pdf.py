@@ -1,16 +1,14 @@
-from src.receipt_parser import GcloudParser
-from src.validate_receipt_data import ReceiptDataValidator
-from src.prettyfier import Prettyfier
-
-
-PATH = "data/receipts/coop/coop-22-02-22.pdf"
+import argparse
+from receipt_parser import GcloudParser
+from validate_receipt_data import ReceiptDataValidator
+from prettyfier import Prettyfier
 
 parser = GcloudParser()
 validator = ReceiptDataValidator()
 prettyfier = Prettyfier()
 
-def parse_one_pdf():
-  articles, dates, markets, discounts, totals, bounding_box = parser.parse_pdf(PATH)
+def parse_one_pdf(file: str):
+  articles, dates, markets, discounts, totals, bounding_box = parser.parse_pdf(file)
   articles = prettyfier.clean_article_names(articles)
   # pprint(articles)
   # #print(len(articles))
@@ -37,5 +35,11 @@ def parse_one_pdf():
   if not is_corr_nr_articles:
     print("The parsed nr of articles are not the same as the amount on the receipt")
 
-
-parse_one_pdf()
+if __name__ ==  "__main__":
+  arg_parser = argparse.ArgumentParser(
+    description="Parses a single PDF file into a structured format"
+  )
+  arg_parser.add_argument("--file", help="Path to the file to be parsed")
+  args = arg_parser.parse_args()
+  
+  parse_one_pdf(args.file)

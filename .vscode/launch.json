@@ -16,9 +16,23 @@
       "name": "Parse one PDF",
       "type": "python",
       "request": "launch",
-      "program": "${workspaceRoot}/",
+      "program": "${workspaceRoot}/src/parse_one_pdf.py",
       "console": "integratedTerminal",
-      "justMyCode": true
+      "justMyCode": true,
+      "args": [
+        "--file=data/receipts/coop/coop-22-02-22.pdf"
+      ]
+    },
+    {
+      "name": "Validate json",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceRoot}/src/validate_json.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--file=articles.json"
+      ]
     },
 
   ]

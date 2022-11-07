@@ -23,6 +23,26 @@ def convert_to_nr(string):
   return parsed_number
 
 
+def get_bb_corners(vertices):
+  """Returns the corners of the bounding box
+
+  Args:
+      vertices (any): The vertices of the bounding polygon
+
+  Returns:
+      tuple: A tuple of (xmin, xmax, ymin, ymax)
+  """
+  xmin = np.min([v.x for v in vertices])
+  xmax = np.max([v.x for v in vertices])
+  ymin = np.min([v.y for v in vertices])
+  ymax = np.max([v.y for v in vertices])
+  return xmin, xmax, ymin, ymax
+
+
+def get_first(array):
+  return next(iter(array), None)
+
+
 def get_number_from_string(string):
   rex = r'[\d]+[.,\d]+|[\d]*[.][\d]+|[\d]+'
   match = re.search(rex, string)
@@ -42,8 +62,6 @@ def remove_double_minus_sign(string):
   else:
     return string
 
-def get_first(array):
-  return next(iter(array), None)
 
 # Function for detecting a price string
 # A price string has the format (X)XX,XX

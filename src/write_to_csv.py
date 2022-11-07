@@ -1,9 +1,8 @@
 import json
 import os
 import csv
-import src.utils as utils
+import utils
 import sys
-import numpy as np
 
 def write_to_csv():
   with open(os.path.join(sys.path[0], 'articles.csv'), 'w', newline='', encoding='utf8') as csvfile:
