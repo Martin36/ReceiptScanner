@@ -24,11 +24,11 @@ class TestUtils(unittest.TestCase):
     correct = "39,55"
     self.assertEqual(result, correct, "Should round the input correctly")
 
-
     number = "blabla"
     result = utils.convert_to_price_string(number)
     correct = None
     self.assertEqual(result, correct, "Should return None if incorrect input")
+
 
   def test_convert_to_nr(self):
     string = "39,90"
@@ -51,6 +51,7 @@ class TestUtils(unittest.TestCase):
     correct = None
     self.assertEqual(result, correct, "Should return None if input is not ONLY a number")
 
+
   def test_get_number_from_string(self):
     string = "39,90Kr/kg"
     result = utils.get_number_from_string(string)
@@ -71,6 +72,12 @@ class TestUtils(unittest.TestCase):
     result = utils.get_number_from_string(string)
     correct = None
     self.assertEqual(result, correct, "Should return None if string doesnt contain any number")
+    
+    string = "0,00"
+    result = utils.get_number_from_string(string)
+    correct = 0.00
+    self.assertEqual(result, correct, "Should return parsed float if string contains only a number with comma")
+
 
   def test_remove_double_minus_sign(self):
     string = "--4,00"

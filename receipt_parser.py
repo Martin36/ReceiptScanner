@@ -10,9 +10,10 @@ from google.cloud import vision_v1
 from pdf2image import convert_from_path
 
 MARKETS = ['ica', 'coop', 'hemköp', 'city gross']
-SKIPWORDS = ['SEK', 'www.coop.se', 'Tel.nr:', 'Kvitto:', 'Datum:', 'Kassör:', 'Org Nr:', 'SUMMERING']
-STOPWORDS = []
-BLACKLIST_WORDS = []
+SKIPWORDS = ['SEK', 'www.coop.se', 'Tel.nr:', 'Kvitto:', 
+             'Kvitto', 'Datum:', 'Datum', 'Kassör:', 'Org Nr:', 
+             'Org', 'Nr:', 'SUMMERING', 'KÖP', 'Kassör',
+             'Kassör:']
 # TODO: What happens if an article name starts with 'att' (or any of the other words)?
 TOTAL_WORDS = ['att', 'betala', 'totalt', 'total']
 DISCOUNT_WORDS = ['summering', 'rabatter']
@@ -52,7 +53,6 @@ class GcloudParser:
     for page in pages:
       page.save('tmp.jpg')
       gcloud_response = self.detect_text('tmp.jpg')
-      os.system('del tmp.jpg')
       _art, _dat, _mar, _dis = self.parse_response(gcloud_response)
       if not _art:
         continue
@@ -428,6 +428,8 @@ class GcloudParser:
           # Verify that the bounding box of the article is close to 
           # the left edge of the receipt
           # The exeption here is pant, which are a bit shifted to the right
+          # TODO: This causes a problem with the products at Coop which has a 
+          # cloves in front of them. How to handle this?
           if bounding_box['xmin']-ARTICLE_OFFSET > g_xmin and \
              not self.check_if_pant(current_name):
             skip_this = True
@@ -663,7 +665,7 @@ class GcloudParser:
       return False
 
   def check_if_skip_word(self, string):
-    for skipword in SKIPWORDS+BLACKLIST_WORDS+STOPWORDS:
+    for skipword in SKIPWORDS:
       if skipword.lower() in string.lower().split(' '):
         if(self.debug):
           print("Skipping: " + str(string))

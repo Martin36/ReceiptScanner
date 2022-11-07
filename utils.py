@@ -14,14 +14,14 @@ def convert_to_price_string(number):
   else:
     return None
 
+
 def convert_to_nr(string):
   try:
     parsed_number = float(string.replace(",", ".")) 
   except ValueError:
     return None
-  if not parsed_number:
-    return None
   return parsed_number
+
 
 def get_number_from_string(string):
   rex = r'[\d]+[.,\d]+|[\d]*[.][\d]+|[\d]+'
@@ -29,6 +29,7 @@ def get_number_from_string(string):
   if match:
     return convert_to_nr(match.group(0))
   return None
+
 
 # Returns the string with only one minus sign instead of multiple
 # Used for when the OCR scan happens to think there is multiple 

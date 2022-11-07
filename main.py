@@ -1,9 +1,8 @@
 import json
 import os
 import sys
-import csv
 import utils
-from pprint import pprint
+from glob import glob
 from receipt_parser import GcloudParser
 from validate_receipt_data import ReceiptDataValidator
 from categorizer import Categorizer
@@ -11,23 +10,11 @@ from prettyfier import Prettyfier
 from write_to_csv import write_to_csv
 
 
-PATH = 'D:\\Documents\\Kvitto Scanner\\Receipts\\citygross-20-12-01.pdf'
-receipt_paths = [
-  'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-20.pdf',
-  'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-27.pdf',
-  'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-10-29.pdf',
-  'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-11-05.pdf',
-  'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-11-22.pdf',
-  'D:\\Documents\\Kvitto Scanner\\Receipts\\coop-20-11-25.pdf',
-  'D:\\Documents\\Kvitto Scanner\\Receipts\\citygross-20-12-01.pdf',
-  'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-02.pdf',
-  'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-12.pdf',
-  'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-18.pdf',
-  'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-10-24.pdf',
-  'D:\\Documents\\Kvitto Scanner\\Receipts\\hemköp-20-11-29.pdf',
-  'D:\\Documents\\Kvitto Scanner\\Receipts\\ica-20-10-11.pdf',
-  'D:\\Documents\\Kvitto Scanner\\Receipts\\ica-20-11-09.pdf',
-]
+PATH = "data/receipts/coop/coop-22-02-22.pdf"
+
+receipt_paths = glob("data/receipts/coop/*.pdf")
+# receipt_paths += glob("data/receipts/hemkop/*")
+# receipt_paths += glob("data/receipts/ica/*")
 
 parser = GcloudParser()
 validator = ReceiptDataValidator()
@@ -37,13 +24,13 @@ prettyfier = Prettyfier()
 def parse_one_pdf():
   articles, dates, markets, discounts, totals, bounding_box = parser.parse_pdf(PATH)
   articles = prettyfier.clean_article_names(articles)
-  pprint(articles)
-  #print(len(articles))
-  print(dates)
-  print(markets)
-  pprint(discounts)
-  print(totals)
-  pprint(bounding_box)
+  # pprint(articles)
+  # #print(len(articles))
+  # print(dates)
+  # print(markets)
+  # pprint(discounts)
+  # print(totals)
+  # pprint(bounding_box)
 
   # Validate the parsed data
   faulty_indx = validator.check_articles(articles)
@@ -100,7 +87,7 @@ def validate_json():
     
     # Check that the nr of articles are correct
     if not validator.check_nr_of_articles(receipt):
-      print("Error for receipt '{} {}, the parsed number of articles does not coincide with the number of the receipt"
+      print("Error for receipt '{} {}, the parsed number of articles does not coincide with the number on the receipt"
         .format(receipt["market"], utils.get_first(receipt["dates"])))
   
     # Check that the totals has been correctly parsed
@@ -134,8 +121,9 @@ def categorize_articles():
   f.close()
   print("Finished categorizing all receipts")
 
-# validate_json()
-# parse_all_pdfs()
 parse_one_pdf()
+
+# parse_all_pdfs()
+# validate_json()
 # categorize_articles()
 # write_to_csv()
