@@ -20,7 +20,8 @@
       "console": "integratedTerminal",
       "justMyCode": true,
       "args": [
-        "--file=data/receipts/coop/coop-22-02-22.pdf"
+        "--input_file=data/receipts/coop/coop-22-02-22.pdf",
+        "--output_file=data/parses/coop-22-02-22.json"
       ]
     },
     {
@@ -31,9 +32,20 @@
       "console": "integratedTerminal",
       "justMyCode": true,
       "args": [
-        "--file=articles.json"
+        "--file=data/parses/coop-22-02-22.json"
       ]
     },
-
+    {
+      "name": "Write to csv",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceRoot}/src/write_to_csv.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--json_file=data/parses/coop-22-02-22.json",
+        "--csv_file=data/tables/coop-22-02-22.csv"
+      ]
+    },
   ]
 }

@@ -1,19 +1,22 @@
+import argparse
 import json
-import os
 import csv
 import utils
 import sys
 
-def write_to_csv():
-  with open(os.path.join(sys.path[0], 'articles.csv'), 'w', newline='', encoding='utf8') as csvfile:
+def write_to_csv(json_file: str, csv_file: str):
+  with open(csv_file, 'w', newline='', encoding='utf8') as csvfile:
     csv_writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
     
-    f = open(os.path.join(sys.path[0], 'articles.json'), 'r', encoding='utf8')
+    f = open(json_file, 'r', encoding='utf8')
     json_data = json.load(f)
 
     # Add the header
     csv_writer.writerow(['Market', 'Date', 'Receipt total', 'Article name', 
       'Sum', 'Quantity', 'Price', 'Category'])
+    
+    if type(json_data) is not list:
+      json_data = [json_data]
 
     for receipt in json_data:
       
@@ -28,7 +31,7 @@ def write_to_csv():
         price_sum = article['sum']
         quantity = article['amount']
         price = article['price']
-        category = article['category']
+        category = article.get('category', None)
         csv_writer.writerow(
           [market, date, total, name, price_sum, quantity, price, category]
         )   
@@ -38,13 +41,13 @@ def write_to_csv():
         price_sum = discount['price']
         quantity = ""
         price = discount['price']
-        category = discount['category']
+        category = discount.get('category', None)
         csv_writer.writerow(
           [market, date, total, name, price_sum, quantity, price, category]
         )   
 
     f.close()
-    print("Finished writing to csv file")
+    print(f"Stored results in {csv_file}")
 
 def get_smallest_total(totals):
   if len(totals) == 0:
@@ -59,3 +62,20 @@ def get_smallest_total(totals):
     # This means that no total sum were found
     return ""
   return utils.convert_to_price_string(total_sum)
+
+
+if __name__ == "__main__":
+  arg_parser = argparse.ArgumentParser(
+    description="Converts a json file of receipts to a csv file"
+  )
+  arg_parser.add_argument(
+    "--json_file", 
+    help="Path to the json file to be converted"
+  )
+  arg_parser.add_argument(
+    "--csv_file", 
+    help="Path to the output csv file"
+  )
+  args = arg_parser.parse_args()
+
+  write_to_csv(args.json_file, args.csv_file)

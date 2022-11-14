@@ -39,7 +39,16 @@ class GcloudParser:
       articles += _art
       dates += _dat
       discounts += _dis
-    return articles, dates, self.market, discounts, self.totals, self.bounding_box
+      
+    return {
+      "articles": articles,
+      "dates": dates,
+      "market": self.market,
+      "discounts": discounts,
+      "totals": self.totals,
+      "bounding_box": self.bounding_box
+    }
+    # return articles, dates, self.market, discounts, self.totals, self.bounding_box
 
   # Detects text in the file.
   def detect_text(self, path):

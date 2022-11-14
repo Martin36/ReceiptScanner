@@ -1,8 +1,7 @@
-import unittest
-import sys, os
-from os.path import dirname, join, abspath
-sys.path.insert(0, abspath(join(dirname(__file__), '..')))
-import utils
+import unittest, utils
+from utils_package import load_json
+
+articles = load_json("tests/test_data/articles.json")
 
 class TestUtils(unittest.TestCase):
 
@@ -51,6 +50,14 @@ class TestUtils(unittest.TestCase):
     correct = None
     self.assertEqual(result, correct, "Should return None if input is not ONLY a number")
 
+  def test_filter_articles(self):
+    filtered_articles = utils.filter_articles(articles)
+    self.assertNotEqual(len(filtered_articles), len(articles), "The duplicate articles should be filtered out")
+    nr_of_avokado = len([article for article in filtered_articles if "avokado" in article["name"].lower()])
+    nr_of_pant = len([article for article in filtered_articles if "pant" in article["name"].lower()])
+    self.assertEqual(nr_of_avokado, 1, "There should only be one avokado article")
+    self.assertEqual(nr_of_pant, 2, "There should still be two pant articles")
+
 
   def test_get_number_from_string(self):
     string = "39,90Kr/kg"
@@ -72,7 +79,7 @@ class TestUtils(unittest.TestCase):
     result = utils.get_number_from_string(string)
     correct = None
     self.assertEqual(result, correct, "Should return None if string doesnt contain any number")
-    
+
     string = "0,00"
     result = utils.get_number_from_string(string)
     correct = 0.00
@@ -95,6 +102,7 @@ class TestUtils(unittest.TestCase):
     correct = string
     self.assertEqual(result, correct, "Should return input if not a price string")
 
+
   def test_check_price(self):
     price = "34,99"
     result = utils.check_price(price)
@@ -111,6 +119,7 @@ class TestUtils(unittest.TestCase):
     price = "blabla"
     result = utils.check_price(price)
     self.assertFalse(result, "Should be false if input is not a price")
+
 
   def test_remove_diactrics(self):
     string = 'NOTF@RS 12%'
@@ -132,6 +141,7 @@ class TestUtils(unittest.TestCase):
     correct = 'MOZZARELLA för 22kr'
     self.assertEqual(result, correct, "Should only change a non-swedish diactrics")
 
+
   def test_find_swe_chars(self):
     string = 'MOZZAŘELLA för 22kr'
     result = utils.find_swe_chars(string)
@@ -140,13 +150,15 @@ class TestUtils(unittest.TestCase):
     self.assertEqual(result_obj['letter'], 'ö', 'Should find the correct swe char')
     self.assertEqual(result_obj['idx'], 12, 'Should find the correct idx of char')
 
+
   def test_return_swe_chars(self):
     string = 'MOZZAŘELLA for 22kr'
     char_arr = [{'letter': 'ö', 'idx': 12}]
     correct = 'MOZZAŘELLA för 22kr'
     result = utils.return_swe_chars(string, char_arr)
     self.assertEqual(result, correct, "Should return the correct char at the correct pos")
-    
+
+
   def test_replace_weird_chars(self):
     string = 'FL®SKYTTERFIL®'
     result = utils.replace_weird_chars(string)

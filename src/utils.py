@@ -23,6 +23,25 @@ def convert_to_nr(string):
   return parsed_number
 
 
+def filter_articles(articles: list):
+  """Filters out the articles that are duplicates, ignoring 'pant' 
+  as these can be multiple per receipt
+
+  Args:
+      articles (list): A list of articles
+
+  Returns:
+      list: A filtered list of articles
+  """
+  filtered_articles = []
+  for article in articles:
+    if "pant" in article["name"].lower():
+      filtered_articles.append(article)
+    elif article not in filtered_articles:
+      filtered_articles.append(article)
+  return filtered_articles
+
+
 def get_bb_corners(vertices):
   """Returns the corners of the bounding box
 

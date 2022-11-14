@@ -63,4 +63,4 @@ def categorize_articles():
 parse_all_pdfs()
 validate_json()
 # categorize_articles()
-# write_to_csv()
+# write_to_csv(os.path.join(sys.path[0], 'articles.json'), os.path.join(sys.path[0], 'articles.csv')
