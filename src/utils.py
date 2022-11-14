@@ -1,12 +1,36 @@
 import re
+from typing import List, Union
 import numpy as np
 import unidecode
+from copy import deepcopy
 
 SWE_LETTERS = ['å', 'Å', 'ä', 'Ä', 'ö', 'Ö']
 
-# This function converts a float or int number to a string 
-# on the format XX,XX where X is an int
-def convert_to_price_string(number):
+def closest_value(list: List[int], value: int):
+  """Returns the closest value in a list to a given value
+
+  Args:
+      list (List[int]): The list to search in
+      value (int): The value to look for
+
+  Returns:
+      int: The closest value in the list
+  """
+  arr = np.asarray(list)
+  idx = (np.abs(arr - value)).argmin()
+  return arr[idx]
+
+
+def convert_to_price_string(number: Union[int, float]):
+  """Function that converts a float or int to a string
+  on the format XX.XX where X is an int
+
+  Args:
+      number (Union[int, float]): The number to convert
+
+  Returns:
+      str: The number as a string 
+  """
   if type(number) is int:
     return str(number) + ",00"
   if type(number) is float: 
@@ -33,8 +57,13 @@ def filter_articles(articles: list):
   Returns:
       list: A filtered list of articles
   """
+  # Need to remove the bounding box first
+  mod_articles = deepcopy(articles)
+  for article in mod_articles:
+    if 'bounding_box' in article:
+      del article['bounding_box']
   filtered_articles = []
-  for article in articles:
+  for article in mod_articles:
     if "pant" in article["name"].lower():
       filtered_articles.append(article)
     elif article not in filtered_articles:

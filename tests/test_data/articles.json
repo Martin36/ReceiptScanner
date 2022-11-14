@@ -3,13 +3,25 @@
     "name": "AVOKADO N\u00c4T XTRA 70",
     "sum": "38,95",
     "amount": "1 st",
-    "price": "38,95"
+    "price": "38,95",
+    "bounding_box": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
   },
   {
     "name": "AVOKADO N\u00c4T XTRA 70",
     "sum": "38,95",
     "amount": "1 st",
-    "price": "38,95"
+    "price": "38,95",
+    "bounding_box": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
   },
   {
     "name": "CITY PULSE",

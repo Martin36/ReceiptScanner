@@ -1,24 +1,23 @@
 import argparse
-import json
 import csv
+import os
+from typing import Union
 import utils
 import sys
+from utils_package import load_json
 
-def write_to_csv(json_file: str, csv_file: str):
+def write_to_csv(data: Union[dict,list], csv_file: str):
   with open(csv_file, 'w', newline='', encoding='utf8') as csvfile:
     csv_writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
     
-    f = open(json_file, 'r', encoding='utf8')
-    json_data = json.load(f)
-
     # Add the header
     csv_writer.writerow(['Market', 'Date', 'Receipt total', 'Article name', 
       'Sum', 'Quantity', 'Price', 'Category'])
     
-    if type(json_data) is not list:
-      json_data = [json_data]
+    if type(data) is not list:
+      data = [data]
 
-    for receipt in json_data:
+    for receipt in data:
       
       market = receipt['market']
       date = utils.get_first(receipt['dates'])
@@ -46,8 +45,8 @@ def write_to_csv(json_file: str, csv_file: str):
           [market, date, total, name, price_sum, quantity, price, category]
         )   
 
-    f.close()
     print(f"Stored results in {csv_file}")
+
 
 def get_smallest_total(totals):
   if len(totals) == 0:
@@ -64,9 +63,19 @@ def get_smallest_total(totals):
   return utils.convert_to_price_string(total_sum)
 
 
+def write_to_folder(json_file: str, folder: str):
+  receipts = load_json(json_file)
+  
+  for receipt in receipts:
+    market = receipt['market']
+    date = utils.get_first(receipt['dates'])
+    file_name = os.path.join(folder, f"{market}-{date}.csv")
+    write_to_csv(receipt, file_name)
+
+
 if __name__ == "__main__":
   arg_parser = argparse.ArgumentParser(
-    description="Converts a json file of receipts to a csv file"
+    description="Converts a json file of receipts to a csv file, or a folder of csv files, one for each receipt"
   )
   arg_parser.add_argument(
     "--json_file", 
@@ -76,6 +85,15 @@ if __name__ == "__main__":
     "--csv_file", 
     help="Path to the output csv file"
   )
+  arg_parser.add_argument(
+    "--csv_folder", 
+    help="Path to the output csv file"
+  )  
   args = arg_parser.parse_args()
 
-  write_to_csv(args.json_file, args.csv_file)
+  if args.csv_folder:
+    write_to_folder(args.json_file, args.csv_folder)
+  elif args.csv_file:
+    write_to_csv(args.json_file, args.csv_file)
+  else:
+    print("You need to specify either --csv_file or --csv_folder")

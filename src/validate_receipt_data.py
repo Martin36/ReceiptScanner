@@ -21,7 +21,7 @@ class ReceiptDataValidator:
 
   def check_nr_of_articles(self, parsed_data):
     nr_parsed_articles = self.count_articles(parsed_data['articles'])
-    nr_receipt_articles = self.get_nr_receipt_articles(parsed_data['totals'])
+    nr_receipt_articles = self.get_nr_receipt_articles(parsed_data['totals'], nr_parsed_articles)
     if not nr_receipt_articles:
       # This means that the amount of articles is not specified on the receipt
       # and therefore this validation is not relevant
@@ -87,13 +87,12 @@ class ReceiptDataValidator:
       total += amount
     return total
         
-  # TODO: What if there are multiple totals with nr of articles
-  def get_nr_receipt_articles(self, totals):
-    result = None
-    amount = None
+  def get_nr_receipt_articles(self, totals, nr_parsed_articles=None):
+    amounts = []
     for total in totals:
       if 'amount' in total:
-        amount = total['amount']
-      if amount != None:
-        result = int(amount)
-    return result
+        amounts.append(int(total['amount']))
+    if len(amounts):
+      return utils.closest_value(amounts, nr_parsed_articles)
+    else:
+      return None

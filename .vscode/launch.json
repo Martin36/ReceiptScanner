@@ -32,7 +32,7 @@
       "console": "integratedTerminal",
       "justMyCode": true,
       "args": [
-        "--file=data/parses/coop-22-02-22.json"
+        "--file=data/parses/articles_filtered.json"
       ]
     },
     {
@@ -45,6 +45,31 @@
       "args": [
         "--json_file=data/parses/coop-22-02-22.json",
         "--csv_file=data/tables/coop-22-02-22.csv"
+      ]
+    },
+    {
+      "name": "Write to csv in folder",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceRoot}/src/write_to_csv.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--json_file=data/parses/articles_filtered.json",
+        "--csv_folder=data/tables/coop"
+      ]
+    },
+    {
+      "name": "Filter articles",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceRoot}/src/filter_articles.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--input_file=articles.json",
+        "--output_file=data/parses/articles_filtered.json",
+        "--validate_receipt"
       ]
     },
   ]
